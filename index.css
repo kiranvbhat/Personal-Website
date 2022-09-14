@@ -3,26 +3,15 @@ html {
 }
 
 body {
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
+    /* font-family: "Roboto", sans-serif; */
+    /* font-weight: 300; */
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
 }
 
 a {
-    /*color: #212529 !important;*/
-    /*color: teal !important;*/
-    color: #3d73c6;
-    /*color: #307df6;*/
     text-decoration: none ;
 }
-
-/* a:not(.no-link-style) {
-    border-bottom: 2px solid #add8e6;
-}
-
-a:hover:not(.no-link-style) {
-    border-bottom: 2px solid #7c9ba3;
-    text-decoration: lightblue !important;
-} */
 
 b {
     font-weight: 700;
@@ -36,18 +25,7 @@ hr {
     margin-right: auto;
 }
 
-h1 {
-    font-size: 78px;
-    font-weight: 300;
-    text-align: left;
-}
-
-h2 {
-    text-align: center;
-    font-size: 50px;
-}
-
-h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
 }
 
@@ -57,28 +35,25 @@ h2, h3, h4, h5, h6 {
     transition: all 0.1s ease-in-out;
 }
 
-/* darken text on hover */
 .link:hover {
-    color: rgb(65, 65, 65);
+    color: #777;
 }
 
-/* darken nav-link text on hover */
-.nav-link:hover {
-    color: rgb(65, 65, 65);
-}
-
-.navbar-brank:hover {
-    text-shadow: 5px 5px gray;
+.link:active {
+    /* Darker for mobile to make more noticeable */
+    color: rgb(21, 21, 21);
+    /* no transition time */
 }
 
 .card {
     border-radius: 10px;
-    transition: all 0.15s ease-in-out;
+    /* no transition time */
+    box-shadow: 1px 1px 10px gray;
 }
 
-/* Card has drop shadow on hover */
+/* same as .card for mobile */
 .card:hover {
-    box-shadow: 1px 1px 15px gray;
+    box-shadow: 1px 1px 10px gray;
 }
 
 /* Card's drop shadow reduced on mouse click */
@@ -93,6 +68,52 @@ h2, h3, h4, h5, h6 {
     box-shadow: 1px 1px 5px gray;
 }
 
+/* If the device supports hovering (AKA we on a computer not a phone) */
+@media (hover: hover) {
+    /* text muted before hover */
+    .link {
+        color: #777;
+        transition: all 0.1s ease-in-out;
+    }
+
+    /* darken text on hover */
+    .link:hover {
+        color: rgb(65, 65, 65);
+    }
+
+    /* darken nav-link text on hover */
+    .nav-link:hover {
+        color: rgb(65, 65, 65);
+    }
+
+    .navbar-brank:hover {
+        text-shadow: 5px 5px gray;
+    }
+
+    .card {
+        border-radius: 10px;
+        transition: all 0.15s ease-in-out;
+        box-shadow: 0px 0px 0px gray;
+    }
+    
+    .card-img-top {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px gray;
+    }
+
+    /* Card has drop shadow on hover */
+    .card:hover {
+        box-shadow: 1px 1px 15px gray;
+    }
+
+    /* Card's drop shadow reduced on mouse click */
+    .card:active {
+        box-shadow: 1px 1px 0px gray;
+    }
+}
+
 #about {
     /*display: flex;*/
     /*justify-content: center;*/
@@ -101,7 +122,7 @@ h2, h3, h4, h5, h6 {
 }
 
 #about_text {
-    margin-top: 40px;
+    padding-top: 40px;
     padding-left: 60px;
     padding-right: 60px;
     text-align: left;
@@ -110,9 +131,48 @@ h2, h3, h4, h5, h6 {
     flex-direction: column;
     justify-content: center;
     max-height: 1000px;
-    /* align-items: center; */
-    /* vertical-align: center; */
-    /* line-height: normal; */
+}
+
+/* For very small screens, decrease h1 and h2 sizes */
+@media (min-width: 0px) {
+    h1 {
+        font-size: 60px;
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 576px) {
+    h1 {
+        font-size: 78px;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 50px;
+        text-align: center;
+    }
+}
+
+/* When we go into large size window, remove extra spacing above "Kiran Bhat" to fix centering */
+@media (min-width: 992px) {
+    #about_text {
+        padding-top: 20px;
+    }
+    h1 {
+        text-align: left;
+    }
+}
+
+
+@media (min-width: 1500px) {
+    #about_text {
+        padding-top: 0px;
+    }
 }
 
 #about_image {
@@ -120,8 +180,6 @@ h2, h3, h4, h5, h6 {
     flex-direction: column;
     justify-content: center;
 }
-
-
 
 .img-fluid {
     border-radius: 10px;
