@@ -1,2 +1,4 @@
-# Personal-Website
-My portfolio website; built using HTML+CSS+Bootstrap. Link: <a href="kiranvbhat.com">kiranvbhat.com</a>.
+# Personal Website
+My personal website, built using HTML+CSS+Bootstrap.
+
+<a href="kiranvbhat.com">kiranvbhat.com</a>
