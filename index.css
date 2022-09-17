@@ -161,6 +161,7 @@ h1, h2, h3, h4, h5, h6 {
         text-align: center;
         font-size: 40px;
     }
+    
 }
 
 /* When window small */
@@ -178,10 +179,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* When window medium */
 @media (min-width: 768px) {
-    /* .bandcamp {
-        width: 300px;
-        height: 872px;
-    } */
+    
 }
 
 
@@ -194,10 +192,6 @@ h1, h2, h3, h4, h5, h6 {
     h1 {
         text-align: left;
     }
-    /* .bandcamp {
-        width: 460px;
-        height: 872px;
-    } */
 }
 
 
@@ -205,10 +199,6 @@ h1, h2, h3, h4, h5, h6 {
     #about_text {
         padding-top: 0px;
     }
-    /* .bandcamp {
-        width: 700px;
-        height: 905px;
-    } */
 }
 
 #about_image {

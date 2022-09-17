@@ -1,0 +1,14 @@
+# mod_rewrite starts here
+RewriteEngine on
+
+# if the folder doesn't exist on the server
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# and if file with .html extension is in directory 
+RewriteCond %{REQUEST_FILENAME}\.html -f
+
+# Then show the page that has the .html extension without the extension
+#  ^(.*)$ $1.html - RegEx to grab file without the .html
+# [NC] - No Case (casing doesn't matter)
+# [L] - RewriteConds above only apply to this RewriteRule, and no other rules below
+RewriteRule ^(.*)$ $1.html [NC, L]
