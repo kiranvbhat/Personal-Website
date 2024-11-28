@@ -14,8 +14,6 @@
   </head>
 
 
-
-
   <body>
     <!-- -------------------Navbar------------------- -->
     <nav class="navbar fixed-top navbar-expand-lg bg-light">
@@ -28,16 +26,19 @@
           <!-- Left side of Navbar -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">Fun Stuff</a>
+              <a class="nav-link" href="#">Music</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#music">Music</a>
+              <a class="nav-link" href="random">Random</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#photography">Photography</a>
+                <a class="nav-link">|</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#random">Random</a>
+                <a class="nav-link" href="#composition">Composition</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#performance">Performance</a>
             </li>
           </ul>
 
@@ -86,10 +87,10 @@
         <div class="row">
           <!-- About image -->
           <div class="col-lg-6 col-md-12 col-sm-12" id="about_text" style="text-align: center">
-            <h1 style="text-align: center">Fun Stuff</h1>
+            <h1 style="text-align: center">Music</h1>
             <br>
             <h3 style="text-align: center;">
-              Here are some fun things I've done with my free time.
+              Here are some musical compositions and performances from throughout my life.
             </h3>
           </div>
 
@@ -99,23 +100,20 @@
               Jump to:
             </h3> -->
             <h2>
-              <a class="link" href="#music">Music</a>
+              <a class="link" href="#composition">Composition</a>
             </h2>
             <h2>
-              <a class="link" href="#photography">Photography</a>
-            </h2>
-            <h2>
-              <a class="link" href="#random">Random</a>
+              <a class="link" href="#performance">Performance</a>
             </h2>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- -------------------Music------------------- -->
-    <div id="music" style="padding-top: 1px">
+    <!-- -------------------Composition------------------- -->
+    <div id="composition" style="padding-top: 1px">
       <hr>
-      <h2>Music</h2>
+      <h2>Composition</h2>
       <br>
       <div class="album">
         <div class="container">
@@ -130,14 +128,17 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <h3 class="card-title">Music Composition</h3>
+                  <h3 class="card-title">Piano Compositions</h3>
                   <h5 class="card-subtitle mb-3 text-muted">
-                    A Bandcamp album of a few of my favorite compositions.
+                    A Bandcamp album of a few of my favorite piano compositions.
                   </h5>
                 </div>
               </a>
+
+              
             </div>
 
+            
             <!-- Right column -->
             <div class="col-lg-6 col-md-12 col-sm-12">
 
@@ -171,21 +172,23 @@
                 </div>
               </div>
 
-              <!-- Performance -->
-              <div class="card mb-3 text-bg-light">
+              <!-- BREAK MONKEY -->
+              <a href="https://ccrma.stanford.edu/~kvbhat/cs476a/hw2/" target="_blank" class="card mb-3 text-bg-light">
                 <div class="card-img-top">
                   <div class="ratio ratio-16x9">
-                    <iframe class="img-fluid" src="https://www.youtube.com/embed/2xG6bvdmTIo" title="Kiran's first composition" frameborder="0" allow="accelerometer; gyroscope" allowfullscreen></iframe>
+                    <iframe class="img-fluid" src="https://www.youtube.com/embed/StXiBjWgxWc?si=GlrlUeMlv5APcFNk" title="BREAK MONKEY" frameborder="0" allow="accelerometer; gyroscope" allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="card-body">
-                  <h3 class="card-title">Piano Performance</h3>
+                  <h3 class="card-title">BREAK MONKEY</h3>
                   <h5 class="card-subtitle mb-3 text-muted">
-                    Excerpts from some of my favorite pieces that I have performed.
+                    A breakcore style instrumental piece and Suzanne-based audio visualizer.
                   </h5>
-                  <h6 class="text-muted">(Ballade No. 1 by Chopin, EARFQUAKE by Tyler the Creator, La Campanella by Liszt)</h6>
                 </div>
-              </div>
+              </a>
+
+              
+              
 
             </div>
           </div>
@@ -193,128 +196,80 @@
       </div>
     </div>
 
-    <!-- -------------------Photography------------------- -->
-    <div id="photography" style="padding-top: 1px">
-      <hr>
-      <h2>Photography</h2>
-      <br>
-      <div class="album">
-        <div class="container">
-          <div class="row">
-
-            <!-- Single Column, 360 photos with panoraven -->
-            <div class="col-lg-12 col-md-12 col-sm-12">
-              <div class="card mb-3 text-bg-light">
-                <div class="card-img-top">
-                  <div class="ratio ratio-16x9">
-                    <iframe allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope" class="panoraven" src="https://panoraven.com/en/embed/Cilny6bvKo"></iframe>
-                  </div>
+    <!-- -------------------Performance------------------- -->
+    <div id="performance" style="padding-top: 1px">
+        <hr>
+        <h2>Performance</h2>
+        <br>
+        <div class="album">
+          <div class="container">
+            <div class="row">
+              <!-- Left column bandcamp embed -->
+              <div class="col-lg-6 col-md-12 col-sm-12">
+                <!-- Performance -->
+                <div class="card mb-3 text-bg-light">
+                    <div class="card-img-top">
+                      <div class="ratio ratio-16x9">
+                        <iframe class="img-fluid" src="https://www.youtube.com/embed/2xG6bvdmTIo" title="Kiran's first composition" frameborder="0" allow="accelerometer; gyroscope" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title">Excerpts</h3>
+                      <h5 class="card-subtitle mb-3 text-muted">
+                        Excerpts from some of my favorite pieces that I have performed.
+                      </h5>
+                      <h6 class="text-muted">(Ballade No. 1 by Chopin, EARFQUAKE by Tyler the Creator, La Campanella by Liszt)</h6>
+                    </div>
                 </div>
-                <div class="card-body">
-                  <h3 class="card-title">360<span>&#176;</span> Photos</h3>
-                  <p class="card-text">
-                    Some 360<span>&#176;</span> photos I've taken for fun using Google's photo sphere feature. Don't worry, those floating torsos and walking pants in some of the images aren't real -- they're just a result of the photo-taking-and-stitching process.
-                  <p>
-                </div>
-              </div>
-            </div>
 
-            <!-- Smartphone photos with Albumizr -->
-            <div class="col-lg-12 col-md-12 col-sm-12">
-              <div class="card mb-3 text-bg-light">
-                <div class="card-img-top">
-                  <div class="ratio ratio-16x9">
-                    <iframe src="https://albumizr.com/a/ByIx" scrolling="no" frameborder="0" allowfullscreen></iframe>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h3 class="card-title">Smartphone Photography</h3>
-                  <p class="card-text">
-                    I didn't have a DSLR Camera until recently, but still had a lot of fun taking photos with my phone. Cameras used: Nexus 5, Nexus 6P, Pixel 2.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <!-- -------------------Random------------------- -->
-
-    <div id="random" style="padding-top: 1px">
-      <hr>
-      <h2>Random</h2>
-      <br>
-
-      <div class="album">
-        <div class="container">
-          <div class="row">
-            <!-- Left column -->
-            <div class="col-lg-6 col-md-6 col-sm-12 mx-auto">
-
-              <!-- Tiny Wings WR -->
-              <div class="card mb-3 text-bg-light">
-                <div class="card-img-top">
-                  <div class="ratio ratio-16x9">
-                    <iframe class="img-fluid" src="https://www.youtube.com/embed/chqVxox2FHs" title="Kiran's first composition" frameborder="0" allow="accelerometer; gyroscope" allowfullscreen></iframe>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h3 class="card-title">Tiny Wings World Record</h3>
-                  <p class="card-text">
-                    Tiny wings is a 2011 iOS game with over <b>11 million downloads</b>. When you complete all the achievements, a message appears saying "Congratulations! You are a master of Tiny Wings! <b>Now beat the highscore!</b>" I took this too literally and now own the world record.
-                  </p>
+                <!-- Senior Recital -->
+                <div class="card mb-3 text-bg-light">
+                    <div class="card-img-top">
+                      <div class="ratio ratio-16x9">
+                        <iframe class="img-fluid" src="https://www.youtube.com/embed/XrxldF58UIg?si=GIqLzzwNoshNQ0dh" title="Senior Recital" frameborder="0" allow="accelerometer; gyroscope" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title">Senior Recital</h3>
+                      <h5 class="card-subtitle mb-3 text-muted">
+                        A recital to commemorate my journey as a pianist up to my senior year in high school.
+                      </h5>
+                    </div>
                 </div>
               </div>
+  
+              <!-- Right column -->
+              <div class="col-lg-6 col-md-12 col-sm-12">
+  
+                <!-- YESBOT -->
+                <a href="https://slork.stanford.edu/events/2024/slorktastic/" target="_blank" class="card mb-3 text-bg-light">
+                    <div class="card-img-top">
+                    <div class="ratio ratio-16x9">
+                        <iframe class="img-fluid" src="https://www.youtube.com/embed/oYNdI5XdsBk?si=AEM45_9xjWq5xEXl" title="YESBOT" frameborder="0" allow="accelerometer; gyroscope" allowfullscreen></iframe>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                    <h3 class="card-title">YESBOT</h3>
+                    <h5 class="card-subtitle mb-3 text-muted">
+                        A cautionary tale about the dangers of automating human creativity. The piece was written and performed by myself and 
+                        Samantha Liu as part of the Stanford Laptop Orchestra.
+                    </h5>
+                    </div>
+                </a>
 
-              <!-- Gymnastics -->
-              <div class="card mb-3 text-bg-light">
-                <div class="card-img-top">
-                  <div class="ratio ratio-16x9">
-                    <iframe class="img-fluid" src="https://www.youtube.com/embed/6mcc7ihyNNQ" title="Kiran's first composition" frameborder="0" allow="accelerometer; gyroscope" allowfullscreen></iframe>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h3 class="card-title">Competitive Gymnastics</h3>
-                  <p class="card-text">
-                    I used to compete at the state and national levels in gymnastics. Here is one of my low-lights. Sadly it's the most viewed video I've ever starred in at ~100,000 views. At least I walked away unharmed -- thanks Coach Izzy!
-                  </p>
-                </div>
+                
               </div>
-              
-              
-            </div>
-            <!-- Right column -->
-            <div class="col-lg-6 col-md-6 col-sm-12 mx-auto">
-              
-              <!-- Basketball Coaching -->
-              <div class="card mb-3 text-bg-light">
-                <div class="card-img-top">
-                  <img src="img/photos/crossover.jpg" class="img-fluid" alt="Kiran Bhat">
-                </div>
-                <div class="card-body">
-                  <h3 class="card-title">Basketball Coaching</h3>
-                  <p class="card-text">
-                    I coached 4th/5th grade basketball teams from 2017 to 2019. I love both teaching and basketball, so being a coach was a really fun experience.
-                  </p>
-                </div>
-              </div>
-              
             </div>
           </div>
         </div>
       </div>
-    </div>
+
 
     <div id="footer" style="padding: 20px">
       <hr style="margin-top: 20px">
       <br>
       <div class="container">
-        <p>Created by Kiran Bhat. Last updated Sept 26, 2022.</p>
+        <p>Created by Kiran Bhat. Last updated Nov 28, 2024.</p>
       </div>
     </div>
 

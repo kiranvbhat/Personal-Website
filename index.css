@@ -95,16 +95,46 @@ p, h1, h2, h3, h4, h5, h6 {
 
     /* darken text on hover */
     .link:hover {
-        color: rgb(65, 65, 65);
+        /* color: rgb(65, 65, 65); */
+        color: rgb(30, 30, 30);
+        text-shadow: 5px 5px rgb(174, 174, 174);
+    }
+
+    /* darken text on hover */
+    .link:active {
+        /* color: rgb(65, 65, 65); */
+        color: rgb(30, 30, 30);
+        text-shadow: 0px 0px rgb(174, 174, 174);
+    }
+
+    .nav-link {
+        transition: all 0.1s ease-in-out;
     }
 
     /* darken nav-link text on hover */
     .nav-link:hover {
-        color: rgb(65, 65, 65);
+        color: rgb(30, 30, 30);
+        text-shadow: 3px 3px rgb(174, 174, 174);
     }
 
-    .navbar-brank:hover {
-        text-shadow: 5px 5px gray;
+    /* darken nav-link text on hover */
+    .nav-link:active {
+        color: rgb(30, 30, 30);
+        text-shadow: 0px 0px rgb(174, 174, 174);
+    }
+
+    .navbar-brand {
+        transition: all 0.1s ease-in-out;
+    }
+
+    .navbar-brand:hover {
+        color: rgb(30, 30, 30);
+        text-shadow: 4px 4px rgb(174, 174, 174);
+    }
+
+    .navbar-brand:active {
+        color: rgb(30, 30, 30);
+        text-shadow: 0px 0px rgb(174, 174, 174);
     }
 
     .card {
@@ -147,7 +177,7 @@ p, h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-height: 1000px;
+    /* max-height: 1000px; */
 }
 
 /* For very small screens, decrease h1 and h2 sizes */
