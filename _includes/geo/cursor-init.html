@@ -1,12 +1,14 @@
 {%- comment -%}
   Applies the cursor picked in the cursor menu (cursor-setting.html), before the page draws. The choice is saved in the
-  browser as the cursor's id from _data/cursors.yml. Also defines setSiteCursor(id), which the menu calls.
+  browser as the cursor's id from _data/cursors.yml; visitors who haven't picked one get defaultSiteCursor below, and
+  "system" means the browser's own cursor. Also defines setSiteCursor(id), which the menu calls.
   Sets --site-cursor, --site-link and (for cursors that have one) --site-text on <html>; geocities.css uses them on
   devices with a mouse.
 {%- endcomment -%}
 <script>
   (function () {
     var base = {{ "/assets/cursors/web/" | relative_url | jsonify }};
+    window.defaultSiteCursor = "windows-98";
     var cursors = {};
     {%- assign states = "cursor,link,text" | split: "," %}
     {%- for cursor in site.data.cursors %}
@@ -58,6 +60,8 @@
       root.classList.add("custom-cursor");
     };
 
-    try { setSiteCursor(localStorage.getItem("cursor")); } catch (e) {}
+    var saved = null;
+    try { saved = localStorage.getItem("cursor"); } catch (e) {}
+    setSiteCursor(saved || defaultSiteCursor);
   })();
 </script>

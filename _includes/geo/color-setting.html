@@ -1,0 +1,22 @@
+{%- comment -%}
+  Color dropdown for the settings box (dark or light). The choice is saved in the browser; color-init.html applies it
+  on each page load.
+{%- endcomment -%}
+<label class="appearance">
+  color:
+  <select id="color-select">
+    <option value="dark">Dark</option>
+    <option value="light">Light</option>
+  </select>
+</label>
+<script>
+  (function () {
+    var select = document.getElementById("color-select");
+    select.value = document.documentElement.dataset.color === "light" ? "light" : "dark";
+    select.addEventListener("change", function () {
+      if (select.value === "light") document.documentElement.dataset.color = "light";
+      else delete document.documentElement.dataset.color;
+      try { localStorage.setItem("color", select.value); } catch (e) {}
+    });
+  })();
+</script>

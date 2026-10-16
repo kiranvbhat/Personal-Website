@@ -7,7 +7,7 @@
 <div class="setting cursor-setting">
   cursor:
   <div class="cursor-buttons">
-    <button type="button" class="cursor-open" id="cursor-open">Default</button>
+    <button type="button" class="cursor-open" id="cursor-open">Windows 98</button>
     <button type="button" class="cursor-random" id="cursor-random" title="Random cursor!" aria-label="Pick a random cursor">
       <img src="{{ 'assets/graphics/misc/dice 29.gif' | relative_url }}" alt="">
     </button>
@@ -22,9 +22,9 @@
   <p class="cursor-hint">hover over one to see it on a link, then click to pick it</p>
   {%- assign states = "cursor,link" | split: "," %}
   <div class="cursor-grid">
-    <button type="button" class="cursor-option" data-cursor="default">
-      <span class="cursor-pics cursor-pics-default">normal</span>
-      <span class="cursor-name">Default</span>
+    <button type="button" class="cursor-option" data-cursor="system">
+      <span class="cursor-pics cursor-pics-system">normal</span>
+      <span class="cursor-name">System</span>
     </button>
     {%- for cursor in site.data.cursors %}
     {%- capture dir %}assets/cursors/web/{{ cursor.id }}/{% endcapture %}
@@ -49,12 +49,12 @@
     var options = menu.querySelectorAll(".cursor-option");
 
     function current() {
-      try { return localStorage.getItem("cursor") || "default"; } catch (e) { return "default"; }
+      try { return localStorage.getItem("cursor") || defaultSiteCursor; } catch (e) { return defaultSiteCursor; }
     }
 
     // Shows the current cursor's name on the button and highlights it in the menu.
     function showCurrent() {
-      var id = current(), name = "Default";
+      var id = current(), name = "System";
       options.forEach(function (option) {
         var picked = option.dataset.cursor === id;
         option.classList.toggle("picked", picked);
@@ -77,10 +77,10 @@
       });
     });
 
-    // Dice: any cursor except Default and the current one.
+    // Dice: any cursor except System and the current one.
     document.getElementById("cursor-random").addEventListener("click", function () {
       var choices = Array.prototype.map.call(options, function (option) { return option.dataset.cursor; })
-        .filter(function (id) { return id !== "default" && id !== current(); });
+        .filter(function (id) { return id !== "system" && id !== current(); });
       pick(choices[Math.floor(Math.random() * choices.length)]);
     });
 

@@ -1,4 +1,5 @@
-/* GeoCities appearance. Colors are set in the variables below. */
+/* GeoCities appearance. Colors are set in the variables below: dark by default, light when the visitor picks it in
+   settings (color-init.html sets data-color="light" on <html>). */
 
 /* The font for the site name and section titles. */
 @font-face {
@@ -11,9 +12,27 @@
     --text: #33ff33;
     --heading: #ffff00;
     --accent: #ff2020;
+    --on-accent: #ffff00;        /* text on red boxes and buttons */
     --link: #ff4040;
     --link-visited: #ff9900;
+    --highlight-bg: #ffff00;     /* behind hovered links */
     --panel: #000;
+    --muted: #99cc99;
+    --tile: #111;                /* cursor menu options */
+    --tile-hover: #2a2a2a;
+    --tile-picked: #332b00;
+}
+
+:root[data-color="light"] {
+    --text: #000080;
+    --heading: #c00000;
+    --link: #0000ee;
+    --link-visited: #551a8b;
+    --panel: #fffdf0;
+    --muted: #557755;
+    --tile: #f4f4f4;
+    --tile-hover: #e4e4e4;
+    --tile-picked: #fff3b0;
 }
 
 html {
@@ -33,7 +52,7 @@ body {
 
 a { color: var(--link); }
 a:visited { color: var(--link-visited); }
-a:hover { color: #000; background: var(--heading); }
+a:hover { color: #000; background: var(--highlight-bg); }
 
 b, strong { color: var(--heading); }
 
@@ -127,13 +146,13 @@ h2 {
 .box-title {
     padding: 2px 8px;
     background: var(--accent);
-    color: var(--heading);
+    color: var(--on-accent);
     font-weight: bold;
     font-size: 14px;
     white-space: nowrap;
 }
 
-.box-title a, .box-title a:visited { color: var(--heading); }
+.box-title a, .box-title a:visited { color: var(--on-accent); }
 .box-title a:hover { color: #000; }
 
 .nav {
@@ -171,7 +190,7 @@ h2 {
     max-height: 100%;
 }
 
-.social:hover { background: var(--heading); }
+.social:hover { background: var(--highlight-bg); }
 .social:active { border-style: inset; }
 
 .contact {
@@ -212,7 +231,7 @@ h2 {
 .entry-body p:last-child { margin-bottom: 0; }
 
 .entry-subtitle { color: var(--heading); font-style: italic; }
-.entry-note { color: #99cc99; font-size: 11px; }
+.entry-note { color: var(--muted); font-size: 11px; }
 
 .entry-thumb {
     float: left;
@@ -347,7 +366,7 @@ h2 {
     padding: 0 5px;
     border: 1px solid #666;
     background: linear-gradient(#333, #000 50%, #333);
-    color: var(--text);
+    color: #33ff33;   /* always a green-on-black display */
     font-family: "Courier New", monospace;
     font-size: 22px;
     font-weight: bold;
@@ -378,7 +397,7 @@ h2 {
 }
 
 #footer p { margin: 4px 0 0; }
-.fine-print { color: #99cc99; font-size: 11px; }
+.fine-print { color: var(--muted); font-size: 11px; }
 
 /* -------------------Splash------------------- */
 .splash {
@@ -488,7 +507,7 @@ h2 {
     width: min(560px, 92vw);
     padding: 0;
     border: 3px outset #c0c0c0;
-    background: #000;
+    background: var(--panel);
     color: var(--text);
 }
 
@@ -538,14 +557,14 @@ h2 {
     gap: 6px;
     padding: 8px 4px;
     border: 2px solid var(--accent);
-    background: #111;
+    background: var(--tile);
     color: var(--text);
     font: 12px Verdana, Tahoma, sans-serif;
     cursor: pointer;
 }
 
-.cursor-option:hover, .cursor-option:focus-visible { background: #2a2a2a; border-color: var(--heading); }
-.cursor-option.picked { border: 2px dashed var(--heading); background: #332b00; }
+.cursor-option:hover, .cursor-option:focus-visible { background: var(--tile-hover); border-color: var(--heading); }
+.cursor-option.picked { border: 2px dashed var(--heading); background: var(--tile-picked); }
 .cursor-option.picked .cursor-name::after { content: " \2713"; color: var(--heading); }
 
 .cursor-pics {
@@ -556,7 +575,7 @@ h2 {
     height: 64px;
 }
 
-.cursor-pics-default { color: #99cc99; font-style: italic; }
+.cursor-pics-system { color: var(--muted); font-style: italic; }
 
 /* The normal cursor by default; its link version while hovered. */
 .cursor-pic-link,
@@ -573,7 +592,7 @@ h2 {
     padding: 6px 2px;
     border: 2px outset #ff8080;
     background: var(--accent);
-    color: var(--heading);
+    color: var(--on-accent);
     font: bold 14px "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive;
     white-space: nowrap;
     cursor: pointer;
