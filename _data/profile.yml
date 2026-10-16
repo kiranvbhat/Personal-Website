@@ -6,8 +6,8 @@ portrait: assets/portraits/Portrait.jpeg
 resume: assets/resume/Kiran_Bhat_Resume.pdf
 
 # GeoCities appearance
-# Splash page image. Drop a file at this path and it replaces the placeholder automatically.
-door_image: assets/graphics/splash/door.gif
+# Splash page door image (clicking it enters the site).
+door_image: assets/graphics/misc/red door.png
 # Fake visitor count shown on the homepage (padded to 6 digits).
 hit_count: 4213
 

@@ -1,4 +1,12 @@
 /* GeoCities appearance. Colors are set in the variables below. */
+
+/* The font for the site name and section titles. */
+@font-face {
+    font-family: "Sawdust Marionette";
+    src: url("assets/fonts/SawdustMarionette.woff2") format("woff2");
+    font-display: swap;
+}
+
 :root {
     --text: #33ff33;
     --heading: #ffff00;
@@ -76,7 +84,7 @@ main {
    bottom. */
 .bubble-text {
     display: inline-block;
-    font-family: "Creepster", Impact, sans-serif;
+    font-family: "Sawdust Marionette", "Comic Sans MS", cursive;
     font-weight: normal;
     letter-spacing: 1px;
     background-image: linear-gradient(#fffde0 0%, #fff35a 30%, #ffd000 60%, #ff9d00 100%);
@@ -383,12 +391,11 @@ h2 {
     text-align: center;
 }
 
+/* Same style as the site name in the banner (.bubble-text), just bigger. */
 .splash-warning {
     margin: 0;
-    font-family: Impact, "Arial Black", sans-serif;
     font-size: 52px;
-    color: var(--accent);
-    text-shadow: 3px 3px 0 var(--heading);
+    font-weight: normal;
 }
 
 .door img { display: block; max-width: 300px; max-height: 50vh; }
@@ -405,14 +412,6 @@ h2 {
     color: var(--heading);
 }
 
-.splash-enter {
-    font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive;
-    font-size: 26px;
-    font-weight: bold;
-}
-
-.splash-settings { font-size: 11px; }
-.splash-settings select { width: auto; }
 
 /* -------------------Animations------------------- */
 @keyframes blink { 50% { opacity: 0; } }
@@ -601,5 +600,5 @@ h2 {
     .coursework { grid-template-columns: 1fr; }
     .entry-thumb { float: none; display: block; width: 100%; max-width: 320px; margin: 0 auto 10px; }
     .side-thumb .entry-thumb { float: left; width: 35%; max-width: 130px; margin: 0 10px 4px 0; }
-    .splash-warning { font-size: 34px; }
+    .splash-warning { padding: 0 10px; font-size: 28px; }
 }

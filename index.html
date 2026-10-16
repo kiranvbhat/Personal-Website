@@ -13,18 +13,17 @@ layout: null
     <link rel="icon" href="{{ 'assets/graphics/characters/TinyWingsBird.png' | relative_url }}">
     {% include appearance-redirect.html %}
     {% include geo/cursor-init.html %}
+    <link rel="preload" href="{{ 'assets/fonts/SawdustMarionette.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ 'geocities.css' | relative_url }}">
   </head>
   <body class="splash">
-    <h1 class="splash-warning blink">ENTER AT YOUR OWN RISK</h1>
+    <h1 class="splash-warning"><span class="bubble-text">ENTER IF YOU DARE</span></h1>
     <a class="door" href="{{ 'home' | relative_url }}">
       {%- if door_file %}
-      <img src="{{ site.data.profile.door_image | relative_url }}" alt="An open wooden door">
+      <img src="{{ site.data.profile.door_image | relative_url }}" alt="A red door: click to enter">
       {%- else %}
       <span class="door-placeholder">[ door image goes here ]<br><small>{{ site.data.profile.door_image }}</small></span>
       {%- endif %}
     </a>
-    <a class="splash-enter" href="{{ 'home' | relative_url }}">&gt;&gt; ENTER &lt;&lt;</a>
-    <div class="splash-settings">{% include appearance-select.html current="geocities" %}</div>
   </body>
 </html>

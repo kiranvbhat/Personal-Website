@@ -13,6 +13,8 @@ exclude:
   - vendor
   # Original cursor files; the site uses the converted PNGs in assets/cursors/web/ (see _scripts/convert_cursors.py).
   - assets/cursors/originals
+  # The original font file; the site uses the smaller .woff2 copy.
+  - assets/fonts/*.otf
 
 kramdown:
   # Keep quotes and dashes in _data/ text exactly as typed instead of converting them to curly quotes / en dashes.
