@@ -106,8 +106,6 @@ h1 {
     text-align: center;
 }
 
-h1::before, h1::after { content: " ~*~ "; color: var(--accent); text-shadow: none; }
-
 h2 {
     margin: 24px 0 12px;
     padding-bottom: 4px;
@@ -242,8 +240,6 @@ h2 {
     line-height: 1.2;
     text-shadow: none;
 }
-
-.welcome::before, .welcome::after { content: none; }
 
 .welcome-to {
     font-size: 30px;
@@ -397,8 +393,6 @@ h2 {
     color: var(--accent);
     text-shadow: 3px 3px 0 var(--heading);
 }
-
-.splash-warning::before, .splash-warning::after { content: none; }
 
 .door img { display: block; max-width: 300px; max-height: 50vh; }
 .door { text-decoration: none; }

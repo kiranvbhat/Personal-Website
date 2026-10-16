@@ -13,7 +13,7 @@
   </div>
 
   <div class="box" id="box-menu">
-    <div class="box-title">~ menu ~</div>
+    <div class="box-title">menu</div>
     <ul class="nav">
       {%- for link in site.data.nav %}
       {%- assign link_url = link.url | prepend: "/" %}
@@ -27,7 +27,7 @@
   </div>
 
   <div class="box" id="box-contact">
-    <div class="box-title">~ contact ~</div>
+    <div class="box-title">contact</div>
     <div class="contact">
       {%- for item in site.data.profile.contact %}
       {%- if item.url contains ":" %}{% assign item_url = item.url %}{% else %}{% assign item_url = item.url | relative_url %}{% endif %}
@@ -40,7 +40,7 @@
   </div>
 
   <div class="box" id="box-socials">
-    <div class="box-title">~ social networks ~</div>
+    <div class="box-title">social networks</div>
     <div class="socials">
       {%- for social in site.data.profile.socials %}
       <a class="social" href="{{ social.url }}" target="_blank" title="{{ social.name }}"><img src="{{ social.icon | relative_url }}" alt="{{ social.name }}"></a>
@@ -49,7 +49,7 @@
   </div>
 
   <div class="box" id="box-settings">
-    <div class="box-title">~ settings ~</div>
+    <div class="box-title">settings</div>
     {% include appearance-select.html current="geocities" %}
     {% include geo/cursor-setting.html %}
   </div>
