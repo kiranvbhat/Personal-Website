@@ -1,0 +1,59 @@
+# Content for the Other page.
+#
+# media: exactly one of
+#   youtube: YouTube video id
+#   embed: URL of an embeddable page (e.g. Panoraven, Albumizr)
+#   image: path to an image/gif
+# `start` and `end` (YYYY-MM) are optional. Entries show in the order written here, except volunteering, which is
+# shown newest first by date (entries without dates go last).
+# Descriptions support Markdown (e.g. **bold**).
+
+intro: A collection of random things I have worked on or found interesting.
+
+photography:
+  - title: 360° Photos
+    media:
+      embed: https://panoraven.com/en/embed/Cilny6bvKo
+    description: >-
+      Some 360° photos I've taken for fun using Google's photo sphere feature. Don't worry, those floating torsos and
+      walking pants in some of the images aren't real -- they're just a result of the photo-taking-and-stitching
+      process.
+
+  - title: Smartphone Photography
+    media:
+      embed: https://albumizr.com/a/ByIx
+    description: >-
+      I didn't have a DSLR Camera until recently, but still had a lot of fun taking photos with my phone. Cameras
+      used: Nexus 5, Nexus 6P, Pixel 2.
+
+volunteering:
+  - title: Camp Kaleidoscope
+    start: 2024-11
+    end: 2026-06
+
+  - title: Camp Kesem
+    start: 2022-11
+    end: 2024-10
+
+  - title: Basketball Coaching
+    media:
+      image: assets/portfolio/photos/crossover.jpg
+    description: >-
+      I coached 4th/5th grade basketball teams from 2017 to 2019. I love both teaching and basketball, so being a
+      coach was a really fun experience.
+
+misc:
+  - title: Tiny Wings World Record
+    media:
+      youtube: chqVxox2FHs
+    description: >-
+      Tiny wings is a 2011 iOS game with over **11 million downloads**. When you complete all the achievements, a
+      message appears saying "Congratulations! You are a master of Tiny Wings! **Now beat the highscore!**" I took
+      this too literally and now own the world record.
+
+  - title: Competitive Gymnastics
+    media:
+      youtube: 6mcc7ihyNNQ
+    description: >-
+      I used to compete at the state and national levels in gymnastics. Here is one of my low-lights. Sadly it's the
+      most viewed video I've ever starred in at ~100,000 views. At least I walked away unharmed -- thanks Coach Izzy!

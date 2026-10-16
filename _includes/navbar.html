@@ -1,0 +1,32 @@
+<!-- -------------------Navbar------------------- -->
+<nav class="navbar fixed-top navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ '/' | relative_url }}">{{ site.data.profile.name }}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Left side of Navbar -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ 'music' | relative_url }}">Music</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ 'random' | relative_url }}">Random</a>
+        </li>
+      </ul>
+
+      <!-- Right side of Navbar (ms-auto for right alignment) -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          {%- for social in site.data.profile.socials %}
+          <a class="navbar-brand" href="{{ social.url }}" target="_blank">
+            <img src="{{ social.icon | relative_url }}" alt="{{ social.name }}" width="35" height="35">
+          </a>
+          {%- endfor %}
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>

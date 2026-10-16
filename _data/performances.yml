@@ -1,0 +1,46 @@
+# Musical performances. Shown newest first, sorted by `end` then `start`; entries without dates go last, in file order.
+# Dates are YYYY-MM (e.g. 2024-05); `start` and `end` are both optional. For a one-time event, just set `start`.
+#
+# media: exactly one of
+#   youtube: YouTube video id
+#   bandcamp: Bandcamp album id
+#   image: path to an image/gif
+# `link` and `note` are optional.
+
+- title: Senior Recital
+  start: 2020-07
+  media:
+    youtube: XrxldF58UIg
+  description: A recital to commemorate my journey as a pianist up to my senior year in high school.
+
+- title: YESBOT
+  start: 2024-05
+  link: https://slork.stanford.edu/events/2024/slorktastic/
+  media:
+    youtube: oYNdI5XdsBk
+  description: >-
+    A cautionary tale about the dangers of automating human creativity. The piece was written and performed by
+    myself and Samantha Liu as part of the Stanford Laptop Orchestra.
+
+- title: DISKOMPONIST
+  start: 2025-03
+  media:
+    youtube: 8XecBeocAlY
+  description: Not a piano, but a pianist with a compositional mind.
+
+- title: An Introduction
+  start: 2025-09
+  media:
+    youtube: 6lkYC9yl3N4
+  description: A new master's student at CCRMA introduces himself to his peers.
+
+- title: TO THE END OF THIS WORLD
+  start: 2026-06
+  media:
+    image: assets/graphics/signs/coming soon.gif
+  description: A horror-inspired, animated short film.
+
+- title: Drawn2Noize
+  start: 2025-05
+  media:
+    image: assets/graphics/signs/coming soon.gif

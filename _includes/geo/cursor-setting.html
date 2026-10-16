@@ -1,0 +1,77 @@
+{%- comment -%}
+  Cursor setting for the settings box: a button that opens a window of every cursor in _data/cursors.yml.
+  Each option shows the normal cursor, and the pointer (link) version on hover. The choice is saved in the browser;
+  cursor-init.html applies it on each page load. Hidden on touch devices (see .cursor-setting in geocities.css).
+{%- endcomment -%}
+<div class="setting cursor-setting">
+  cursor: <button type="button" class="cursor-open" id="cursor-open">Default</button>
+</div>
+
+<dialog class="cursor-menu" id="cursor-menu" aria-labelledby="cursor-menu-title">
+  <div class="window-title">
+    <span id="cursor-menu-title">Pick a cursor!!</span>
+    <button type="button" class="window-close" id="cursor-close" aria-label="Close">X</button>
+  </div>
+  <p class="cursor-hint">hover over one to see its pointer, then click to pick it</p>
+  {%- assign states = "cursor,pointer" | split: "," %}
+  <div class="cursor-grid">
+    <button type="button" class="cursor-option" data-cursor="default">
+      <span class="cursor-pics cursor-pics-default">normal</span>
+      <span class="cursor-name">Default</span>
+    </button>
+    {%- for cursor in site.data.cursors %}
+    {%- capture dir %}assets/cursors/web/{{ cursor.id }}/{% endcapture %}
+    <button type="button" class="cursor-option" data-cursor="{{ cursor.id }}">
+      <span class="cursor-pics">
+        {%- for state in states %}
+        {%- if cursor[state].frames %}{% capture image %}{{ dir }}{{ state }}-preview.png{% endcapture %}
+        {%- else %}{% capture image %}{{ dir }}{{ state }}@2x.png{% endcapture %}{% endif %}
+        <img class="cursor-pic-{{ state }}" src="{{ image | relative_url }}" alt="" loading="lazy" width="64" height="64">
+        {%- endfor %}
+      </span>
+      <span class="cursor-name">{{ cursor.name }}</span>
+    </button>
+    {%- endfor %}
+  </div>
+</dialog>
+
+<script>
+  (function () {
+    var menu = document.getElementById("cursor-menu");
+    var openButton = document.getElementById("cursor-open");
+    var options = menu.querySelectorAll(".cursor-option");
+
+    function current() {
+      try { return localStorage.getItem("cursor") || "default"; } catch (e) { return "default"; }
+    }
+
+    // Shows the current cursor's name on the button and highlights it in the menu.
+    function showCurrent() {
+      var id = current(), name = "Default";
+      options.forEach(function (option) {
+        var picked = option.dataset.cursor === id;
+        option.classList.toggle("picked", picked);
+        option.setAttribute("aria-pressed", picked);
+        if (picked) name = option.querySelector(".cursor-name").textContent;
+      });
+      openButton.textContent = name;
+    }
+
+    options.forEach(function (option) {
+      option.addEventListener("click", function () {
+        try { localStorage.setItem("cursor", option.dataset.cursor); } catch (e) {}
+        setSiteCursor(option.dataset.cursor);
+        showCurrent();
+        menu.close();
+      });
+    });
+
+    openButton.addEventListener("click", function () { menu.showModal(); });
+    document.getElementById("cursor-close").addEventListener("click", function () { menu.close(); });
+    // Clicking outside the window closes it.
+    menu.addEventListener("click", function (event) {
+      if (event.target === menu) menu.close();
+    });
+    showCurrent();
+  })();
+</script>

@@ -1,0 +1,46 @@
+---
+layout: geocities
+background: assets/background/stars 1.gif
+title: Home
+---
+{%- assign profile = site.data.profile -%}
+{%- capture hits %}000000{{ profile.hit_count }}{% endcapture -%}
+{%- assign hit_digits = hits | slice: -6, 6 | split: "" -%}
+<h1 class="welcome">
+  <span class="welcome-to bubble-text">Welcome to...</span>
+  <span class="zoom bubble-text bubble-3d">KIRAN'S HOMEPAGE!!</span>
+</h1>
+
+<div class="construction-row">
+  <img src="{{ 'assets/graphics/signs/under construction 2.gif' | relative_url }}" alt="">
+  <img src="{{ 'assets/graphics/signs/underconstruction.gif' | relative_url }}" alt="Under construction">
+  <img src="{{ 'assets/graphics/signs/under construction excavator.gif' | relative_url }}" alt="">
+</div>
+
+<div class="home-intro">
+  <img src="{{ profile.portrait | relative_url }}" class="portrait" alt="{{ profile.name }}">
+  <div>
+    {%- for paragraph in profile.bio %}
+    {{ paragraph | markdownify }}
+    {%- endfor %}
+  </div>
+</div>
+
+<div class="portals">
+  {%- for link in site.data.nav %}
+  {%- if link.url == "home" %}{% continue %}{% endif %}
+  <a class="portal" href="{{ link.url | relative_url }}">
+    {%- if link.gif %}
+    <img src="{{ link.gif | relative_url }}" alt="">
+    {%- else %}
+    <span class="gif-placeholder">[gif needed]</span>
+    {%- endif %}
+    <span>{{ link.caption | default: link.name }}</span>
+  </a>
+  {%- endfor %}
+</div>
+
+<div class="counter">
+  You are visitor #
+  <span class="digits">{%- for digit in hit_digits -%}<span>{{ digit }}</span>{%- endfor -%}</span>
+</div>

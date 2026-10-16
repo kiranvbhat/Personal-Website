@@ -1,0 +1,21 @@
+# Jekyll configuration. GitHub Pages builds the site with these settings.
+# All site content lives in _data/; the HTML in _layouts/, _includes/ and the pages only handles presentation.
+
+title: Kiran Bhat
+# Used for the "last updated" date, which is the build time.
+timezone: America/Los_Angeles
+
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  # Original cursor files; the site uses the converted PNGs in assets/cursors/web/ (see _scripts/convert_cursors.py).
+  - assets/cursors/sweezy cursors
+  - assets/cursors/rw designer
+
+kramdown:
+  # Keep quotes and dashes in _data/ text exactly as typed instead of converting them to curly quotes / en dashes.
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+  typographic_symbols: { hellip: "...", mdash: "---", ndash: "--", laquo: "<<", raquo: ">>", laquo_space: "<< ", raquo_space: " >>" }

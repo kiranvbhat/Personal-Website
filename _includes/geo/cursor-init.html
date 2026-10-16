@@ -1,0 +1,58 @@
+{%- comment -%}
+  Applies the cursor picked in the cursor menu (cursor-setting.html), before the page draws. The choice is saved in the
+  browser as the cursor's id from _data/cursors.yml. Also defines setSiteCursor(id), which the menu calls.
+  Sets --site-cursor and --site-pointer on <html>; geocities.css uses them on devices with a mouse.
+{%- endcomment -%}
+<script>
+  (function () {
+    var base = {{ "/assets/cursors/web/" | relative_url | jsonify }};
+    var cursors = {};
+    {%- assign states = "cursor,pointer" | split: "," %}
+    {%- for cursor in site.data.cursors %}
+    cursors[{{ cursor.id | jsonify }}] = {
+      {%- for state in states %}
+      {{ state }}: { hotspot: {{ cursor[state].hotspot | jsonify }}{% if cursor[state].frames %}, frames: {{ cursor[state].frames }}, delay: {{ cursor[state].delay }}{% endif %} }{% unless forloop.last %},{% endunless %}
+      {%- endfor %}
+    };
+    {%- endfor %}
+
+    var hasMouse = window.matchMedia && matchMedia("(hover: hover) and (pointer: fine)").matches;
+    var sharp = window.CSS && CSS.supports && CSS.supports("cursor", 'image-set(url("a.png") 1x) 0 0, auto');
+    var timers = [];
+
+    // A CSS cursor value for one image, with a 2x version for high-resolution screens where supported.
+    function cursorValue(dir, file, hotspot, fallback) {
+      var image = sharp
+        ? 'image-set(url("' + dir + file + '.png") 1x, url("' + dir + file + '@2x.png") 2x)'
+        : 'url("' + dir + file + '.png")';
+      return image + " " + hotspot.join(" ") + ", " + fallback;
+    }
+
+    window.setSiteCursor = function (id) {
+      var root = document.documentElement;
+      timers.forEach(clearInterval);
+      timers = [];
+      if (!cursors[id]) {
+        root.classList.remove("custom-cursor");
+        return;
+      }
+      ["cursor", "pointer"].forEach(function (state) {
+        var info = cursors[id][state], dir = base + id + "/", property = "--site-" + state;
+        var fallback = state === "cursor" ? "auto" : "pointer";
+        root.style.setProperty(property, cursorValue(dir, state, info.hotspot, fallback));
+        // Animated cursors: CSS can't animate a cursor, so swap through the frames.
+        if (info.frames && hasMouse) {
+          for (var n = 1; n <= info.frames; n++) new Image().src = dir + state + "-" + n + (sharp && devicePixelRatio > 1 ? "@2x" : "") + ".png";
+          var frame = 1;
+          timers.push(setInterval(function () {
+            frame = frame % info.frames + 1;
+            root.style.setProperty(property, cursorValue(dir, state + "-" + frame, info.hotspot, fallback));
+          }, info.delay));
+        }
+      });
+      root.classList.add("custom-cursor");
+    };
+
+    try { setSiteCursor(localStorage.getItem("cursor")); } catch (e) {}
+  })();
+</script>

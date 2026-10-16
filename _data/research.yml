@@ -1,0 +1,22 @@
+# Research. Shown newest first, sorted by `end` then `start`.
+# Dates are YYYY-MM (e.g. 2025-08); use `end: present` for ongoing work. Both are optional.
+#
+# media (optional): exactly one of
+#   image: path to an image/gif
+#   youtube: YouTube video id
+# Descriptions support Markdown (e.g. **bold**).
+
+- title: Robust Neural Audio Fingerprinting using Music Foundation Models
+  start: 2025-08
+  end: 2025-10
+  description: >-
+    Fine-tuned music foundation models (MuQ, MERT) with a nonlinear projection head using contrastive learning.
+    Achieved an **88.2% track-level hit rate** and **95.5% segment-level F1**, vs. 70.3% and 80.8% for the prior
+    state of the art (BEATs), and beat the Shazam-like Dejavu by 39 points (49.2% hit rate). Co-first author,
+    **NeurIPS 2025 AI for Music Workshop**.
+
+- title: "SMucK: Symbolic Music in ChucK"
+  start: 2025-01
+  end: 2025-06
+  description: >-
+    Designed a framework for symbolic music in the ChucK programming language. Accepted to **NIME 2025**.

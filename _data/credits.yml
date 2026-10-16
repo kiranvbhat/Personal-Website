@@ -1,0 +1,36 @@
+# Links shown on the Credits page (linked from the footer).
+#
+# Each entry can be just a URL:
+#   - https://example.com
+# or a URL with an optional name and note:
+#   - url: https://example.com
+#     name: Example Site
+#     note: the background tiles
+# Without a name, the link shows the URL's address (e.g. example.com/page).
+
+inspiration:
+  - url: https://www.webdesignmuseum.org/gallery/year-2000/
+    note: collection of old website front pages
+  - url: https://www.webdesignmuseum.org/gallery/rollercoaster-tycoon-in-2002
+  - url: https://www.webdesignmuseum.org/gallery/neil-gaiman-2002
+  - url: https://geocities.restorativland.org/Area51/Atlantis/8958/
+  - url: https://geocities.restorativland.org/Area51/Atlantis/9024/
+  - url: https://geocities.restorativland.org/Area51/Atlantis/7933/
+  - url: https://geocities.restorativland.org/Area51/Atlantis/6796/
+  - url: https://geocities.restorativland.org/Area51/Atlantis/7391/index.htm
+  - url: https://geocities.restorativland.org/Area51/Atlantis/4051/Home.htm
+  - url: https://geocities.restorativland.org/Area51/Atlantis/2882/
+  - url: https://geocities.restorativland.org/Area51/Atlantis/2793/
+  - url: https://geocities.restorativland.org/Area51/Hollow/1445/
+graphics:
+  - url: http://www.rw-designer.com/cursor-library
+    note: Lots of cool custom cursors
+  - url: https://sweezy-cursors.com/
+    note: More custom cursors
+  - url: https://bettysgraphics.neocities.org/
+    note: Incredible collection of graphics/gifs/backgrounds
+  - url: https://pixelsafari.neocities.org/webring/
+    note: Links to various collections of web graphics
+  - url: https://www.3dgifmaker.com/
+    note: Amazing website for converting images to 3d gifs
+  

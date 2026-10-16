@@ -1,0 +1,51 @@
+# Coursework grouped by subject. `link` is optional.
+
+- subject: Computer Science
+  courses:
+    - { code: CS 255, name: Cryptography }
+    - { code: CS 238, name: Decision Making Under Uncertainty }
+    - { code: CS 236, name: Deep Generative Models }
+    - { code: CS 231N, name: Deep Learning for Computer Vision }
+    - { code: CS 229, name: Machine Learning }
+    - { code: CS 224N, name: Natural Language Processing }
+    - { code: CS 161, name: Design and Analysis of Algorithms }
+    - { code: CS 155, name: Computer and Network Security }
+    - { code: CS 148, name: Computer Graphics and Imaging }
+    - { code: CS 144, name: Computer Networking }
+    - { code: CS 111, name: Operating Systems Principles }
+    - { code: CS 109, name: Probability for Computer Science }
+    - { code: CS 107, name: Computer Organization and Systems }
+    - { code: CS 106L, name: Standard C++ Programming Laboratory }
+    - { code: CS 106B, name: Programming Abstractions }
+    - { code: CS 103, name: Mathematical Foundations of Computing }
+
+- subject: Music and Acoustics
+  courses:
+    - { code: CS 476A, name: "Music, Computing, and Design", link: "https://ccrma.stanford.edu/~kvbhat/cs476a/" }
+    - { code: CS 470, name: Music and AI, link: "https://ccrma.stanford.edu/~kvbhat/cs470/" }
+    - { code: CS 275A, name: Symbolic Musical Information }
+    - { code: CS 170, name: Stanford Laptop Orchestra, link: "https://slork.stanford.edu/events/2024/slorktastic/" }
+    - { code: MUSIC 320, name: Audio Signal Processing }
+    - { code: MUSIC 319, name: Computational Models of Sound Perception }
+    - { code: MUSIC 257, name: Neuroplasticity and Musical Gaming }
+    - { code: MUSIC 220A, name: Computer-Generated Sound, link: "https://ccrma.stanford.edu/~kvbhat/220a/" }
+
+- subject: Physics
+  courses:
+    - { code: PHYSICS 59, name: Frontiers of Physics Research }
+    - { code: PHYSICS 46, name: Light and Heat Laboratory }
+    - { code: PHYSICS 45, name: Light and Heat }
+    - { code: PHYSICS 44, name: Electricity and Magnetism Laboratory }
+    - { code: PHYSICS 43, name: Electricity and Magnetism }
+    - { code: PHYSICS 42, name: Classical Mechanics Laboratory }
+    - { code: PHYSICS 41, name: Mechanics }
+
+- subject: Other
+  courses:
+    - { code: ENGR 40M, name: Electrical Engineering }
+    - { code: MATH 51, name: Linear Algebra and Multivariable Calculus }
+    - { code: CS 547, name: Human-Computer Interaction Seminar }
+    - { code: CS 106S, name: Coding for Social Good }
+    - { code: THINK 65, name: Preventing Human Extinction }
+    - { code: MUSIC 123B, name: "Undergraduate Seminar in Composition: Pitch Design" }
+    - { code: MUSIC 72D, name: Jazz Piano }

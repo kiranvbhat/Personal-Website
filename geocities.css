@@ -1,0 +1,566 @@
+/* GeoCities appearance. Colors are set in the variables below. */
+:root {
+    --text: #33ff33;
+    --heading: #ffff00;
+    --accent: #ff2020;
+    --link: #ff4040;
+    --link-visited: #ff9900;
+    --panel: #000;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    font-family: Verdana, Tahoma, Geneva, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    /* Each page sets its own tiling image with `background:` in its front matter. */
+    background-color: #000;
+    background-repeat: repeat;
+}
+
+a { color: var(--link); }
+a:visited { color: var(--link-visited); }
+a:hover { color: #000; background: var(--heading); }
+
+b, strong { color: var(--heading); }
+
+.highlight { color: var(--heading); }
+
+/* -------------------Page frame------------------- */
+#page {
+    max-width: 800px;
+    margin: 16px auto;
+    border: 4px ridge var(--accent);
+    background: var(--panel);   /* solid panel keeps text readable over a busy tiled background */
+}
+
+#banner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    border-bottom: 4px ridge var(--accent);
+}
+
+#banner .site-name {
+    font-size: 30px;
+    text-decoration: none;
+}
+
+#banner .site-name:hover { background-color: transparent; }
+
+#columns {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+}
+
+#sidebar {
+    padding: 12px 10px;
+    border-right: 4px ridge var(--accent);
+}
+
+main {
+    padding: 12px 18px 18px;
+    min-width: 0;
+}
+
+/* -------------------Bubble text------------------- */
+/* Shiny bubbly letters: a gradient clipped to the letters gives them a light top and darker bottom. */
+.bubble-text {
+    display: inline-block;
+    font-family: "Titan One", Impact, sans-serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+    background-image: linear-gradient(#fffde0 0%, #fff35a 30%, #ffd000 60%, #ff9d00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #8a4500;
+}
+
+/* Adds depth: each drop-shadow adds 1px in a darker orange, building up the sides. The last one is a soft glow. */
+.bubble-3d {
+    filter:
+        drop-shadow(1px 1px 0 #d06a00) drop-shadow(1px 1px 0 #b85d00) drop-shadow(1px 1px 0 #a05000)
+        drop-shadow(1px 1px 0 #884300) drop-shadow(1px 1px 0 #703700) drop-shadow(1px 1px 0 #5a2c00)
+        drop-shadow(0 0 6px rgba(255, 200, 0, 0.35));
+}
+
+/* -------------------Headings------------------- */
+h1, h2, .box-title {
+    font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive;
+}
+
+h1 {
+    margin: 4px 0 14px;
+    color: var(--heading);
+    font-size: 32px;
+    font-weight: normal;
+    text-align: center;
+}
+
+h1::before, h1::after { content: " ~*~ "; color: var(--accent); text-shadow: none; }
+
+h2 {
+    margin: 24px 0 12px;
+    padding-bottom: 4px;
+    color: var(--heading);
+    font-size: 26px;
+    font-weight: normal;
+    border-bottom: 2px dashed var(--accent);
+}
+
+.intro, .jump { text-align: center; }
+
+/* -------------------Boxes------------------- */
+.box {
+    margin-bottom: 14px;
+    border: 2px solid var(--accent);
+}
+
+.box-title {
+    padding: 2px 8px;
+    background: var(--accent);
+    color: var(--heading);
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.box-title a, .box-title a:visited { color: var(--heading); }
+.box-title a:hover { color: #000; }
+
+.nav {
+    margin: 0;
+    padding: 6px 8px;
+    list-style: none;
+}
+
+.nav li::before { content: "\25BA  "; color: var(--heading); }
+.nav li.current { color: var(--heading); font-weight: bold; }
+
+/* Image links shouldn't get the yellow text-link hover highlight. */
+.contact a:hover, .portal:hover { background: none; }
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+}
+
+/* Each logo sits centered on a white beveled tile (some of the logos are dark). */
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 46px;
+    padding: 3px 6px;
+    background: #fff;
+    border: 2px outset #ccc;
+}
+
+.social img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.social:hover { background: var(--heading); }
+.social:active { border-style: inset; }
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.contact img { display: block; margin: 0 auto 2px; }
+
+.appearance {
+    display: block;
+    padding: 6px 8px;
+}
+
+.setting {
+    display: block;
+    padding: 0 8px 8px;
+    cursor: pointer;
+}
+
+.appearance select {
+    margin-top: 4px;
+    width: 100%;
+    font-family: inherit;
+}
+
+/* -------------------Entries------------------- */
+.entry-body {
+    display: flow-root;   /* contains the floated thumbnail */
+    padding: 8px 10px;
+}
+
+.entry-body p { margin: 0 0 8px; }
+.entry-body p:last-child { margin-bottom: 0; }
+
+.entry-subtitle { color: var(--heading); font-style: italic; }
+.entry-note { color: #99cc99; font-size: 11px; }
+
+.entry-thumb {
+    float: left;
+    width: 200px;
+    margin: 0 12px 6px 0;
+    border: 3px ridge var(--heading);
+}
+
+.entry-frame {
+    margin: 0 auto 10px;
+    border: 3px ridge var(--heading);
+}
+
+.entry-frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.frame-video { max-width: 480px; aspect-ratio: 16 / 9; }
+.frame-bandcamp { max-width: 350px; aspect-ratio: 2 / 3; }
+
+/* -------------------Home------------------- */
+.welcome {
+    line-height: 1.2;
+    text-shadow: none;
+}
+
+.welcome::before, .welcome::after { content: none; }
+
+.welcome-to {
+    font-size: 30px;
+}
+
+/* Zooms in and out. */
+.zoom {
+    font-size: 46px;
+    animation: zoom 1.2s ease-in-out infinite alternate;
+}
+
+/* Signs side by side across the page, bottoms lined up, shrinking to fit narrow screens. */
+.construction-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.construction-row img {
+    min-width: 0;
+    max-width: 30%;
+    height: auto;
+}
+
+/* Optional small picture next to a page's title, set with `title_gif:` in its front matter. */
+.title-gif {
+    height: 1.6em;
+    vertical-align: middle;
+}
+
+.centered {
+    display: block;
+    margin: 0 auto 12px;
+}
+
+.home-intro {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.portrait {
+    width: 220px;
+    flex-shrink: 0;
+    border: 5px ridge var(--heading);
+}
+
+.home-intro p:first-child { margin-top: 0; }
+
+.portals {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 18px;
+}
+
+.portal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 120px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Same height for every gif, so small ones get scaled up and big ones down. */
+.portal img {
+    height: 100px;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+.portal:hover img { transform: scale(1.1) rotate(-4deg); }
+
+.gif-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border: 2px dashed var(--heading);
+    color: var(--heading);
+    font-size: 11px;
+}
+
+.counter {
+    margin-top: 24px;
+    text-align: center;
+    color: var(--heading);
+}
+
+.counter .digits span {
+    display: inline-block;
+    margin: 0 1px;
+    padding: 0 5px;
+    border: 1px solid #666;
+    background: linear-gradient(#333, #000 50%, #333);
+    color: var(--text);
+    font-family: "Courier New", monospace;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* -------------------Education------------------- */
+.coursework {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 14px;
+    align-items: start;
+}
+
+.coursework ul, .credits ul {
+    margin: 0;
+    padding: 8px 10px 8px 28px;
+    list-style: square;
+}
+
+/* Long URLs wrap instead of stretching the page. */
+.credits li { overflow-wrap: anywhere; }
+
+/* -------------------Footer------------------- */
+#footer {
+    padding: 10px;
+    border-top: 4px ridge var(--accent);
+    text-align: center;
+}
+
+#footer p { margin: 4px 0 0; }
+.fine-print { color: #99cc99; font-size: 11px; }
+
+/* -------------------Splash------------------- */
+.splash {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+}
+
+.splash-warning {
+    margin: 0;
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 52px;
+    color: var(--accent);
+    text-shadow: 3px 3px 0 var(--heading);
+}
+
+.splash-warning::before, .splash-warning::after { content: none; }
+
+.door img { display: block; max-width: 300px; max-height: 50vh; }
+.door { text-decoration: none; }
+.door:hover { background: none; }
+
+.door-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 220px;
+    height: 320px;
+    border: 3px dashed var(--heading);
+    color: var(--heading);
+}
+
+.splash-enter {
+    font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.splash-settings { font-size: 11px; }
+.splash-settings select { width: auto; }
+
+/* -------------------Animations------------------- */
+@keyframes zoom { from { transform: scale(0.8); } to { transform: scale(1.12); } }
+@keyframes blink { 50% { opacity: 0; } }
+
+.blink { animation: blink 1.2s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+    .blink, .zoom { animation: none; }
+}
+
+/* -------------------Custom cursor------------------- */
+/* Only for devices with a mouse. cursor-init.html sets --site-cursor and --site-pointer to the picked cursor's images. */
+@media (hover: hover) and (pointer: fine) {
+    html.custom-cursor,
+    html.custom-cursor * {
+        cursor: var(--site-cursor);
+    }
+
+    html.custom-cursor a,
+    html.custom-cursor a *,
+    html.custom-cursor button,
+    html.custom-cursor button *,
+    html.custom-cursor select,
+    html.custom-cursor label,
+    html.custom-cursor input {
+        cursor: var(--site-pointer);
+    }
+}
+
+/* No cursor on touch screens, so no point offering the setting. */
+@media (hover: none), (pointer: coarse) {
+    .cursor-setting { display: none; }
+}
+
+.cursor-setting { cursor: default; }
+
+.cursor-open {
+    margin-top: 4px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* The pop-up window of cursors, styled like an old Windows window. */
+.cursor-menu {
+    width: min(560px, 92vw);
+    padding: 0;
+    border: 3px outset #c0c0c0;
+    background: #000;
+    color: var(--text);
+}
+
+.cursor-menu::backdrop { background: rgba(0, 0, 0, 0.6); }
+
+.window-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 4px 3px 8px;
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: #fff;
+    font-weight: bold;
+}
+
+.window-close {
+    width: 22px;
+    height: 20px;
+    padding: 0;
+    border: 2px outset #fff;
+    background: #c0c0c0;
+    color: #000;
+    font: bold 12px Verdana, sans-serif;
+    cursor: pointer;
+}
+
+.cursor-hint {
+    margin: 8px 10px;
+    color: var(--heading);
+    text-align: center;
+}
+
+/* Scrolls when there are more cursors than fit. */
+.cursor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+    max-height: min(420px, 65vh);
+    overflow-y: auto;
+    padding: 0 10px 10px;
+}
+
+.cursor-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 4px;
+    border: 2px solid var(--accent);
+    background: #111;
+    color: var(--text);
+    font: 12px Verdana, Tahoma, sans-serif;
+    cursor: pointer;
+}
+
+.cursor-option:hover, .cursor-option:focus-visible { background: #2a2a2a; border-color: var(--heading); }
+.cursor-option.picked { border: 2px dashed var(--heading); background: #332b00; }
+.cursor-option.picked .cursor-name::after { content: " \2713"; color: var(--heading); }
+
+.cursor-pics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+}
+
+.cursor-pics-default { color: #99cc99; font-style: italic; }
+
+/* The normal cursor by default; its pointer version while hovered. */
+.cursor-pic-pointer,
+.cursor-option:hover .cursor-pic-cursor,
+.cursor-option:focus-visible .cursor-pic-cursor { display: none; }
+.cursor-option:hover .cursor-pic-pointer,
+.cursor-option:focus-visible .cursor-pic-pointer { display: block; }
+
+/* -------------------Small screens------------------- */
+@media (max-width: 700px) {
+    #page { margin: 8px; border-width: 2px; }
+    #banner .site-name { font-size: 24px; }
+    #columns { grid-template-columns: 1fr; }
+    #sidebar { border-right: 0; border-bottom: 4px ridge var(--accent); }
+    #sidebar .nav { display: flex; flex-wrap: wrap; gap: 0 14px; }
+    h1 { font-size: 26px; }
+    .welcome-to { font-size: 20px; }
+    .zoom { font-size: 28px; }
+    .home-intro { flex-direction: column; align-items: center; }
+    .coursework { grid-template-columns: 1fr; }
+    .entry-thumb { float: none; display: block; width: 100%; max-width: 320px; margin: 0 auto 10px; }
+    .splash-warning { font-size: 34px; }
+}

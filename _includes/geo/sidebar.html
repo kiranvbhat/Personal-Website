@@ -1,0 +1,44 @@
+{%- assign current_url = page.url | remove: ".html" -%}
+<aside id="sidebar">
+  <div class="box">
+    <div class="box-title">~ menu ~</div>
+    <ul class="nav">
+      {%- for link in site.data.nav %}
+      {%- assign link_url = link.url | prepend: "/" %}
+      {%- if link_url == current_url %}
+      <li class="current">{{ link.name }}</li>
+      {%- else %}
+      <li><a href="{{ link.url | relative_url }}">{{ link.name }}</a></li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+  </div>
+
+  <div class="box">
+    <div class="box-title">~ contact ~</div>
+    <div class="contact">
+      {%- for item in site.data.profile.contact %}
+      {%- if item.url contains ":" %}{% assign item_url = item.url %}{% else %}{% assign item_url = item.url | relative_url %}{% endif %}
+      <a href="{{ item_url }}">
+        {%- if item.icon %}<img src="{{ item.icon | relative_url }}" alt="">{% endif -%}
+        <span>{{ item.caption }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title">~ social networks ~</div>
+    <div class="socials">
+      {%- for social in site.data.profile.socials %}
+      <a class="social" href="{{ social.url }}" target="_blank" title="{{ social.name }}"><img src="{{ social.icon | relative_url }}" alt="{{ social.name }}"></a>
+      {%- endfor %}
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title">~ settings ~</div>
+    {% include appearance-select.html current="geocities" %}
+    {% include geo/cursor-setting.html %}
+  </div>
+</aside>

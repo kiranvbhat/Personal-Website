@@ -13,7 +13,7 @@ a {
     text-decoration: none ;
 }
 
-b {
+b, strong {
     font-weight: 700;
 }
 
@@ -68,7 +68,7 @@ p, h1, h2, h3, h4, h5, h6 {
     box-shadow: 1px 1px 5px gray;
 }
 
-.panoraven {
+.panoraven, .embed {
     display:block;
     border:0 none; 
     /* max-width:880px; */

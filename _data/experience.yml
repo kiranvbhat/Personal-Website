@@ -1,0 +1,91 @@
+# Work experience. Shown newest first, sorted by `end` then `start`.
+# Dates are YYYY-MM (e.g. 2024-03); use `end: present` for ongoing work. Both are optional.
+# Descriptions support Markdown (e.g. **bold**).
+
+- role: Audio ML Engineer (Part-time)
+  organization: SoundPatrol
+  start: 2024-12
+  end: 2026-10
+  description: >-
+    I prototyped a novel **distortion-free watermarking** method for generative AI music, with **100% detection** in
+    high-entropy generations. I aligned **1700+ hours of MIDI-audio data** for fine-tuning a transcription model,
+    filtering out 95% of mismatched pairs. I also created new scanners for YouTube, TikTok, and SoundCloud, increasing
+    relevant dashboard results by **over 10x**, and deployed a scalable audio tagging model for music/non-music
+    separation with **over 99% accuracy**.
+
+- role: Researcher
+  organization: ChucK Development Team
+  start: 2024-03
+  end: 2026-06
+  link: https://chuck.stanford.edu/
+  media:
+    image: assets/portfolio/photos/chuck.png
+  description: >-
+    I'm developing new features for the **music programming language ChucK**, in collaboration with several PhD
+    students at CCRMA and the creator of ChucK, Professor Ge Wang. I helped design SMucK, a system for **simplified
+    musical input** and **dynamic playback** in ChucK. SMucK enables users to import MIDI/MusicXML files into ChucK,
+    and manipulate their playback in real-time.
+
+- role: Computer Science Section Leader
+  organization: Stanford University School of Engineering
+  start: 2022-03
+  end: 2022-12
+  link: https://cs198.stanford.edu/cs198/
+  media:
+    image: assets/portfolio/gifs/SectionLeading.gif
+  description: >-
+    I **instructed** moderately sized groups of computer science students in **Python and C++** in the CS106 program.
+    I **graded assignments/exams** and provided feedback to students. I **worked closely with professors** and other
+    course staff to improve class material.
+
+- role: MLab Member, Teaching Assistant
+  organization: Stanford ACM
+  start: 2021-10
+  end: 2023-05
+  link: https://www.stanfordacm.org/
+  media:
+    image: assets/portfolio/photos/ACMLab.png
+  description: >-
+    I worked with a team to build a **convolutional neural network** using **Python** and **PyTorch** to predict
+    average income based on satellite imagery. We achieved the **3rd best validation loss** out of Stanford teams who
+    completed the project. I also **mentored teams** working on a bird classification model and an NLP model to
+    identify human values behind arguments.
+
+- role: Software Engineering Intern
+  organization: Wati
+  start: 2023-06
+  end: 2023-08
+  link: https://www.wati.io/
+  media:
+    image: assets/portfolio/photos/wati_logo.JPG
+  description: >-
+    I trained several ML classifiers to **predict if contacts would become customers** of Wati, after setting up
+    classes to collect and preprocess a changing dataset of contacts. I achieved 98% training accuracy and **92% test
+    accuracy** with initial models using a class-balanced dataset. I also **constructed a data pipeline in Python** to
+    automatically query the YouTrack API and upload ticket information to BigQuery. I then **visualized the progress of
+    tickets over time and employee performance** with Looker Studio.
+
+- role: Software Engineering Intern
+  organization: AVEVA
+  start: 2019-06
+  end: 2019-07
+  link: https://www.osisoft.com/
+  media:
+    image: assets/portfolio/gifs/SnackVision.gif
+  description: >-
+    I led a project to create a real-time, **weight-based inventory management** system using company software. Our
+    team constructed weight sensors and wrote **Python** code on a **Raspberry Pi** to collect and upload weight data.
+    We created an **online, real-time visualization** of the quantity of snacks in kitchenette snack bins as a proof
+    of concept, shown in the GIF above.
+
+- role: Software Engineering Intern
+  organization: AVEVA
+  start: 2018-06
+  end: 2018-07
+  link: https://www.osisoft.com/
+  media:
+    image: assets/portfolio/gifs/RetroPiCropped.gif
+  description: >-
+    I **modified Python code** of 4 retro video games to receive **real-time data** to influence game mechanics. We
+    used a **REST API** to relay data from the company data management system into the retro games. I also wrote a
+    Python script to **automate weekly time sheet** entries for interns.

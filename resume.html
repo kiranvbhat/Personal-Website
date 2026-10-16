@@ -1,0 +1,15 @@
+---
+layout: null
+---
+{%- comment -%} /resume sends visitors to the resume PDF set in profile.yml. {%- endcomment -%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url={{ site.data.profile.resume | relative_url }}">
+    <title>Resume</title>
+  </head>
+  <body>
+    <p><a href="{{ site.data.profile.resume | relative_url }}">Open my resume (PDF)</a></p>
+  </body>
+</html>

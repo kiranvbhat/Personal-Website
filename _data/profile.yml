@@ -1,0 +1,44 @@
+# General info about me, used across every page.
+
+name: Kiran Bhat
+email: kvbhat@alumni.stanford.edu
+portrait: assets/portraits/Portrait.jpeg
+resume: assets/resume/Kiran_Bhat_Resume.pdf
+
+# GeoCities appearance
+# Splash page image. Drop a file at this path and it replaces the placeholder automatically.
+door_image: assets/graphics/splash/door.gif
+# Fake visitor count shown on the homepage (padded to 6 digits).
+hit_count: 4213
+
+# Each entry is a paragraph. Markdown is allowed (e.g. [text](link), **bold**).
+bio:
+  - Hey! I just graduated from Stanford, where I studied computer science and it's intersection with music.
+  - In my spare time, I enjoy making [music](music), taking [photos](other#photography), and playing basketball.
+
+# Sidebar "contact" box. `url` is a full link (mailto:, https://) or a page on this site (e.g. guestbook).
+# `icon` is optional; the caption is shown under it, or on its own as a text link.
+contact:
+  - caption: email me!
+    url: mailto:kvbhat@alumni.stanford.edu
+    icon: assets/graphics/mail/email 137.gif
+  - caption: sign my guestbook!
+    url: guestbook
+
+# Sidebar "social networks" box. Each logo is shown on a white tile.
+socials:
+  - name: GitHub
+    url: https://github.com/kiranvbhat
+    icon: assets/graphics/logos/Github (2008).png
+  - name: LinkedIn
+    url: https://www.linkedin.com/in/kiranvbhat/
+    icon: assets/graphics/logos/LinkedIn (2003 wide).svg
+  - name: YouTube
+    url: https://www.youtube.com/channel/UClfHxiQZ94nuXDJ6DGyF7BQ
+    icon: assets/graphics/logos/YouTube (2005).svg
+  - name: Bandcamp
+    url: https://kiranvbhat.bandcamp.com/
+    icon: assets/graphics/logos/Bandcamp (2007 wide).png
+  # - name: Instagram
+  #   url: ""
+  #   icon: assets/graphics/logos/Instagram.png

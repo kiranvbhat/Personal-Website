@@ -1,0 +1,18 @@
+---
+layout: geocities
+background: assets/background/pattern 600.gif
+title: Other
+---
+{%- assign other = site.data.other -%}
+{% include geo/page-title.html %}
+<p class="intro">{{ other.intro }}</p>
+<p class="jump">jump to: <a href="#photography">[photography]</a> <a href="#volunteering">[volunteering]</a> <a href="#misc">[miscellaneous]</a></p>
+
+<h2 id="photography"><span class="bubble-text bubble-3d">Photography</span></h2>
+{% include geo/entries.html items=other.photography %}
+
+<h2 id="volunteering"><span class="bubble-text bubble-3d">Volunteering</span></h2>
+{% include geo/entries.html items=other.volunteering sort=true %}
+
+<h2 id="misc"><span class="bubble-text bubble-3d">Miscellaneous</span></h2>
+{% include geo/entries.html items=other.misc %}

@@ -1,0 +1,17 @@
+{%- comment -%}
+  Appearance dropdown. Saves the choice in the browser and jumps to that version of the site.
+  Params: current ("geocities" or "modern").
+{%- endcomment -%}
+<label class="appearance">
+  appearance:
+  <select onchange="setAppearance(this.value)">
+    <option value="geocities"{% if include.current == "geocities" %} selected{% endif %}>GeoCities</option>
+    <option value="modern"{% if include.current == "modern" %} selected{% endif %}>Modern</option>
+  </select>
+</label>
+<script>
+  function setAppearance(value) {
+    try { localStorage.setItem("appearance", value); } catch (e) {}
+    location.href = value === "modern" ? "{{ 'modern' | relative_url }}" : "{{ 'home' | relative_url }}";
+  }
+</script>

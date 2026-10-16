@@ -1,0 +1,29 @@
+---
+layout: geocities
+background: assets/background/pattern 59.gif
+title: Credits
+---
+{%- assign credits = site.data.credits -%}
+{% include geo/page-title.html %}
+<p class="intro">Websites I looked at for inspiration, and where I found the graphics on this site. Thank you!!</p>
+
+{%- assign sections = "inspiration|~ inspiration ~,graphics|~ graphics ~" | split: "," -%}
+{%- for section in sections %}
+{%- assign key = section | split: "|" | first -%}
+{%- assign heading = section | split: "|" | last -%}
+{%- assign links = credits[key] %}
+<div class="box credits">
+  <div class="box-title">{{ heading }}</div>
+  <ul>
+    {%- for link in links %}
+    {%- assign url = link.url | default: link -%}
+    {%- assign name = link.name | default: url | remove_first: "https://" | remove_first: "http://" | remove_first: "www." | split: "?" | first -%}
+    {%- assign last_char = name | slice: -1, 1 -%}
+    {%- if last_char == "/" %}{% assign name_length = name.size | minus: 1 %}{% assign name = name | slice: 0, name_length %}{% endif %}
+    <li><a href="{{ url }}" target="_blank">{{ name }}</a>{% if link.note %} - {{ link.note }}{% endif %}</li>
+    {%- else %}
+    <li>coming soon!</li>
+    {%- endfor %}
+  </ul>
+</div>
+{%- endfor %}

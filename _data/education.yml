@@ -1,0 +1,26 @@
+# Education. Shown newest first, sorted by `end` then `start`.
+# Uses the same fields as experience.yml (dates are YYYY-MM); `start`, `end`, `link`, `media` and `description` are optional.
+
+- role: MA in Music, Science, and Technology
+  organization: CCRMA, Stanford University
+  start: 2024-09
+  end: 2026-06
+  link: https://ccrma.stanford.edu/
+  media:
+    image: assets/graphics/logos/ccrma shockwave.gif
+
+- role: BS in Computer Science
+  organization: Stanford University
+  start: 2020-09
+  end: 2024-06
+  link: https://www.stanford.edu/
+  media:
+    image: assets/graphics/logos/stanford logo.gif
+
+- role: High School Diploma
+  organization: Castro Valley High School
+  start: 2016-08
+  end: 2020-05
+  link: https://cvhs.cv.k12.ca.us/
+  media:
+    image: assets/graphics/logos/cvhs tilt zoom.gif

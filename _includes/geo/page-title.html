@@ -1,0 +1,4 @@
+{%- comment -%}
+  A section page's heading: page.title, plus a small picture next to it if the page sets `title_gif:` in its front matter.
+{%- endcomment -%}
+<h1><span class="bubble-text bubble-3d">{{ page.title }}</span>{% if page.title_gif %} <img class="title-gif" src="{{ page.title_gif | relative_url }}" alt="">{% endif %}</h1>

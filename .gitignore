@@ -1,2 +1,10 @@
 # .DS_Store file (Mac folder settings)
 **/.DS_Store
+
+# Jekyll build output / local gems
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/
+Gemfile.lock

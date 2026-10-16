@@ -1,0 +1,90 @@
+# Coding projects. Shown newest first, sorted by `end` then `start`; entries without dates go last, in file order.
+# Dates are YYYY-MM (e.g. 2023-09); use `end: present` for ongoing work. Both are optional.
+#
+# media: exactly one of
+#   image: path to an image/gif
+#   youtube: YouTube video id
+# hidden: true keeps an entry here without showing it on the site.
+# Descriptions support Markdown (e.g. *italics*, **bold**).
+
+- title: Symbolic and Audio-based Music Identification
+  start: 2025-03
+  end: 2025-06
+  description: >-
+    Identifies songs from symbolic queries using a DNA strand matching technique, matching 20/20 in a small test.
+    Also searches 2,000 noisy phone recordings with MuQ embeddings, matching all 13 queries that had a true match.
+
+- title: Spatialized Doppler Effect Simulator
+  start: 2024-12
+  end: 2025-01
+  description: >-
+    A 3D simulation of the Doppler effect with custom-built spatialized audio in ChucK, including spatial sound
+    attenuation, stereo panning, Doppler shift, and a basic physics engine.
+
+- title: Mimic
+  link: https://youtu.be/5hbyKNw1oFA?feature=shared
+  media:
+    image: assets/portfolio/photos/mimic_thumnail.JPG
+  description: A multi-track looper instrument you play with your voice and an xbox controller.
+
+- title: RLevator
+  link: https://github.com/tnarayanan/RLevator
+  media:
+    image: assets/portfolio/gifs/RLevator.gif
+  description: A dynamic elevator control algorithm trained using reinforcement learning.
+
+- title: Cave Rescue with Reinforcement Learning
+  link: https://drive.google.com/file/d/1w8Y5AlqCT91oyGq9WDMrmH8TNCFJEarz/view?usp=sharing
+  media:
+    image: assets/portfolio/photos/cave_rescue.png
+  description: Trained reinforcement learning agents in Julia to rescue people trapped in cave systems of varying complexity.
+
+- title: K-means Image Compression
+  link: https://youtu.be/_g2wPgyvhVM
+  media:
+    image: assets/portfolio/gifs/KMC.gif
+  description: An image compression algorithm utilizing an unsupervised machine learning technique known as k-means clustering.
+
+- title: Ghostwriter
+  start: 2023-02
+  end: 2023-03
+  link: https://drive.google.com/file/d/1QAyzPfFxnZw97XlePoQUNjZbY1KdkW8u/view?usp=drive_link
+  media:
+    image: assets/portfolio/photos/ghostwriter.png
+  description: >-
+    Constrained text generation models that write lyrics for a provided sequence of music notes.
+    Received best project award and TA's choice best poster in *CS 224N: Natural Language Processing*.
+
+- title: Audio Inpainting With Diffusion
+  start: 2023-09
+  end: 2023-12
+  link: https://drive.google.com/file/d/162QKVcMbvT7FNXvPTEMzCVUjLI2D4rWa/view?usp=sharing
+  media:
+    image: assets/portfolio/photos/audio_inpainting.png
+  description: Using a pretrained, unconditional audio-generating diffusion model to restore masked speech waveforms.
+
+- title: The Trebled C
+  link: https://github.com/kiranvbhat/The-Trebled-C
+  media:
+    image: assets/portfolio/gifs/TrebledCGameplay.gif
+  description: Unity 2D platformer designed to train pitch interval recognition and short-term memory.
+
+- title: Arduino LED Display + Tetris
+  link: https://github.com/kiranvbhat/Arduino-LED-Display-Tetris
+  media:
+    image: assets/portfolio/gifs/ArduinoTetris.gif
+  description: Custom-built LED display with variable brightness and Tetris.
+
+- title: Composer Predictor
+  hidden: true
+  link: https://github.com/kiranvbhat/Composer-Predictor
+  media:
+    image: assets/portfolio/gifs/ComposerPredictor.gif
+  description: Applying multinomial probability theory to predict the composer of a piano piece.
+
+- title: Speed Reader
+  hidden: true
+  link: https://github.com/kiranvbhat/Speed-Reader
+  media:
+    image: assets/portfolio/gifs/SpeedReader.gif
+  description: ReactJS app that can improve reading speed by reducing subvocalization.

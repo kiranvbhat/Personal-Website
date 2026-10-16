@@ -1,0 +1,19 @@
+{%- comment -%}
+  Renders an entry's media. Params: media (a `media:` entry from _data/), title (used for alt text / iframe title).
+{%- endcomment -%}
+{%- assign m = include.media -%}
+{%- if m.image -%}
+<img src="{{ m.image | relative_url }}" class="entry-thumb" alt="{{ include.title | escape }}">
+{%- elsif m.youtube -%}
+<div class="entry-frame frame-video">
+  <iframe src="https://www.youtube.com/embed/{{ m.youtube }}" title="{{ include.title | escape }}" allow="accelerometer; gyroscope" allowfullscreen></iframe>
+</div>
+{%- elsif m.bandcamp -%}
+<div class="entry-frame frame-bandcamp">
+  <iframe src="https://bandcamp.com/EmbeddedPlayer/album={{ m.bandcamp }}/size=large/bgcol=000000/linkcol=ffff00/transparent=true/" title="{{ include.title | escape }}" seamless></iframe>
+</div>
+{%- elsif m.embed -%}
+<div class="entry-frame frame-video">
+  <iframe src="{{ m.embed }}" title="{{ include.title | escape }}" scrolling="no" allow="accelerometer; magnetometer; gyroscope" allowfullscreen></iframe>
+</div>
+{%- endif -%}

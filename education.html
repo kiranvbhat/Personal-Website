@@ -1,0 +1,25 @@
+---
+layout: geocities
+background: assets/background/pattern 575.gif
+title: Education
+---
+{% include geo/page-title.html %}
+{% include geo/entries.html items=site.data.education style="experience" sort=true %}
+
+<h2 id="coursework"><span class="bubble-text bubble-3d">Coursework</span></h2>
+<div class="coursework">
+  {%- for group in site.data.coursework %}
+  <div class="box">
+    <div class="box-title">{{ group.subject }}</div>
+    <ul>
+      {%- for course in group.courses %}
+      {%- if course.link %}
+      <li><a href="{{ course.link }}" target="_blank"><b>{{ course.code }}</b></a> {{ course.name }}</li>
+      {%- else %}
+      <li><b>{{ course.code }}</b> {{ course.name }}</li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endfor %}
+</div>

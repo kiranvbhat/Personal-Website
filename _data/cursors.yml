@@ -1,0 +1,274 @@
+# Cursors offered in the cursor menu (settings box), in this order. See _scripts/convert_cursors.py.
+# To add one, add an entry with `id`, `name` (the title in the menu), and `file:` under `cursor:` (normal) and
+# `pointer:` (hovering a link; optional), then run the script. It fills in the rest:
+#   hotspot  the pixel (x, y) that does the clicking
+#   frames   number of animation frames, shown `delay` milliseconds apart (animated cursors only)
+
+- id: attack-on-titan
+  name: Attack on Titan
+  cursor:
+    file: assets/cursors/sweezy cursors/Attack on Titan Gear Sword & Scout Logo Cursor--cursor--SweezyCursors.cur
+    hotspot: [0, 1]
+  pointer:
+    file: assets/cursors/sweezy cursors/Attack on Titan Gear Sword & Scout Logo Cursor--pointer--SweezyCursors.cur
+    hotspot: [4, 3]
+- id: awesome-face
+  name: Awesome Face
+  cursor:
+    file: assets/cursors/rw designer/awesome-face-deluxe/Awesome Face Typing.ani
+    hotspot: [0, 0]
+    frames: 2
+    delay: 167
+  pointer:
+    file: assets/cursors/rw designer/awesome-face-deluxe/Awesome Face Link Select.ani
+    hotspot: [0, 0]
+- id: basketball
+  name: Basketball
+  cursor:
+    file: assets/cursors/sweezy cursors/Windows 9598 Basketball Hoop & Ball Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [5, 5]
+    frames: 6
+    delay: 133
+  pointer:
+    file: assets/cursors/sweezy cursors/Windows 9598 Basketball Hoop & Ball Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [9, 2]
+- id: bloody-knife-axe
+  name: Bloody Knife & Axe
+  cursor:
+    file: assets/cursors/rw designer/manic-mix/bloody knife normal select.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/manic-mix/bloody axe normal select.cur
+    hotspot: [0, 9]
+- id: fnaf
+  name: Bonnie
+  cursor:
+    file: assets/cursors/sweezy cursors/FNaF Toy Bonnie & Guitar Cursor--cursor--SweezyCursors.cur
+    hotspot: [2, 0]
+  pointer:
+    file: assets/cursors/sweezy cursors/FNaF Toy Bonnie & Guitar Cursor--pointer--SweezyCursors.cur
+    hotspot: [2, 0]
+- id: candy-cane
+  name: Candy Cane
+  cursor:
+    file: assets/cursors/sweezy cursors/Christmas Candy Cane & Sock Cursor--cursor--SweezyCursors.cur
+    hotspot: [3, 1]
+  pointer:
+    file: assets/cursors/sweezy cursors/Christmas Candy Cane & Sock Cursor--pointer--SweezyCursors.cur
+    hotspot: [9, 0]
+- id: club-penguin
+  name: Club Penguin
+  cursor:
+    file: assets/cursors/rw designer/misc/club-penguin.ani
+    hotspot: [2, 2]
+    frames: 8
+    delay: 67
+  pointer:
+    file: assets/cursors/rw designer/misc/club-penguin.ani
+    hotspot: [2, 2]
+    frames: 8
+    delay: 67
+- id: coraline
+  name: Coraline
+  cursor:
+    file: assets/cursors/sweezy cursors/Coraline & Key Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [2, 5]
+    frames: 4
+    delay: 183
+  pointer:
+    file: assets/cursors/sweezy cursors/Coraline & Key Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [7, 1]
+- id: corgi
+  name: Corgi
+  cursor:
+    file: assets/cursors/rw designer/manic-mix/corgi normal select.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/manic-mix/corgi normal select.cur
+    hotspot: [0, 0]
+- id: doritos
+  name: Doritos
+  cursor:
+    file: assets/cursors/sweezy cursors/Doritos Cursor--cursor--SweezyCursors.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/sweezy cursors/Doritos Cursor--pointer--SweezyCursors.cur
+    hotspot: [0, 0]
+- id: drum-piano
+  name: Drum & Piano
+  cursor:
+    file: assets/cursors/sweezy cursors/Windows 9598 Drum & Piano Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [1, 3]
+    frames: 4
+    delay: 133
+  pointer:
+    file: assets/cursors/sweezy cursors/Windows 9598 Drum & Piano Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [0, 2]
+- id: fancy-pants
+  name: Fancy Pants
+  cursor:
+    file: assets/cursors/sweezy cursors/Fancy Pants Adventures Pencil Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [0, 0]
+    frames: 3
+    delay: 200
+  pointer:
+    file: assets/cursors/sweezy cursors/Fancy Pants Adventures Pencil Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [3, 0]
+- id: fnf-boyfriend
+  name: Friday Night Funkin' (BF)
+  cursor:
+    file: assets/cursors/sweezy cursors/Friday Night Funkin' Boyfriend Cursor--cursor--SweezyCursors.cur
+    hotspot: [2, 2]
+  pointer:
+    file: assets/cursors/sweezy cursors/Friday Night Funkin' Boyfriend Cursor--pointer--SweezyCursors.cur
+    hotspot: [13, 2]
+- id: fnf-girlfriend
+  name: Friday Night Funkin' (GF)
+  cursor:
+    file: assets/cursors/sweezy cursors/Friday Night Funkin' Girlfriend Cursor--cursor--SweezyCursors.cur
+    hotspot: [1, 1]
+  pointer:
+    file: assets/cursors/sweezy cursors/Friday Night Funkin' Girlfriend Cursor--pointer--SweezyCursors.cur
+    hotspot: [12, 3]
+- id: frisk
+  name: Frisk
+  cursor:
+    file: assets/cursors/sweezy cursors/Undertale Frisk Pixel Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [4, 1]
+    frames: 2
+    delay: 283
+  pointer:
+    file: assets/cursors/sweezy cursors/Undertale Frisk Pixel Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [3, 2]
+- id: grey-mouse
+  name: Grey Mouse
+  cursor:
+    file: assets/cursors/rw designer/manic-mix/grey mouse normal select.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/manic-mix/grey mouse normal select.cur
+    hotspot: [0, 0]
+- id: jack-o-lantern
+  name: Jack-o'-Lantern
+  cursor:
+    file: assets/cursors/rw designer/random-halloween/jackOlantern (5).cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/random-halloween/jackOlantern (5).cur
+    hotspot: [0, 0]
+- id: jax
+  name: Jax
+  cursor:
+    file: assets/cursors/sweezy cursors/The Amazing Digital Circus Cute Half-Abstracted Jax Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [0, 1]
+    frames: 3
+    delay: 333
+  pointer:
+    file: assets/cursors/sweezy cursors/The Amazing Digital Circus Cute Half-Abstracted Jax Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [1, 1]
+- id: mars-earth
+  name: Mars & Earth
+  cursor:
+    file: assets/cursors/sweezy cursors/Windows 9598 Mars & Earth Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [0, 0]
+    frames: 4
+    delay: 150
+  pointer:
+    file: assets/cursors/sweezy cursors/Windows 9598 Mars & Earth Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [0, 0]
+- id: megumin
+  name: Megumin
+  cursor:
+    file: assets/cursors/sweezy cursors/KonoSuba Megumin & Staff Cursor--cursor--SweezyCursors.cur
+    hotspot: [2, 1]
+  pointer:
+    file: assets/cursors/sweezy cursors/KonoSuba Megumin & Staff Cursor--pointer--SweezyCursors.cur
+    hotspot: [6, 2]
+- id: michael-jackson
+  name: Michael Jackson
+  cursor:
+    file: assets/cursors/sweezy cursors/Michael Jackson Cursor--cursor--SweezyCursors.cur
+    hotspot: [0, 1]
+  pointer:
+    file: assets/cursors/sweezy cursors/Michael Jackson Cursor--pointer--SweezyCursors.cur
+    hotspot: [1, 1]
+- id: minecraft-diamond
+  name: Minecraft
+  cursor:
+    file: assets/cursors/rw designer/minecraft-diamond-edition/01 Normal Select.ani
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/minecraft-diamond-edition/15 Link Select.ani
+    hotspot: [0, 0]
+- id: pac-man
+  name: Pac-Man
+  cursor:
+    file: assets/cursors/sweezy cursors/Pac-Man Pinky & Blue Ghost Animated Cursor--cursor--SweezyCursors.ani
+    hotspot: [7, 2]
+    frames: 2
+    delay: 250
+  pointer:
+    file: assets/cursors/sweezy cursors/Pac-Man Pinky & Blue Ghost Animated Cursor--pointer--SweezyCursors.cur
+    hotspot: [7, 2]
+- id: parappa
+  name: PaRappa
+  cursor:
+    file: assets/cursors/rw designer/igottabelieve/Pappy Rappy Normal.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/igottabelieve/Pappy Rappy Link.cur
+    hotspot: [0, 0]
+- id: penguindrum
+  name: Penguindrum
+  cursor:
+    file: assets/cursors/rw designer/mawaru-penguindrum/keychain symbol princess of the crystal animated.ani
+    hotspot: [0, 0]
+    frames: 2
+    delay: 900
+  pointer:
+    file: assets/cursors/rw designer/mawaru-penguindrum/penguin spraying animated.ani
+    hotspot: [0, 0]
+    frames: 3
+    delay: 300
+- id: sakamoto
+  name: Sakamoto
+  cursor:
+    file: assets/cursors/sweezy cursors/Nichijou Sakamoto Cursor--cursor--SweezyCursors.cur
+    hotspot: [0, 1]
+  pointer:
+    file: assets/cursors/sweezy cursors/Nichijou Sakamoto Cursor--pointer--SweezyCursors.cur
+    hotspot: [1, 1]
+- id: skull
+  name: Skull
+  cursor:
+    file: assets/cursors/rw designer/random-halloween/skull_halloween_mask4.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/random-halloween/skull_halloween_mask4.cur
+    hotspot: [0, 0]
+- id: sonic-exe
+  name: Sonic.exe
+  cursor:
+    file: assets/cursors/sweezy cursors/Sonic.exe Cursor--cursor--SweezyCursors.cur
+    hotspot: [2, 0]
+  pointer:
+    file: assets/cursors/sweezy cursors/Sonic.exe Cursor--pointer--SweezyCursors.cur
+    hotspot: [2, 4]
+- id: unicorn
+  name: Unicorn
+  cursor:
+    file: assets/cursors/rw designer/manic-mix/unicorn normal select.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/manic-mix/unicorn normal select.cur
+    hotspot: [0, 0]
+- id: zombie-cat
+  name: Zombie Cat
+  cursor:
+    file: assets/cursors/rw designer/manic-mix/zombie cat normal select.cur
+    hotspot: [0, 0]
+  pointer:
+    file: assets/cursors/rw designer/manic-mix/zombie cat II left select.ani
+    hotspot: [0, 0]
+    frames: 7
+    delay: 67

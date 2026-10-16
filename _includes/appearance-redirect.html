@@ -1,0 +1,6 @@
+<script>
+  // Visitors who picked the modern appearance are sent there before this page renders.
+  try {
+    if (localStorage.getItem("appearance") === "modern") location.replace("{{ 'modern' | relative_url }}");
+  } catch (e) {}
+</script>
