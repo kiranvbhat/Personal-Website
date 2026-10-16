@@ -12,8 +12,7 @@ exclude:
   - Gemfile.lock
   - vendor
   # Original cursor files; the site uses the converted PNGs in assets/cursors/web/ (see _scripts/convert_cursors.py).
-  - assets/cursors/sweezy cursors
-  - assets/cursors/rw designer
+  - assets/cursors/originals
 
 kramdown:
   # Keep quotes and dashes in _data/ text exactly as typed instead of converting them to curly quotes / en dashes.

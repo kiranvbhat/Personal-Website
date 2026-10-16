@@ -1,10 +1,17 @@
 {%- comment -%}
-  Cursor setting for the settings box: a button that opens a window of every cursor in _data/cursors.yml.
-  Each option shows the normal cursor, and the pointer (link) version on hover. The choice is saved in the browser;
+  Cursor setting for the settings box: a button that opens a window of every cursor in _data/cursors.yml, and a dice
+  button that picks one at random.
+  Each option shows the normal cursor, and the link version on hover. The choice is saved in the browser;
   cursor-init.html applies it on each page load. Hidden on touch devices (see .cursor-setting in geocities.css).
 {%- endcomment -%}
 <div class="setting cursor-setting">
-  cursor: <button type="button" class="cursor-open" id="cursor-open">Default</button>
+  cursor:
+  <div class="cursor-buttons">
+    <button type="button" class="cursor-open" id="cursor-open">Default</button>
+    <button type="button" class="cursor-random" id="cursor-random" title="Random cursor!" aria-label="Pick a random cursor">
+      <img src="{{ 'assets/graphics/misc/dice 29.gif' | relative_url }}" alt="">
+    </button>
+  </div>
 </div>
 
 <dialog class="cursor-menu" id="cursor-menu" aria-labelledby="cursor-menu-title">
@@ -12,8 +19,8 @@
     <span id="cursor-menu-title">Pick a cursor!!</span>
     <button type="button" class="window-close" id="cursor-close" aria-label="Close">X</button>
   </div>
-  <p class="cursor-hint">hover over one to see its pointer, then click to pick it</p>
-  {%- assign states = "cursor,pointer" | split: "," %}
+  <p class="cursor-hint">hover over one to see it on a link, then click to pick it</p>
+  {%- assign states = "cursor,link" | split: "," %}
   <div class="cursor-grid">
     <button type="button" class="cursor-option" data-cursor="default">
       <span class="cursor-pics cursor-pics-default">normal</span>
@@ -57,13 +64,24 @@
       openButton.textContent = name;
     }
 
+    function pick(id) {
+      try { localStorage.setItem("cursor", id); } catch (e) {}
+      setSiteCursor(id);
+      showCurrent();
+    }
+
     options.forEach(function (option) {
       option.addEventListener("click", function () {
-        try { localStorage.setItem("cursor", option.dataset.cursor); } catch (e) {}
-        setSiteCursor(option.dataset.cursor);
-        showCurrent();
+        pick(option.dataset.cursor);
         menu.close();
       });
+    });
+
+    // Dice: any cursor except Default and the current one.
+    document.getElementById("cursor-random").addEventListener("click", function () {
+      var choices = Array.prototype.map.call(options, function (option) { return option.dataset.cursor; })
+        .filter(function (id) { return id !== "default" && id !== current(); });
+      pick(choices[Math.floor(Math.random() * choices.length)]);
     });
 
     openButton.addEventListener("click", function () { menu.showModal(); });

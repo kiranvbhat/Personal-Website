@@ -33,7 +33,7 @@ The site has two appearances, picked with the dropdown in the sidebar (the choic
 
 Images live in `assets/`. Each page picks its tiling background with `background:` in its front matter (the block at the top of the page file). Any `.gif` in `assets/graphics/ads/` is added to the rotation of fake banner ads automatically.
 
-To add a cursor to the cursor menu, add an entry to `_data/cursors.yml` with an `id`, a `name`, and the paths of its original `.cur`/`.ani` files (`file:` under `cursor:` and `pointer:`), then run `python3 _scripts/convert_cursors.py` (needs Pillow and PyYAML). It converts them to PNGs in `assets/cursors/web/` and fills in the rest of the entry. For a folder of Sweezy-style files (`<Name>--cursor--...` and `<Name>--pointer--...`), run `python3 _scripts/convert_cursors.py "<folder>"` to add them all. The original cursor folders are listed under `exclude:` in `_config.yml` so they aren't published.
+To add a cursor to the cursor menu, make a folder for it in `assets/cursors/originals/` (the folder name is its id) and put its `.cur`/`.ani` files in it, named `cursor` (normal), `link` (hovering links; optional) and `text` (hovering text; optional). Then run `python3 _scripts/convert_cursors.py` (needs Pillow and PyYAML). It converts them to PNGs in `assets/cursors/web/` and adds the cursor to `_data/cursors.yml`, where you can change its `name` and note its `source`. The originals aren't published (see `exclude:` in `_config.yml`).
 
 view
 With Docker running:

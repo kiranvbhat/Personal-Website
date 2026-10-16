@@ -1,18 +1,19 @@
 {%- comment -%}
   Applies the cursor picked in the cursor menu (cursor-setting.html), before the page draws. The choice is saved in the
   browser as the cursor's id from _data/cursors.yml. Also defines setSiteCursor(id), which the menu calls.
-  Sets --site-cursor and --site-pointer on <html>; geocities.css uses them on devices with a mouse.
+  Sets --site-cursor, --site-link and (for cursors that have one) --site-text on <html>; geocities.css uses them on
+  devices with a mouse.
 {%- endcomment -%}
 <script>
   (function () {
     var base = {{ "/assets/cursors/web/" | relative_url | jsonify }};
     var cursors = {};
-    {%- assign states = "cursor,pointer" | split: "," %}
+    {%- assign states = "cursor,link,text" | split: "," %}
     {%- for cursor in site.data.cursors %}
     cursors[{{ cursor.id | jsonify }}] = {
-      {%- for state in states %}
-      {{ state }}: { hotspot: {{ cursor[state].hotspot | jsonify }}{% if cursor[state].frames %}, frames: {{ cursor[state].frames }}, delay: {{ cursor[state].delay }}{% endif %} }{% unless forloop.last %},{% endunless %}
-      {%- endfor %}
+      {%- for state in states %}{% if cursor[state] %}
+      {{ state }}: { hotspot: {{ cursor[state].hotspot | jsonify }}{% if cursor[state].frames %}, frames: {{ cursor[state].frames }}, delay: {{ cursor[state].delay }}{% endif %} },
+      {%- endif %}{% endfor %}
     };
     {%- endfor %}
 
@@ -36,9 +37,13 @@
         root.classList.remove("custom-cursor");
         return;
       }
-      ["cursor", "pointer"].forEach(function (state) {
+      ["cursor", "link", "text"].forEach(function (state) {
         var info = cursors[id][state], dir = base + id + "/", property = "--site-" + state;
-        var fallback = state === "cursor" ? "auto" : "pointer";
+        var fallback = { cursor: "auto", link: "pointer", text: "text" }[state];
+        if (!info) {
+          root.style.removeProperty(property);  // no text cursor: the CSS falls back to the normal one
+          return;
+        }
         root.style.setProperty(property, cursorValue(dir, state, info.hotspot, fallback));
         // Animated cursors: CSS can't animate a cursor, so swap through the frames.
         if (info.frames && hasMouse) {

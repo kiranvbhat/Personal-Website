@@ -72,10 +72,11 @@ main {
 }
 
 /* -------------------Bubble text------------------- */
-/* Shiny bubbly letters: a gradient clipped to the letters gives them a light top and darker bottom. */
+/* Shiny letters for the site name and titles: a gradient clipped to the letters gives them a light top and darker
+   bottom. */
 .bubble-text {
     display: inline-block;
-    font-family: "Titan One", Impact, sans-serif;
+    font-family: "Creepster", Impact, sans-serif;
     font-weight: normal;
     letter-spacing: 1px;
     background-image: linear-gradient(#fffde0 0%, #fff35a 30%, #ffd000 60%, #ff9d00 100%);
@@ -83,14 +84,6 @@ main {
     background-clip: text;
     color: transparent;
     -webkit-text-stroke: 1.5px #8a4500;
-}
-
-/* Adds depth: each drop-shadow adds 1px in a darker orange, building up the sides. The last one is a soft glow. */
-.bubble-3d {
-    filter:
-        drop-shadow(1px 1px 0 #d06a00) drop-shadow(1px 1px 0 #b85d00) drop-shadow(1px 1px 0 #a05000)
-        drop-shadow(1px 1px 0 #884300) drop-shadow(1px 1px 0 #703700) drop-shadow(1px 1px 0 #5a2c00)
-        drop-shadow(0 0 6px rgba(255, 200, 0, 0.35));
 }
 
 /* -------------------Headings------------------- */
@@ -245,10 +238,14 @@ h2 {
     font-size: 30px;
 }
 
-/* Zooms in and out. */
-.zoom {
-    font-size: 46px;
-    animation: zoom 1.2s ease-in-out infinite alternate;
+/* The title GIF has lots of empty space above and below the words; show just the middle band. */
+.home-title {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 600 / 70;
+    margin: 0 auto;
+    object-fit: cover;
 }
 
 /* Signs side by side across the page, bottoms lined up, shrinking to fit narrow screens. */
@@ -418,21 +415,29 @@ h2 {
 .splash-settings select { width: auto; }
 
 /* -------------------Animations------------------- */
-@keyframes zoom { from { transform: scale(0.8); } to { transform: scale(1.12); } }
 @keyframes blink { 50% { opacity: 0; } }
 
 .blink { animation: blink 1.2s steps(1) infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-    .blink, .zoom { animation: none; }
+    .blink { animation: none; }
 }
 
 /* -------------------Custom cursor------------------- */
-/* Only for devices with a mouse. cursor-init.html sets --site-cursor and --site-pointer to the picked cursor's images. */
+/* Only for devices with a mouse. cursor-init.html sets --site-cursor, --site-link and --site-text to the picked
+   cursor's images. The link rules come last so links inside text still get the link cursor. */
 @media (hover: hover) and (pointer: fine) {
     html.custom-cursor,
     html.custom-cursor * {
         cursor: var(--site-cursor);
+    }
+
+    /* Text, for cursors with a text cursor (the rest use their normal cursor here too). */
+    html.custom-cursor :is(p, li, h1, h2, h3, td, th, blockquote),
+    html.custom-cursor :is(p, li, h1, h2, h3, td, th, blockquote) *,
+    html.custom-cursor textarea,
+    html.custom-cursor input[type="text"] {
+        cursor: var(--site-text, var(--site-cursor));
     }
 
     html.custom-cursor a,
@@ -442,7 +447,7 @@ h2 {
     html.custom-cursor select,
     html.custom-cursor label,
     html.custom-cursor input {
-        cursor: var(--site-pointer);
+        cursor: var(--site-link);
     }
 }
 
@@ -453,13 +458,31 @@ h2 {
 
 .cursor-setting { cursor: default; }
 
-.cursor-open {
+.cursor-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     margin-top: 4px;
-    width: 100%;
+}
+
+.cursor-open {
+    flex: 1;
+    min-width: 0;
     font-family: inherit;
     font-size: 12px;
     cursor: pointer;
 }
+
+.cursor-random {
+    flex: none;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.cursor-random img { display: block; width: 24px; height: 24px; }
+.cursor-random:active img { transform: scale(0.85); }
 
 /* The pop-up window of cursors, styled like an old Windows window. */
 .cursor-menu {
@@ -536,12 +559,12 @@ h2 {
 
 .cursor-pics-default { color: #99cc99; font-style: italic; }
 
-/* The normal cursor by default; its pointer version while hovered. */
-.cursor-pic-pointer,
+/* The normal cursor by default; its link version while hovered. */
+.cursor-pic-link,
 .cursor-option:hover .cursor-pic-cursor,
 .cursor-option:focus-visible .cursor-pic-cursor { display: none; }
-.cursor-option:hover .cursor-pic-pointer,
-.cursor-option:focus-visible .cursor-pic-pointer { display: block; }
+.cursor-option:hover .cursor-pic-link,
+.cursor-option:focus-visible .cursor-pic-link { display: block; }
 
 /* -------------------Mobile bar------------------- */
 /* Small screens only: buttons that open the sidebar boxes (see sidebar.html). */
@@ -574,7 +597,6 @@ h2 {
     #sidebar .socials { display: grid; grid-template-columns: 1fr 1fr; }
     h1 { font-size: 26px; }
     .welcome-to { font-size: 20px; }
-    .zoom { font-size: 28px; }
     .home-intro { flex-direction: column; align-items: center; }
     .coursework { grid-template-columns: 1fr; }
     .entry-thumb { float: none; display: block; width: 100%; max-width: 320px; margin: 0 auto 10px; }

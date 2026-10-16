@@ -1,22 +1,21 @@
 """Converts Windows cursor files into PNGs that browsers can use, and lists them in _data/cursors.yml.
 
-Browsers can't use .ani (animated) cursors and support .cur unevenly, so each cursor is saved as PNGs:
+Each cursor's original files go in their own folder, assets/cursors/originals/<id>/, named by state:
+  cursor.cur or cursor.ani   the normal cursor (required)
+  link.cur or link.ani       hovering a link (optional; without it the normal cursor is used)
+  text.cur or text.ani       hovering text (optional; without it the normal cursor is used)
+
+Browsers can't use .ani (animated) cursors and support .cur unevenly, so each state is saved as PNGs:
   assets/cursors/web/<id>/<state>.png           32px cursor (the first frame, if animated)
   assets/cursors/web/<id>/<state>-<n>.png       32px animation frames (animated cursors only)
   assets/cursors/web/<id>/<state>-preview.png   64px animated PNG for the cursor menu (animated cursors only)
 plus a 64px "@2x" copy of each 32px image for sharp cursors on high-resolution screens.
-<state> is "cursor" (normal) or "pointer" (hovering a link).
 
-Each cursor in _data/cursors.yml lists its source files as `file:` under `cursor:` and `pointer:` (pointer is optional;
-without it the normal cursor is used for links too). To add a cursor, add an entry with `id`, `name` and those files,
-then run this. Everything else in the entry is filled in. Names and order are kept.
+New folders are added to the end of _data/cursors.yml, titled from the folder name. Your edits there (`name`,
+`source`, `static`, and the order) are kept when you re-run this; entries whose folder is gone are removed.
 
 Usage (needs Pillow and PyYAML):
   python3 _scripts/convert_cursors.py
-      converts every cursor listed in _data/cursors.yml
-  python3 _scripts/convert_cursors.py "assets/cursors/sweezy cursors"
-      also adds new cursors from a folder whose files are named "<Name>--cursor--<anything>.cur/.ani" and
-      "<Name>--pointer--<anything>.cur/.ani" (like the Sweezy Cursors downloads), at the end of the list
 """
 import io
 import re
@@ -31,7 +30,9 @@ from PIL import Image
 Resampling = getattr(Image, "Resampling", Image)  # Pillow 9.1+ moved the resampling filters here
 
 ROOT = Path(__file__).resolve().parent.parent
+SOURCE_DIR = ROOT / "assets/cursors/originals"
 OUT_DIR = ROOT / "assets/cursors/web"
+STATES = ("cursor", "link", "text")
 DATA_FILE = ROOT / "_data/cursors.yml"
 CURSOR_SIZE = 32
 PREVIEW_SIZE = 64
@@ -47,6 +48,10 @@ def read_cur(data):
         image_data = data[offset:offset + length]
         if image_data[:4] == b"\x89PNG":
             image = Image.open(io.BytesIO(image_data)).convert("RGBA")
+        elif struct.unpack("<H", image_data[14:16])[0] == 32:
+            image = read_bmp32(image_data, width)
+        elif struct.unpack("<H", image_data[14:16])[0] == 1:
+            image = read_bmp1(image_data, width)
         else:
             # A BMP image: wrap it in a one-image .ico file, which Pillow can decode (including its transparency mask).
             entry = data[6 + 16 * i:10 + 16 * i] + struct.pack("<HHII", 1, 0, length, 22)
@@ -54,6 +59,55 @@ def read_cur(data):
             image = Image.open(io.BytesIO(ico)).convert("RGBA")
         images[width] = (image, hot_x, hot_y)
     return images
+
+
+def read_bmp32(data, width):
+    """Decodes a 32-bit BMP cursor image. Pillow ignores these images' own transparency (alpha), so decode it here."""
+    header_size, _, double_height = struct.unpack("<Iii", data[:12])
+    height = abs(double_height) // 2  # cursor BMPs list the image plus its mask as one double-height image
+    pixels = data[header_size:header_size + width * height * 4]
+    image = Image.frombuffer("RGBA", (width, height), pixels, "raw", "BGRA", 0, -1)
+    if image.getextrema()[3][1] == 0:
+        # No alpha at all: transparency comes from the 1-bit mask after the pixels instead (1 = transparent).
+        row = (width + 31) // 32 * 4
+        mask = data[header_size + len(pixels):]
+        alpha = Image.frombuffer("1", (width, height), mask, "raw", "1;I", row, -1)
+        image.putalpha(alpha)
+    return image
+
+
+def read_bmp1(data, width):
+    """Decodes a black-and-white BMP cursor image. These can have "invert the screen" pixels (like the classic text
+    I-beam), which browsers can't do; they're drawn white with a black outline, like an inverted cursor on this
+    site's black pages."""
+    header_size, _, double_height = struct.unpack("<Iii", data[:12])
+    height = abs(double_height) // 2
+    colors = struct.unpack("<I", data[32:36])[0] or 2
+    palette = [tuple(data[header_size + 4 * i:header_size + 4 * i + 3][::-1]) for i in range(colors)]
+    row = (width + 31) // 32 * 4
+    image_start = header_size + 4 * colors
+
+    def bit(plane_start, x, y):
+        byte = data[plane_start + (height - 1 - y) * row + x // 8]  # rows are stored bottom to top
+        return (byte >> (7 - x % 8)) & 1
+
+    image = Image.new("RGBA", (width, height))
+    inverted = set()
+    for y in range(height):
+        for x in range(width):
+            color, transparent = bit(image_start, x, y), bit(image_start + row * height, x, y)
+            if not transparent:
+                image.putpixel((x, y), palette[color] + (255,))
+            elif color:
+                inverted.add((x, y))
+    for x, y in inverted:
+        image.putpixel((x, y), (255, 255, 255, 255))
+    for x, y in inverted:
+        for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, -1), (-1, 1), (1, 1)):
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < width and 0 <= ny < height and image.getpixel((nx, ny))[3] == 0:
+                image.putpixel((nx, ny), (0, 0, 0, 255))
+    return image
 
 
 def read_ani(data):
@@ -98,13 +152,16 @@ def pick(images, size):
     return image, round(hot_x * scale), round(hot_y * scale)
 
 
-def convert(source, out_dir, state):
-    """Saves one state of a cursor and returns its generated fields for cursors.yml."""
+def convert(source, out_dir, state, static=False):
+    """Saves one state of a cursor and returns its generated fields for cursors.yml.
+    static: for an animated cursor, keep only the first frame."""
     data = source.read_bytes()
     if data[:4] == b"RIFF":
         frames, delays = read_ani(data)
     else:
         frames, delays = [read_cur(data)], None
+    if static:
+        frames = frames[:1]
 
     def save(frame, name):
         image, hot_x, hot_y = pick(frame, CURSOR_SIZE)
@@ -124,49 +181,51 @@ def convert(source, out_dir, state):
     return entry
 
 
-def default_name(name):
-    return re.sub(r"\s+(Animated\s+)?Cursor$", "", name).strip()
+def find_file(folder, state):
+    for extension in (".cur", ".ani"):
+        if (folder / (state + extension)).exists():
+            return folder / (state + extension)
+    return None
 
 
-def find_pairs(source_dir, cursors):
-    """Adds cursors from a folder of "<Name>--cursor--..." / "<Name>--pointer--..." files that aren't listed yet."""
-    listed = {c["cursor"]["file"] for c in cursors}
-    pairs = {}
-    for path in Path(source_dir).iterdir():
-        match = re.match(r"(.+?)--(cursor|pointer)--", path.name)
-        if match and path.suffix.lower() in (".cur", ".ani"):
-            pairs.setdefault(match.group(1), {})[match.group(2)] = path.resolve().relative_to(ROOT).as_posix()
-    for name, files in sorted(pairs.items()):
-        if "cursor" not in files:
-            print(f"skipping {name}: no --cursor-- file")
-        elif files["cursor"] not in listed:
-            cursors.append({
-                "id": re.sub(r"[^a-z0-9]+", "-", default_name(name).lower()).strip("-"),
-                "name": default_name(name),
-                "cursor": {"file": files["cursor"]},
-                "pointer": {"file": files.get("pointer", files["cursor"])},
-            })
+def main():
+    listed = yaml.safe_load(DATA_FILE.read_text()) or [] if DATA_FILE.exists() else []
+    folders = sorted(path.name for path in SOURCE_DIR.iterdir() if path.is_dir())
+    cursors = [c for c in listed if c["id"] in folders]
+    for gone in sorted({c["id"] for c in listed} - set(folders)):
+        print(f"removed {gone}: no folder in {SOURCE_DIR.relative_to(ROOT)}")
+    for new in sorted(set(folders) - {c["id"] for c in listed}):
+        cursors.append({"id": new, "name": new.replace("-", " ").title()})
 
-
-def main(source_dir=None):
-    cursors = yaml.safe_load(DATA_FILE.read_text()) or [] if DATA_FILE.exists() else []
-    if source_dir:
-        find_pairs(source_dir, cursors)
-
+    shutil.rmtree(OUT_DIR, ignore_errors=True)
     for cursor in cursors:
-        out_dir = OUT_DIR / cursor["id"]
-        shutil.rmtree(out_dir, ignore_errors=True)
+        folder, out_dir = SOURCE_DIR / cursor["id"], OUT_DIR / cursor["id"]
+        if not find_file(folder, "cursor"):
+            sys.exit(f"{folder.relative_to(ROOT)} needs a cursor.cur or cursor.ani")
         out_dir.mkdir(parents=True)
-        cursor_file = cursor["cursor"]["file"]
-        pointer_file = (cursor.get("pointer") or {}).get("file", cursor_file)
-        cursor["cursor"] = {"file": cursor_file, **convert(ROOT / cursor_file, out_dir, "cursor")}
-        cursor["pointer"] = {"file": pointer_file, **convert(ROOT / pointer_file, out_dir, "pointer")}
+        for state in STATES:
+            source = find_file(folder, state) or (find_file(folder, "cursor") if state == "link" else None)
+            if not source:
+                cursor.pop(state, None)
+                continue
+            static = (cursor.get(state) or {}).get("static")
+            cursor[state] = {**({"static": True} if static else {}), **convert(source, out_dir, state, static)}
+        # Keep a tidy key order: id, name, source, then the states.
+        order = ["id", "name", "source", *STATES]
+        cursor_items = sorted(cursor.items(), key=lambda item: order.index(item[0]) if item[0] in order else 99)
+        cursor.clear()
+        cursor.update(cursor_items)
         print(f"converted {cursor['id']}")
 
     header = (
         "# Cursors offered in the cursor menu (settings box), in this order. See _scripts/convert_cursors.py.\n"
-        "# To add one, add an entry with `id`, `name` (the title in the menu), and `file:` under `cursor:` (normal) and\n"
-        "# `pointer:` (hovering a link; optional), then run the script. It fills in the rest:\n"
+        "# Each one's original files are in assets/cursors/originals/<id>/ (cursor, plus optional link and text).\n"
+        "# You can edit:\n"
+        "#   name     the title in the menu\n"
+        "#   source   where the cursor came from (just for reference; not shown on the site)\n"
+        "#   static   put `static: true` under a state to use just the first frame of an animated cursor (animation\n"
+        "#            can flicker)\n"
+        "# and reorder entries. The script fills in the rest:\n"
         "#   hotspot  the pixel (x, y) that does the clicking\n"
         "#   frames   number of animation frames, shown `delay` milliseconds apart (animated cursors only)\n\n"
     )
@@ -174,6 +233,6 @@ def main(source_dir=None):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 1:
         sys.exit(__doc__)
-    main(sys.argv[1] if len(sys.argv) == 2 else None)
+    main()

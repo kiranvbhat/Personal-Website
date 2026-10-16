@@ -7,16 +7,16 @@
     <link rel="icon" href="{{ 'assets/graphics/characters/TinyWingsBird.png' | relative_url }}">
     {% include appearance-redirect.html %}
     {% include geo/cursor-init.html %}
-    <!-- Titan One: the bubbly font for the site name and homepage title -->
+    <!-- Creepster: the font for the site name and section titles (.bubble-text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&display=swap">
     <link rel="stylesheet" href="{{ 'geocities.css' | relative_url }}">
   </head>
   <body id="top"{% if page.background %} style="background-image: url('{{ page.background | relative_url }}')"{% endif %}>
     <div id="page">
       <header id="banner">
-        <a class="site-name bubble-text bubble-3d" href="{{ 'home' | relative_url }}">kiranvbhat.com</a>
+        <a class="site-name bubble-text" href="{{ 'home' | relative_url }}">kiranvbhat.com</a>
       </header>
       <div id="columns">
         {% include geo/sidebar.html %}
