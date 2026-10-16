@@ -549,18 +549,41 @@ h2 {
 .cursor-option:hover .cursor-pic-pointer,
 .cursor-option:focus-visible .cursor-pic-pointer { display: block; }
 
+/* -------------------Mobile bar------------------- */
+/* Small screens only: buttons that open the sidebar boxes (see sidebar.html). */
+.mobile-bar { display: none; }
+
+.mobile-bar button {
+    padding: 6px 2px;
+    border: 2px outset #ff8080;
+    background: var(--accent);
+    color: var(--heading);
+    font: bold 14px "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.mobile-bar button[aria-expanded="true"] { border-style: inset; background: #b00000; }
+
 /* -------------------Small screens------------------- */
 @media (max-width: 700px) {
     #page { margin: 8px; border-width: 2px; }
     #banner .site-name { font-size: 24px; }
     #columns { grid-template-columns: 1fr; }
-    #sidebar { border-right: 0; border-bottom: 4px ridge var(--accent); }
-    #sidebar .nav { display: flex; flex-wrap: wrap; gap: 0 14px; }
+    #sidebar { padding: 8px; border-right: 0; border-bottom: 4px ridge var(--accent); }
+    #sidebar .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
+    .mobile-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .has-mobile-bar #sidebar .box { display: none; margin: 8px 0 0; }
+    .has-mobile-bar #sidebar .box.open { display: block; }
+    .has-mobile-bar #sidebar .box-title { display: none; }  /* the pressed button already says what it is */
+    #sidebar .contact { flex-direction: row; justify-content: center; align-items: center; gap: 24px; }
+    #sidebar .socials { display: grid; grid-template-columns: 1fr 1fr; }
     h1 { font-size: 26px; }
     .welcome-to { font-size: 20px; }
     .zoom { font-size: 28px; }
     .home-intro { flex-direction: column; align-items: center; }
     .coursework { grid-template-columns: 1fr; }
     .entry-thumb { float: none; display: block; width: 100%; max-width: 320px; margin: 0 auto 10px; }
+    .side-thumb .entry-thumb { float: left; width: 35%; max-width: 130px; margin: 0 10px 4px 0; }
     .splash-warning { font-size: 34px; }
 }

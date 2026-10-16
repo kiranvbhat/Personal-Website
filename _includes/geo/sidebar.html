@@ -1,6 +1,18 @@
 {%- assign current_url = page.url | remove: ".html" -%}
 <aside id="sidebar">
-  <div class="box">
+  {%- comment %}
+    On small screens the boxes are hidden behind this row of buttons; each button opens its box as a panel underneath.
+    The script marks the page so the CSS only hides the boxes when the buttons work.
+  {% endcomment -%}
+  <script>document.documentElement.classList.add("has-mobile-bar");</script>
+  <div class="mobile-bar">
+    <button type="button" aria-expanded="false" aria-controls="box-menu">menu &#9662;</button>
+    <button type="button" aria-expanded="false" aria-controls="box-contact">contact &#9662;</button>
+    <button type="button" aria-expanded="false" aria-controls="box-socials">social &#9662;</button>
+    <button type="button" aria-expanded="false" aria-controls="box-settings">settings &#9662;</button>
+  </div>
+
+  <div class="box" id="box-menu">
     <div class="box-title">~ menu ~</div>
     <ul class="nav">
       {%- for link in site.data.nav %}
@@ -14,7 +26,7 @@
     </ul>
   </div>
 
-  <div class="box">
+  <div class="box" id="box-contact">
     <div class="box-title">~ contact ~</div>
     <div class="contact">
       {%- for item in site.data.profile.contact %}
@@ -27,7 +39,7 @@
     </div>
   </div>
 
-  <div class="box">
+  <div class="box" id="box-socials">
     <div class="box-title">~ social networks ~</div>
     <div class="socials">
       {%- for social in site.data.profile.socials %}
@@ -36,9 +48,26 @@
     </div>
   </div>
 
-  <div class="box">
+  <div class="box" id="box-settings">
     <div class="box-title">~ settings ~</div>
     {% include appearance-select.html current="geocities" %}
     {% include geo/cursor-setting.html %}
   </div>
+
+  <script>
+    // Mobile bar: each button shows its box and hides the others; pressing it again closes it.
+    (function () {
+      var buttons = document.querySelectorAll(".mobile-bar button");
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var opening = button.getAttribute("aria-expanded") !== "true";
+          buttons.forEach(function (other) {
+            var open = other === button && opening;
+            other.setAttribute("aria-expanded", open);
+            document.getElementById(other.getAttribute("aria-controls")).classList.toggle("open", open);
+          });
+        });
+      });
+    })();
+  </script>
 </aside>

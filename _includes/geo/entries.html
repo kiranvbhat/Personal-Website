@@ -6,6 +6,8 @@
            otherwise: title as title, dates (if any) as subtitle
     sort   true: newest first, by `end` then `start` ("present" counts as newest).
            Entries without dates go last, keeping their order from the file.
+    side_thumbs  true: keep pictures small on the left on phones too, like on desktop (good for logos).
+                 Otherwise pictures go full width above the text on phones.
 {%- endcomment -%}
 {%- assign visible_items = include.items | where_exp: "i", "i.hidden != true" -%}
 
@@ -41,7 +43,7 @@
   {%- assign entry_title = item.title -%}
   {%- assign entry_subtitle = entry_dates -%}
 {%- endif %}
-<div class="box entry">
+<div class="box entry{% if include.side_thumbs %} side-thumb{% endif %}">
   <div class="box-title">
     {%- if item.link %}<a href="{{ item.link }}" target="_blank">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif -%}
   </div>
