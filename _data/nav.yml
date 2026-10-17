@@ -1,13 +1,14 @@
 # Sidebar links, in order. `url` is the page name without .html.
 # `gif` is the clickable picture for that page on the homepage. Leave it out to show a placeholder there.
 # `caption` is the text under the gif.
+# `scale` (optional) shows the gif bigger or smaller than the others, e.g. 1.3, without changing the spacing.
 
 - { name: Home, url: home }
 - { name: Education, url: education, gif: assets/portfolio/education/stanford logo.gif, caption: education }
 - { name: Experience, url: experience, gif: assets/graphics/misc/briefcase 1.gif, caption: experience }
-- { name: Research, url: research, gif: assets/graphics/misc/chemistry 1.gif, caption: research }
+- { name: Research, url: research, gif: assets/graphics/misc/chemistry 4.gif, caption: research }
 - { name: Coding, url: coding, gif: assets/graphics/characters/computer wizard.gif, caption: coding }
 - { name: Performances, url: performances, gif: assets/graphics/characters/magician 1.gif, caption: performances }
 - { name: Music, url: music, gif: assets/graphics/misc/ipod cube 2.gif, caption: music }
 - { name: Other, url: other, gif: assets/graphics/tech/camera 50.gif, caption: other stuff }
-- { name: Resume, url: resume, gif: assets/graphics/misc/resume.gif, caption: resume }
+- { name: Resume, url: resume, gif: assets/graphics/misc/resume distort.gif, caption: resume, scale: 1.5 }

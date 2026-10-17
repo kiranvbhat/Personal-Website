@@ -4,6 +4,8 @@
     items  the data list
     style  "experience": role as title, "organization, dates" as subtitle
            otherwise: title as title, "conference, dates" as subtitle (each if any)
+    Optional link fields, shown as buttons under the description: paper, demo, poster, github. Each is a web address
+    or a file in the site (e.g. assets/portfolio/coding/ghostwriter_paper.pdf).
     sort   true: newest first, by `end` then `start` ("present" counts as newest).
            Entries without dates go last, keeping their order from the file.
     side_thumbs  true: keep pictures small on the left on phones too, like on desktop (good for logos).
@@ -55,8 +57,20 @@
     {%- if item.description %}
     <p>{{ item.description | markdownify | remove: "<p>" | remove: "</p>" | strip }}</p>
     {%- endif %}
-    {%- if item.paper %}
-    <p><a href="{{ item.paper }}" target="_blank">[read the paper]</a></p>
+    {%- assign link_fields = "paper:read the paper|demo:watch the demo|poster:see the poster|github:view on GitHub" | split: "|" -%}
+    {%- capture entry_links -%}
+      {%- for link_field in link_fields -%}
+        {%- assign field = link_field | split: ":" | first -%}
+        {%- assign label = link_field | split: ":" | last -%}
+        {%- assign href = item[field] -%}
+        {%- if href -%}
+          {%- unless href contains "://" %}{% assign href = href | relative_url %}{% endunless %}
+          <a href="{{ href }}" target="_blank">[{{ label }}]</a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if entry_links != "" %}
+    <p>{{ entry_links | strip }}</p>
     {%- endif %}
     {%- if item.note %}
     <p class="entry-note">{{ item.note }}</p>

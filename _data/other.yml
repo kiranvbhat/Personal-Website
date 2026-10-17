@@ -26,16 +26,28 @@ photography:
 
 volunteering:
   - title: Camp Kaleidoscope
+    link: https://campkaleidoscope.org/
     start: 2024-11
     end: 2026-06
+    media:
+      image: assets/portfolio/other/volunteering/kaleidoscope logo 2.webp
+    description: >-
+      Camp Kaleidoscope offers free camps and year-round programs for children facing a parent's cancer. I was a unit leader (UL)
+      and counselor for silver unit (9th/10th grade).
 
   - title: Camp Kesem
+    link: https://www.kesem.org/
     start: 2022-11
     end: 2024-10
+    media:
+      image: assets/portfolio/other/volunteering/kesem logo.png
+    description: >-
+      Camp Kesem offers free camps and year-round programs for children facing a parent's cancer. I was a counselor
+      for green unit (7th/8th grade) and orange unit (8th/9th grade).
 
   - title: Basketball Coaching
     media:
-      image: assets/portfolio/other/crossover.jpg
+      image: assets/portfolio/other/volunteering/crossover.jpg
     description: >-
       I coached 4th/5th grade basketball teams from 2017 to 2019. I love both teaching and basketball, so being a
       coach was a really fun experience.

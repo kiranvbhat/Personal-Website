@@ -4,13 +4,16 @@
 # conference (optional): where the paper was accepted, shown before the dates
 # paper (optional): link to the paper
 # media (optional): exactly one of
-#   image: path to an image/gif
+#   image: path to an image/gif (add `background: white` for see-through logos with dark artwork)
 #   youtube: YouTube video id
 # Descriptions support Markdown (e.g. **bold**).
 
 - title: Robust Neural Audio Fingerprinting using Music Foundation Models
   conference: NeurIPS 2025 AI for Music Workshop
   paper: https://openreview.net/forum?id=oaeP03QCjE
+  media:
+    image: assets/portfolio/research/neurips logo.png
+    background: white
   start: 2025-08
   end: 2025-10
   description: >-
@@ -21,6 +24,9 @@
 - title: "SMucK: Symbolic Music in ChucK"
   conference: NIME 2025
   paper: https://nime.org/web_archive/2025/proceedings/284.html
+  media:
+    image: assets/portfolio/research/nime logo.png
+    background: white
   start: 2025-01
   end: 2025-06
   description: >-

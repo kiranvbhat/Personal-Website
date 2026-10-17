@@ -4,43 +4,51 @@
 # media: exactly one of
 #   image: path to an image/gif
 #   youtube: YouTube video id
+# paper, demo, poster, github (optional): links shown as buttons under the description (web addresses, or files in the site
+#   like assets/portfolio/coding/ghostwriter_paper.pdf)
 # hidden: true keeps an entry here without showing it on the site.
 # Descriptions support Markdown (e.g. *italics*, **bold**).
 
 - title: Symbolic and Audio-based Music Identification
   start: 2025-03
   end: 2025-06
+  media:
+    image: assets/portfolio/coding/symbolic_and_audio_mi.png
   description: >-
     Identifies songs from symbolic queries using a DNA strand matching technique, matching 20/20 in a small test.
     Also searches 2,000 noisy phone recordings with MuQ embeddings, matching all 13 queries that had a true match.
 
 - title: Spatialized Doppler Effect Simulator
+  demo: https://youtu.be/Sd2On7RebGc
   start: 2024-12
   end: 2025-01
+  media:
+    image: assets/portfolio/coding/doppler.gif
   description: >-
     A 3D simulation of the Doppler effect with custom-built spatialized audio in ChucK, including spatial sound
     attenuation, stereo panning, Doppler shift, and a basic physics engine.
 
 - title: Mimic
-  link: https://youtu.be/5hbyKNw1oFA?feature=shared
+  demo: https://youtu.be/5hbyKNw1oFA?feature=shared
   media:
     image: assets/portfolio/coding/mimic_thumnail.JPG
   description: A multi-track looper instrument you play with your voice and an xbox controller.
 
 - title: RLevator
-  link: https://github.com/tnarayanan/RLevator
+  paper: assets/portfolio/coding/rlevator_paper.pdf
+  github: https://github.com/tnarayanan/RLevator
   media:
     image: assets/portfolio/coding/RLevator.gif
   description: A dynamic elevator control algorithm trained using reinforcement learning.
 
 - title: Cave Rescue with Reinforcement Learning
-  link: https://drive.google.com/file/d/1w8Y5AlqCT91oyGq9WDMrmH8TNCFJEarz/view?usp=sharing
+  paper: assets/portfolio/coding/cave_rescue_paper.pdf
   media:
     image: assets/portfolio/coding/cave_rescue.png
   description: Trained reinforcement learning agents in Julia to rescue people trapped in cave systems of varying complexity.
 
 - title: K-means Image Compression
-  link: https://youtu.be/_g2wPgyvhVM
+  demo: https://youtu.be/_g2wPgyvhVM
   media:
     image: assets/portfolio/coding/KMC.gif
   description: An image compression algorithm utilizing an unsupervised machine learning technique known as k-means clustering.
@@ -48,7 +56,8 @@
 - title: Ghostwriter
   start: 2023-02
   end: 2023-03
-  link: https://drive.google.com/file/d/1QAyzPfFxnZw97XlePoQUNjZbY1KdkW8u/view?usp=drive_link
+  paper: assets/portfolio/coding/ghostwriter_paper.pdf
+  poster: assets/portfolio/coding/ghostwriter_poster.pdf
   media:
     image: assets/portfolio/coding/ghostwriter.png
   description: >-
@@ -58,33 +67,35 @@
 - title: Audio Inpainting With Diffusion
   start: 2023-09
   end: 2023-12
-  link: https://drive.google.com/file/d/162QKVcMbvT7FNXvPTEMzCVUjLI2D4rWa/view?usp=sharing
+  poster: assets/portfolio/coding/audio_inpainting_poster.pdf
   media:
     image: assets/portfolio/coding/audio_inpainting.png
   description: Using a pretrained, unconditional audio-generating diffusion model to restore masked speech waveforms.
 
 - title: The Trebled C
-  link: https://github.com/kiranvbhat/The-Trebled-C
+  demo: https://www.youtube.com/watch?v=cAAEySOGntU
+  github: https://github.com/kiranvbhat/The-Trebled-C
   media:
     image: assets/portfolio/coding/TrebledCGameplay.gif
   description: Unity 2D platformer designed to train pitch interval recognition and short-term memory.
 
 - title: Arduino LED Display + Tetris
-  link: https://github.com/kiranvbhat/Arduino-LED-Display-Tetris
+  demo: https://www.youtube.com/watch?v=hBOwo1rJkic
+  github: https://github.com/kiranvbhat/Arduino-LED-Display-Tetris
   media:
     image: assets/portfolio/coding/ArduinoTetris.gif
   description: Custom-built LED display with variable brightness and Tetris.
 
 - title: Composer Predictor
   hidden: true
-  link: https://github.com/kiranvbhat/Composer-Predictor
+  github: https://github.com/kiranvbhat/Composer-Predictor
   media:
     image: assets/portfolio/coding/ComposerPredictor.gif
   description: Applying multinomial probability theory to predict the composer of a piano piece.
 
 - title: Speed Reader
   hidden: true
-  link: https://github.com/kiranvbhat/Speed-Reader
+  github: https://github.com/kiranvbhat/Speed-Reader
   media:
     image: assets/portfolio/coding/SpeedReader.gif
   description: ReactJS app that can improve reading speed by reducing subvocalization.

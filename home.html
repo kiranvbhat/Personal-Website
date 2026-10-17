@@ -31,7 +31,7 @@ title: Home
   {%- if link.url == "home" %}{% continue %}{% endif %}
   <a class="portal" href="{{ link.url | relative_url }}">
     {%- if link.gif %}
-    <img src="{{ link.gif | relative_url }}" alt="">
+    <img src="{{ link.gif | relative_url }}" alt=""{% if link.scale %} style="scale: {{ link.scale }}"{% endif %}>
     {%- else %}
     <span class="gif-placeholder">[gif needed]</span>
     {%- endif %}
