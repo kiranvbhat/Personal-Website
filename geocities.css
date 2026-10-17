@@ -69,6 +69,7 @@ a:visited { color: var(--link-visited); }
 a:hover { color: #000; background: var(--highlight-bg); }
 
 b, strong { color: var(--heading); }
+a:hover b, a:hover strong { color: inherit; }  /* bold link text would be yellow on the yellow hover highlight */
 
 .highlight { color: var(--heading); }
 
@@ -178,8 +179,9 @@ h2 {
 .nav li::before { content: "\25BA  "; color: var(--heading); }
 .nav li.current { color: var(--heading); font-weight: bold; }
 
-/* Image links shouldn't get the yellow text-link hover highlight. */
-.contact a:hover, .portal:hover { background: none; }
+/* Image links shouldn't get the yellow text-link hover highlight, so their captions change color instead (black
+   would vanish on the dark panels). */
+.contact a:hover, .portal:hover { background: none; color: var(--heading); }
 
 .socials {
     display: flex;

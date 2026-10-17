@@ -7,7 +7,7 @@
 #   image: path to an image/gif
 # `link` and `note` are optional.
 
-- title: Senior Recital
+- title: Senior Piano Recital
   start: 2020-07
   media:
     youtube: XrxldF58UIg
@@ -19,8 +19,8 @@
   media:
     youtube: oYNdI5XdsBk
   description: >-
-    A cautionary tale about the dangers of automating human creativity. The piece was written and performed by
-    myself and Samantha Liu as part of the Stanford Laptop Orchestra.
+    A mad scientist teaches a robot to perform a song. What could go wrong? Written and performed by
+    Kiran Bhat and Samantha Liu for the Stanford Laptop Orchestra.
 
 - title: DISKOMPONIST
   start: 2025-03
@@ -37,8 +37,8 @@
 - title: TO THE END OF THIS WORLD
   start: 2026-06
   media:
-    image: assets/graphics/signs/coming soon.gif
-  description: A horror-inspired, animated short film.
+    youtube: bM9HpLJ81zk
+  description: A horror-inspired, animated short film. Written, directed, animated, scored, and performed by Kiran Bhat.
 
 - title: Drawn2Noize
   start: 2025-05

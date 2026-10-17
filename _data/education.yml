@@ -7,7 +7,7 @@
   end: 2026-06
   link: https://ccrma.stanford.edu/
   media:
-    image: assets/graphics/logos/ccrma shockwave.gif
+    image: assets/portfolio/education/ccrma shockwave.gif
 
 - role: BS in Computer Science
   organization: Stanford University
@@ -15,7 +15,7 @@
   end: 2024-06
   link: https://www.stanford.edu/
   media:
-    image: assets/graphics/logos/stanford logo.gif
+    image: assets/portfolio/education/stanford logo.gif
 
 - role: High School Diploma
   organization: Castro Valley High School
@@ -23,4 +23,4 @@
   end: 2020-05
   link: https://cvhs.cv.k12.ca.us/
   media:
-    image: assets/graphics/logos/cvhs tilt zoom.gif
+    image: assets/portfolio/education/cvhs tilt zoom.gif
