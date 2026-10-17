@@ -1,6 +1,6 @@
 ---
 layout: geocities
-background: assets/background/stars 1.gif
+background: assets/background/black rock.png
 title: Home
 ---
 {%- assign profile = site.data.profile -%}
@@ -44,3 +44,50 @@ title: Home
   You are visitor #
   <span class="digits">{%- for digit in hit_digits -%}<span>{{ digit }}</span>{%- endfor -%}</span>
 </div>
+
+<!-- A prank: a fly crawling on the screen, on 1 in 4 visits. Fixed in place, so it stays put while you scroll. Click
+     it to squash it. It's animated from a strip of the frames of assets/graphics/animals/bug 69.gif (see .screen-bug in
+     geocities.css) rather than the GIF itself, so the script can tell which frame is showing. -->
+<div class="screen-bug" id="screen-bug" aria-hidden="true"></div>
+<script>
+  (function () {
+    var bug = document.getElementById("screen-bug");
+    // Only shows up on 1 in 4 visits, somewhere random on the screen.
+    if (Math.random() >= 0.25) {
+      bug.remove();
+      return;
+    }
+    bug.style.left = Math.random() * (window.innerWidth - bug.offsetWidth) + "px";
+    bug.style.top = Math.random() * (window.innerHeight - bug.offsetHeight) + "px";
+    var splat = {{ 'assets/graphics/animals/fly splat.png' | relative_url | jsonify }};
+    new Image().src = splat;  // load it now, so it shows the moment the fly is clicked
+
+    // Where the fly is in each frame, as a fraction of the frame's width and height. Frames are 100 ms apart.
+    var flyCenters = [
+      [0.149, 0.596], [0.24, 0.498], [0.369, 0.412], [0.495, 0.362], [0.649, 0.311], [0.781, 0.222], [0.799, 0.102],
+      [0.915, 0.152], [0.952, 0.265], [0.939, 0.395], [0.867, 0.531], [0.731, 0.596], [0.573, 0.621], [0.416, 0.662],
+      [0.285, 0.564], [0.311, 0.418], [0.495, 0.362], [0.649, 0.311], [0.781, 0.222], [0.799, 0.102], [0.915, 0.152],
+      [0.952, 0.265], [0.939, 0.395], [0.867, 0.531], [0.769, 0.637], [0.645, 0.751], [0.49, 0.833], [0.326, 0.824],
+      [0.211, 0.751]
+    ];
+
+    bug.addEventListener("click", function (event) {
+      var crawl = bug.getAnimations ? bug.getAnimations()[0] : null;
+      var box = bug.getBoundingClientRect(), x = event.clientX, y = event.clientY;
+      if (crawl) {
+        var center = flyCenters[Math.floor(crawl.currentTime / 100) % flyCenters.length];
+        x = box.left + center[0] * box.width;
+        y = box.top + center[1] * box.height;
+      }
+      var mark = document.createElement("img");
+      mark.className = "bug-splat";
+      mark.src = splat;
+      mark.alt = "";
+      mark.style.left = x + "px";
+      mark.style.top = y + "px";
+      document.body.appendChild(mark);
+      mark.addEventListener("animationend", function () { mark.remove(); });
+      bug.remove();
+    });
+  })();
+</script>

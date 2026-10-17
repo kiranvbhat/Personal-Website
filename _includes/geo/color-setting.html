@@ -1,22 +1,26 @@
 {%- comment -%}
-  Color dropdown for the settings box (dark or light). The choice is saved in the browser; color-init.html applies it
-  on each page load.
+  Color button for the settings box: switches between dark and light. The choice is saved in the browser;
+  color-init.html applies it on each page load.
 {%- endcomment -%}
-<label class="appearance">
+<div class="appearance">
   color:
-  <select id="color-select">
-    <option value="dark">Dark</option>
-    <option value="light">Light</option>
-  </select>
-</label>
+  <button type="button" class="color-toggle" id="color-toggle"></button>
+</div>
 <script>
   (function () {
-    var select = document.getElementById("color-select");
-    select.value = document.documentElement.dataset.color === "light" ? "light" : "dark";
-    select.addEventListener("change", function () {
-      if (select.value === "light") document.documentElement.dataset.color = "light";
-      else delete document.documentElement.dataset.color;
-      try { localStorage.setItem("color", select.value); } catch (e) {}
+    var button = document.getElementById("color-toggle"), root = document.documentElement;
+    function show() {
+      var light = root.dataset.color === "light";
+      button.textContent = light ? "Light" : "Dark";
+      button.title = light ? "Switch to dark" : "Switch to light";
+    }
+    button.addEventListener("click", function () {
+      var color = root.dataset.color === "light" ? "dark" : "light";
+      if (color === "light") root.dataset.color = "light";
+      else delete root.dataset.color;
+      try { localStorage.setItem("color", color); } catch (e) {}
+      show();
     });
+    show();
   })();
 </script>

@@ -8,8 +8,6 @@
 # shown newest first by date (entries without dates go last).
 # Descriptions support Markdown (e.g. **bold**).
 
-intro: A collection of random things I have worked on or found interesting.
-
 photography:
   - title: 360° Photos
     media:

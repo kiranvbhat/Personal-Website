@@ -13,7 +13,7 @@ hit_count: 4213
 
 # Each entry is a paragraph. Markdown is allowed (e.g. [text](link), **bold**).
 bio:
-  - Hey! I just graduated from Stanford, where I studied computer science and it's intersection with music.
+  - Hey! I just graduated from Stanford, where I studied computer science and its intersection with music.
   - In my spare time, I enjoy making [music](music), taking [photos](other#photography), and playing basketball.
 
 # Sidebar "contact" box. `url` is a full link (mailto:, https://) or a page on this site (e.g. guestbook).
