@@ -8,8 +8,13 @@ resume: assets/resume/Kiran_Bhat_Resume.pdf
 # GeoCities appearance
 # Splash page door image (clicking it enters the site).
 door_image: assets/graphics/misc/red door.png
-# Fake visitor count shown on the homepage (padded to 6 digits).
-hit_count: 4213
+# Visits are counted with GoatCounter (see _includes/goatcounter.html). goatcounter is your site code, the CODE in
+# CODE.goatcounter.com; blank turns it off. The homepage counter (padded to 6 digits) shows hit_count plus the site's
+# total visitors from GoatCounter (this needs "Allow adding visitor counts on your website" on in GoatCounter's
+# settings; it can lag up to 4 hours), or just hit_count while loading, if GoatCounter can't be
+# reached, or if goatcounter is blank.
+goatcounter: kiranvbhat
+hit_count: 23670
 
 # Each entry is a paragraph. Markdown is allowed (e.g. [text](link), **bold**).
 bio:

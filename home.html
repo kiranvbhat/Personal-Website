@@ -42,8 +42,30 @@ title: Home
 
 <div class="counter">
   You are visitor #
-  <span class="digits">{%- for digit in hit_digits -%}<span>{{ digit }}</span>{%- endfor -%}</span>
+  <span class="digits" id="visitor-digits">{%- for digit in hit_digits -%}<span>{{ digit }}</span>{%- endfor -%}</span>
 </div>
+{%- if profile.goatcounter != "" %}
+<script>
+  // hit_count plus the site's total visitors from GoatCounter (see _includes/goatcounter.html). Until it loads (or if
+  // GoatCounter can't be reached), just hit_count shows.
+  (function () {
+    fetch("https://" + {{ profile.goatcounter | jsonify }} + ".goatcounter.com/counter/TOTAL.json")
+      .then(function (response) { return response.ok ? response.json() : Promise.reject(); })
+      .then(function (data) {
+        var digits = document.getElementById("visitor-digits");
+        var total = Number(String(data.count).replace(/\D/g, ""));  // e.g. "1,234"
+        var count = String({{ profile.hit_count }} + total).padStart(6, "0");
+        digits.textContent = "";
+        count.split("").forEach(function (digit) {
+          var box = document.createElement("span");
+          box.textContent = digit;
+          digits.appendChild(box);
+        });
+      })
+      .catch(function () {});
+  })();
+</script>
+{%- endif %}
 
 <!-- A prank: a fly crawling on the screen, on 1 in 4 visits. Fixed in place, so it stays put while you scroll. Click
      it to squash it. It's animated from a strip of the frames of assets/graphics/animals/bug 69.gif (see .screen-bug in

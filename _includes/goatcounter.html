@@ -1,0 +1,21 @@
+{%- comment -%}
+  Counts this page view in GoatCounter (privacy-friendly stats: no cookies, nothing personal stored), using its
+  tracking pixel rather than its script, so no outside code runs on the site. Skipped when profile.goatcounter is
+  blank, on the local preview, and in a browser where localStorage "skipgc" is "t" (to not count your own visits, run
+  `localStorage.setItem("skipgc", "t")` in the browser console on kiranvbhat.com).
+{%- endcomment -%}
+{%- if site.data.profile.goatcounter != "" %}
+<script>
+  (function () {
+    var skip = location.hostname === "localhost" || location.hostname === "127.0.0.1" || navigator.webdriver;
+    try { skip = skip || localStorage.getItem("skipgc") === "t"; } catch (e) {}
+    if (skip) return;
+    var url = "https://" + {{ site.data.profile.goatcounter | jsonify }} + ".goatcounter.com/count";
+    new Image().src = url + "?p=" + encodeURIComponent(location.pathname) +
+      "&t=" + encodeURIComponent(document.title) +
+      "&r=" + encodeURIComponent(document.referrer) +
+      "&s=" + [screen.width, screen.height, devicePixelRatio || 1].join(",") +
+      "&rnd=" + Math.random().toString(36).slice(2);
+  })();
+</script>
+{%- endif %}
