@@ -491,15 +491,6 @@ h2 {
 }
 
 
-/* -------------------Animations------------------- */
-@keyframes blink { 50% { opacity: 0; } }
-
-.blink { animation: blink 1.2s steps(1) infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-    .blink { animation: none; }
-}
-
 /* -------------------Custom cursor------------------- */
 /* Only for devices with a mouse. cursor-init.html sets --site-cursor, --site-link and --site-text to the picked
    cursor's images. The link rules come last so links inside text still get the link cursor. */
@@ -526,6 +517,48 @@ h2 {
     html.custom-cursor input {
         cursor: var(--site-link);
     }
+}
+
+/* Paint and lightsaber trails for some cursors (see _includes/geo/cursor-effects.html), over the whole window. */
+.cursor-effects {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+}
+
+/* Explosion where you click (the explosion cursor effect): plays the 27 frames of explosion 5.gif once. The blast
+   starts from its frame's point (96, 166), so the margins put that point on the click. They go in a layer over the
+   page that cursor-effects.html sizes to the page while one is playing. */
+.cursor-effects.cursor-explosions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.cursor-explosion {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    margin: -166px 0 0 -96px;
+    background: url("assets/graphics/misc/explosion%205%20frames.png") 0 0 / 5400px 200px;
+    animation: explode 2.7s steps(27) forwards;
+}
+
+@keyframes explode { to { background-position: -5400px 0; } }
+
+/* The paint canvas sits in the page instead, so drawings scroll with it. cursor-effects.html sets its size. */
+.cursor-effects.cursor-paint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
 }
 
 /* No cursor on touch screens, so no point offering the setting. */

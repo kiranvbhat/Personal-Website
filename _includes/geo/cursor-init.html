@@ -3,7 +3,7 @@
   browser as the cursor's id from _data/cursors.yml; visitors who haven't picked one get defaultSiteCursor below, and
   "system" means the browser's own cursor. Also defines setSiteCursor(id), which the menu calls.
   Sets --site-cursor, --site-link and (for cursors that have one) --site-text on <html>; geocities.css uses them on
-  devices with a mouse.
+  devices with a mouse. For cursors with an `effect`, also sets data-cursor-effect on <html> (see cursor-effects.html).
 {%- endcomment -%}
 <script>
   (function () {
@@ -13,6 +13,9 @@
     {%- assign states = "cursor,link,text" | split: "," %}
     {%- for cursor in site.data.cursors %}
     cursors[{{ cursor.id | jsonify }}] = {
+      {%- if cursor.effect %}
+      effect: {{ cursor.effect | jsonify }},
+      {%- endif %}
       {%- for state in states %}{% if cursor[state] %}
       {{ state }}: { hotspot: {{ cursor[state].hotspot | jsonify }}{% if cursor[state].frames %}, frames: {{ cursor[state].frames }}, delay: {{ cursor[state].delay }}{% endif %} },
       {%- endif %}{% endfor %}
@@ -35,10 +38,12 @@
       var root = document.documentElement;
       timers.forEach(clearInterval);
       timers = [];
+      delete root.dataset.cursorEffect;
       if (!cursors[id]) {
         root.classList.remove("custom-cursor");
         return;
       }
+      if (cursors[id].effect) root.dataset.cursorEffect = cursors[id].effect;
       ["cursor", "link", "text"].forEach(function (state) {
         var info = cursors[id][state], dir = base + id + "/", property = "--site-" + state;
         var fallback = { cursor: "auto", link: "pointer", text: "text" }[state];

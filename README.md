@@ -3,7 +3,7 @@ My personal website, built using Jekyll and hosted on GitHub Pages.
 
 <a href="https://www.kiranvbhat.com">kiranvbhat.com</a>
 
-## Editing c## Editing content
+## Editing content
 All content lives in `_data/` and is kept separate from the page design:
 
 | File | Contents |
@@ -26,16 +26,18 @@ The "last updated" date is filled in automatically with the date the site was bu
 Entries can have optional `start` and `end` dates written as `YYYY-MM` (use `end: present` for ongoing things). Experience, Research, Coding and Performances are sorted newest first by those dates; Music and Other keep the order written in their files.
 
 ## Design
-The site has two appearances, picked with the dropdown in the sidebar (the choice is saved in the visitor's browser):
+The site has two appearances, picked with the theme dropdown in the sidebar (the choice is saved in the visitor's browser):
 
 - **GeoCities** (default): `index.html` (splash page), `home.html` and the other page templates, `_layouts/geocities.html`, `_includes/geo/` and `geocities.css`.
 - **Modern**: `modern.html`, currently a placeholder.
 
-Images live in `assets/`. Each page picks its tiling background with `background:` in its front matter (the block at the top of the page file). Any `.gif` in `assets/graphics/ads/` is added to the rotation of fake banner ads automatically.
+Images live in `assets/`. Each page picks its tiling background with `background:` in its front matter (the block at the top of the page file), optionally with `background_size:` and a dark-mode tint, `background_tint:` (`true`, or a strength like `0.3`). Any `.gif` in `assets/graphics/ads/` is added to the rotation of fake banner ads automatically.
 
-To add a cursor to the cursor menu, make a folder for it in `assets/cursors/originals/` (the folder name is its id) and put its `.cur`/`.ani` files in it, named `cursor` (normal), `link` (hovering links; optional) and `text` (hovering text; optional). Then run `python3 _scripts/convert_cursors.py` (needs Pillow and PyYAML). It converts them to PNGs in `assets/cursors/web/` and adds the cursor to `_data/cursors.yml`, where you can change its `name` and note its `source`. The originals aren't published (see `exclude:` in `_config.yml`).
+Pictures on the site are shown small, so big ones have a lighter `small` copy next to the original (e.g. `ACMLab small.jpg` next to `ACMLab.png`), and `_data/` points to the copy.
 
-view
+To add a cursor to the cursor menu, make a folder for it in `assets/cursors/originals/` (the folder name is its id) and put its `.cur`/`.ani` files in it, named `cursor` (normal), `link` (hovering links; optional) and `text` (hovering text; optional). Plain images (or `.ico` files) need turning into `.cur` files first. Then run `python3 _scripts/convert_cursors.py` (needs Pillow and PyYAML). It converts them to PNGs in `assets/cursors/web/` and adds the cursor to `_data/cursors.yml`, where you can change its `name`, note its `source`, make it bigger with `size:`, or give it a special `effect:` (`paint`, `saber` or `explosion`, see `_includes/geo/cursor-effects.html`). The originals aren't published (see `exclude:` in `_config.yml`).
+
+## Viewing locally
 With Docker running:
 ```
 docker run --rm -it -p 4000:4000 -v "$PWD":/srv/jekyll -v jekyll-gems:/usr/local/bundle -w /srv/jekyll ruby:3.3 \

@@ -9,10 +9,11 @@ Browsers can't use .ani (animated) cursors and support .cur unevenly, so each st
   assets/cursors/web/<id>/<state>.png           32px cursor (the first frame, if animated)
   assets/cursors/web/<id>/<state>-<n>.png       32px animation frames (animated cursors only)
   assets/cursors/web/<id>/<state>-preview.png   64px animated PNG for the cursor menu (animated cursors only)
-plus a 64px "@2x" copy of each 32px image for sharp cursors on high-resolution screens.
+plus a 64px "@2x" copy of each 32px image for sharp cursors on high-resolution screens. A cursor can be made bigger
+with `size:` in _data/cursors.yml (in pixels, instead of 32).
 
 New folders are added to the end of _data/cursors.yml, titled from the folder name. Your edits there (`name`,
-`source`, `static`, and the order) are kept when you re-run this; entries whose folder is gone are removed.
+`source`, `size`, `effect`, `static`, and the order) are kept when you re-run this; entries whose folder is gone are removed.
 
 Usage (needs Pillow and PyYAML):
   python3 _scripts/convert_cursors.py
@@ -152,9 +153,10 @@ def pick(images, size):
     return image, round(hot_x * scale), round(hot_y * scale)
 
 
-def convert(source, out_dir, state, static=False):
+def convert(source, out_dir, state, static=False, size=CURSOR_SIZE):
     """Saves one state of a cursor and returns its generated fields for cursors.yml.
-    static: for an animated cursor, keep only the first frame."""
+    static: for an animated cursor, keep only the first frame.
+    size: the cursor's size in pixels."""
     data = source.read_bytes()
     if data[:4] == b"RIFF":
         frames, delays = read_ani(data)
@@ -164,9 +166,9 @@ def convert(source, out_dir, state, static=False):
         frames = frames[:1]
 
     def save(frame, name):
-        image, hot_x, hot_y = pick(frame, CURSOR_SIZE)
+        image, hot_x, hot_y = pick(frame, size)
         image.save(out_dir / f"{name}.png")
-        pick(frame, CURSOR_SIZE * 2)[0].save(out_dir / f"{name}@2x.png")
+        pick(frame, size * 2)[0].save(out_dir / f"{name}@2x.png")
         return [hot_x, hot_y]
 
     entry = {"hotspot": save(frames[0], state)}
@@ -209,9 +211,10 @@ def main():
                 cursor.pop(state, None)
                 continue
             static = (cursor.get(state) or {}).get("static")
-            cursor[state] = {**({"static": True} if static else {}), **convert(source, out_dir, state, static)}
-        # Keep a tidy key order: id, name, source, then the states.
-        order = ["id", "name", "source", *STATES]
+            size = cursor.get("size", CURSOR_SIZE)
+            cursor[state] = {**({"static": True} if static else {}), **convert(source, out_dir, state, static, size)}
+        # Keep a tidy key order: id, name, source, size, effect, then the states.
+        order = ["id", "name", "source", "size", "effect", *STATES]
         cursor_items = sorted(cursor.items(), key=lambda item: order.index(item[0]) if item[0] in order else 99)
         cursor.clear()
         cursor.update(cursor_items)
@@ -223,6 +226,10 @@ def main():
         "# You can edit:\n"
         "#   name     the title in the menu\n"
         "#   source   where the cursor came from (just for reference; not shown on the site)\n"
+        "#   size     the cursor's size in pixels (default 32; cursors over 32 can switch to the normal arrow near\n"
+        "#            the edge of the browser window)\n"
+        "#   effect   a special effect (see _includes/geo/cursor-effects.html): `paint` (hold the mouse button and drag\n"
+        "#            to draw), `saber` (a short glowing red trail) or `explosion` (an explosion where you click)\n"
         "#   static   put `static: true` under a state to use just the first frame of an animated cursor (animation\n"
         "#            can flicker)\n"
         "# and reorder entries. The script fills in the rest:\n"

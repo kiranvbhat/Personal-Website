@@ -13,7 +13,7 @@
   start: 2025-03
   end: 2025-06
   media:
-    image: assets/portfolio/coding/symbolic_and_audio_mi.png
+    image: assets/portfolio/coding/symbolic_and_audio_mi small.jpg
   description: >-
     Identifies songs from symbolic queries using a DNA strand matching technique, matching 20/20 in a small test.
     Also searches 2,000 noisy phone recordings with MuQ embeddings, matching all 13 queries that had a true match.
@@ -31,26 +31,26 @@
 - title: Mimic
   demo: https://youtu.be/5hbyKNw1oFA?feature=shared
   media:
-    image: assets/portfolio/coding/mimic_thumnail.JPG
+    image: assets/portfolio/coding/mimic_thumnail small.JPG
   description: A multi-track looper instrument you play with your voice and an xbox controller.
 
 - title: RLevator
   paper: assets/portfolio/coding/rlevator_paper.pdf
   github: https://github.com/tnarayanan/RLevator
   media:
-    image: assets/portfolio/coding/RLevator.gif
+    image: assets/portfolio/coding/RLevator small.gif
   description: A dynamic elevator control algorithm trained using reinforcement learning.
 
 - title: Cave Rescue with Reinforcement Learning
   paper: assets/portfolio/coding/cave_rescue_paper.pdf
   media:
-    image: assets/portfolio/coding/cave_rescue.png
+    image: assets/portfolio/coding/cave_rescue small.png
   description: Trained reinforcement learning agents in Julia to rescue people trapped in cave systems of varying complexity.
 
 - title: K-means Image Compression
   demo: https://youtu.be/_g2wPgyvhVM
   media:
-    image: assets/portfolio/coding/KMC.gif
+    image: assets/portfolio/coding/KMC small.gif
   description: An image compression algorithm utilizing an unsupervised machine learning technique known as k-means clustering.
 
 - title: Ghostwriter
@@ -59,7 +59,7 @@
   paper: assets/portfolio/coding/ghostwriter_paper.pdf
   poster: assets/portfolio/coding/ghostwriter_poster.pdf
   media:
-    image: assets/portfolio/coding/ghostwriter.png
+    image: assets/portfolio/coding/ghostwriter small.jpg
   description: >-
     Constrained text generation models that write lyrics for a provided sequence of music notes.
     Received best project award and TA's choice best poster in *CS 224N: Natural Language Processing*.
@@ -69,21 +69,21 @@
   end: 2023-12
   poster: assets/portfolio/coding/audio_inpainting_poster.pdf
   media:
-    image: assets/portfolio/coding/audio_inpainting.png
+    image: assets/portfolio/coding/audio_inpainting small.jpg
   description: Using a pretrained, unconditional audio-generating diffusion model to restore masked speech waveforms.
 
 - title: The Trebled C
   demo: https://www.youtube.com/watch?v=cAAEySOGntU
   github: https://github.com/kiranvbhat/The-Trebled-C
   media:
-    image: assets/portfolio/coding/TrebledCGameplay.gif
+    image: assets/portfolio/coding/TrebledCGameplay small.gif
   description: Unity 2D platformer designed to train pitch interval recognition and short-term memory.
 
 - title: Arduino LED Display + Tetris
   demo: https://www.youtube.com/watch?v=hBOwo1rJkic
   github: https://github.com/kiranvbhat/Arduino-LED-Display-Tetris
   media:
-    image: assets/portfolio/coding/ArduinoTetris.gif
+    image: assets/portfolio/coding/ArduinoTetris small.gif
   description: Custom-built LED display with variable brightness and Tetris.
 
 - title: Composer Predictor

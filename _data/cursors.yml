@@ -3,6 +3,10 @@
 # You can edit:
 #   name     the title in the menu
 #   source   where the cursor came from (just for reference; not shown on the site)
+#   size     the cursor's size in pixels (default 32; cursors over 32 can switch to the normal arrow near
+#            the edge of the browser window)
+#   effect   a special effect (see _includes/geo/cursor-effects.html): `paint` (hold the mouse button and drag
+#            to draw), `saber` (a short glowing red trail) or `explosion` (an explosion where you click)
 #   static   put `static: true` under a state to use just the first frame of an animated cursor (animation
 #            can flicker)
 # and reorder entries. The script fills in the rest:
@@ -41,6 +45,13 @@
     hotspot: [0, 0]
   link:
     hotspot: [0, 9]
+- id: super-monkey
+  name: Super Monkey
+  size: 40
+  cursor:
+    hotspot: [0, 0]
+  link:
+    hotspot: [0, 0]
 - id: bonnie
   name: Bonnie
   source: Sweezy Cursors
@@ -55,6 +66,19 @@
     hotspot: [3, 1]
   link:
     hotspot: [9, 0]
+- id: chopped-holland
+  name: Chopped Holland
+  size: 36
+  cursor:
+    hotspot: [0, 0]
+  link:
+    hotspot: [0, 0]
+- id: chuck
+  name: ChucK
+  cursor:
+    hotspot: [13, 5]
+  link:
+    hotspot: [13, 5]
 - id: club-penguin
   name: Club Penguin
   source: RW Designer
@@ -85,13 +109,14 @@
 - id: darth-vader
   name: Darth Vader
   source: RW Designer
+  effect: saber
   cursor:
     hotspot: [0, 0]
     frames: 3
     delay: 83
   link:
     static: true
-    hotspot: [12, 16]
+    hotspot: [6, 8]
 - id: doritos
   name: Doritos
   source: Sweezy Cursors
@@ -175,6 +200,7 @@
 - id: megumin
   name: Megumin
   source: Sweezy Cursors
+  effect: explosion
   cursor:
     hotspot: [2, 1]
   link:
@@ -202,6 +228,15 @@
     delay: 250
   link:
     hotspot: [7, 2]
+- id: paintbrush
+  name: Paintbrush
+  effect: paint
+  cursor:
+    hotspot: [0, 0]
+    frames: 29
+    delay: 67
+  link:
+    hotspot: [0, 0]
 - id: parappa
   name: PaRappa
   source: RW Designer
@@ -220,6 +255,12 @@
     hotspot: [0, 0]
     frames: 3
     delay: 300
+- id: dr-hare
+  name: Poptropica
+  cursor:
+    hotspot: [0, 0]
+  link:
+    hotspot: [0, 0]
 - id: sakamoto
   name: Sakamoto
   source: Sweezy Cursors
