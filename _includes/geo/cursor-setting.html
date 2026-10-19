@@ -3,6 +3,7 @@
   button that picks one at random.
   Each option shows the normal cursor, and the link version on hover. The choice is saved in the browser;
   cursor-init.html applies it on each page load. Hidden on touch devices (see .cursor-setting in geocities.css).
+  Any link to #cursor-menu also opens the window.
 {%- endcomment -%}
 <div class="setting cursor-setting">
   cursor:
@@ -85,6 +86,13 @@
     });
 
     openButton.addEventListener("click", function () { menu.showModal(); });
+    // Links to #cursor-menu (like the one in the homepage bio) open it too.
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest('a[href="#cursor-menu"]');
+      if (!link) return;
+      event.preventDefault();
+      menu.showModal();
+    });
     document.getElementById("cursor-close").addEventListener("click", function () { menu.close(); });
     // Clicking outside the window closes it.
     menu.addEventListener("click", function (event) {

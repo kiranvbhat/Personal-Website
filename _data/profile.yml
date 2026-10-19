@@ -16,11 +16,12 @@ door_image: assets/graphics/misc/red door.png
 goatcounter: kiranvbhat
 hit_count: 23670
 
-# Each entry is a paragraph. Markdown is allowed (e.g. [text](link), **bold**).
+# Each entry is a paragraph. Markdown is allowed (e.g. [text](link), **bold**). A link to #cursor-menu opens the cursor menu.
 bio:
-  - Hey :) I just graduated from Stanford, where I studied computer science (AI) and its intersection with music.
+  - Hey! I just graduated from Stanford, where I studied computer science (AI) and its intersection with music.
   - In my spare time, I enjoy writing [music](music), watching/[making films](performances), and playing basketball.
-  - This site is intended to look like it was made during a more exciting time on the internet. And it is permanently under construction.
+  - This site is under construction (permanently)!! If you're on a computer, check out all the [awesome cursor options](#cursor-menu) :D
+  - Thanks for stopping by!! -Kiran
 
 # Sidebar "contact" box. `url` is a full link (mailto:, https://) or a page on this site (e.g. guestbook).
 # `icon` is optional; the caption is shown under it, or on its own as a text link.

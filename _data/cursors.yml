@@ -25,10 +25,12 @@
   source: RW Designer
   cursor:
     hotspot: [0, 0]
-    frames: 2
-    delay: 167
   link:
     hotspot: [0, 0]
+  text:
+    hotspot: [0, 0]
+    frames: 2
+    delay: 167
 - id: basketball
   name: Basketball
   source: Sweezy Cursors
@@ -289,6 +291,12 @@
     hotspot: [0, 0]
   link:
     hotspot: [0, 0]
+- id: wii
+  name: Wii
+  cursor:
+    hotspot: [8, 2]
+  link:
+    hotspot: [7, 3]
 - id: windows-98
   name: Windows 98
   source: RW Designer
@@ -298,6 +306,16 @@
     hotspot: [10, 10]
   text:
     hotspot: [8, 9]
+- id: windows-98-ginormous
+  name: Windows 98 (Ginormous)
+  source: RW Designer
+  size: 128
+  cursor:
+    hotspot: [25, 5]
+  link:
+    hotspot: [25, 5]
+  text:
+    hotspot: [10, 40]
 - id: zombie-cat
   name: Zombie Cat
   source: RW Designer
