@@ -14,7 +14,7 @@ layout: null
     {% include appearance-redirect.html %}
     {% include geo/cursor-init.html %}
     <link rel="preload" href="{{ 'assets/fonts/SawdustMarionette.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ 'geocities.css' | relative_url }}">
+    <link rel="stylesheet" href="{% include asset.html path="geocities.css" %}">
   </head>
   <body class="splash">
     <h1 class="splash-warning"><span class="bubble-text">ENTER</span></h1>

@@ -3,4 +3,4 @@
   core.js (loaded here) plus one file per effect, which core.js loads when it's needed. See core.js for how they work
   and how to add one. data-base tells it the site's root address, for finding images.
 {%- endcomment -%}
-<script src="{{ 'assets/js/cursor-effects/core.js' | relative_url }}" data-base="{{ '/' | relative_url }}"></script>
+<script src="{% include asset.html path="assets/js/cursor-effects/core.js" %}" data-base="{{ '/' | relative_url }}"></script>

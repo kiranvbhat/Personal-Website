@@ -13,7 +13,7 @@
     {% include geo/cursor-init.html %}
     <!-- Sawdust Marionette: the font for the site name and section titles (.bubble-text), loaded early -->
     <link rel="preload" href="{{ 'assets/fonts/SawdustMarionette.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ 'geocities.css' | relative_url }}">
+    <link rel="stylesheet" href="{% include asset.html path="geocities.css" %}">
   </head>
   <body id="top"{% if page.background_tint %} class="tinted"{% endif %}{% if page.background %} style="background-image: url('{{ page.background | relative_url }}'){% if page.background_size %}; background-size: {{ page.background_size }}{% endif %}{% if page.background_tint and page.background_tint != true %}; --tint-strength: {{ page.background_tint }}{% endif %}"{% endif %}>
     <div id="page">

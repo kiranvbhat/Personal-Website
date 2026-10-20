@@ -30,9 +30,9 @@ noindex: true
   <div id="gb-entries"></div>
   <div class="gb-pager" id="gb-pager-bottom"></div>
 </div>
-<script src="{{ 'assets/js/guestbook-format.js' | relative_url }}"></script>
-<script src="{{ 'assets/js/guestbook.js' | relative_url }}"></script>
-<script src="{{ 'assets/js/guestbook-admin.js' | relative_url }}"></script>
+<script src="{% include asset.html path="assets/js/guestbook-format.js" %}"></script>
+<script src="{% include asset.html path="assets/js/guestbook.js" %}"></script>
+<script src="{% include asset.html path="assets/js/guestbook-admin.js" %}"></script>
 {%- else %}
 <p class="intro">The guestbook isn't set up yet (see guestbook-worker/README.md).</p>
 {%- endif %}

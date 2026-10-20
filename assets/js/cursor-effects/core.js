@@ -27,6 +27,7 @@
 (function () {
   var script = document.currentScript;
   var folder = script.src.replace(/[^/]*$/, "");  // where the effect files are (this file's folder)
+  var version = script.src.split("?")[1];           // this build's version (see _includes/asset.html), for them too
   var base = script.dataset.base || "/";            // the site's root address, for kit.asset
   var root = document.documentElement;
   var effects = {};    // registered effects, by name
@@ -64,7 +65,7 @@
     if (requested[name]) return;
     requested[name] = true;
     var tag = document.createElement("script");
-    tag.src = folder + name + ".js";
+    tag.src = folder + name + ".js" + (version ? "?" + version : "");
     document.head.appendChild(tag);
   }
 

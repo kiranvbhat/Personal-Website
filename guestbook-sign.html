@@ -51,8 +51,8 @@ title: Sign my Guestbook
 
 </div>
 <noscript><p class="intro">Signing the guestbook needs JavaScript turned on, sorry!</p></noscript>
-<script src="{{ 'assets/js/guestbook-format.js' | relative_url }}"></script>
-<script src="{{ 'assets/js/guestbook.js' | relative_url }}"></script>
+<script src="{% include asset.html path="assets/js/guestbook-format.js" %}"></script>
+<script src="{% include asset.html path="assets/js/guestbook.js" %}"></script>
 {%- else %}
 {% include geo/guestbook-closed.html %}
 {%- endif %}

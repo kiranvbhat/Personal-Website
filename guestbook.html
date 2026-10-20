@@ -17,8 +17,8 @@ title: Guestbook
   <div class="gb-pager" id="gb-pager-bottom"></div>
 </div>
 <noscript><p class="intro">The guestbook needs JavaScript turned on, sorry!</p></noscript>
-<script src="{{ 'assets/js/guestbook-format.js' | relative_url }}"></script>
-<script src="{{ 'assets/js/guestbook.js' | relative_url }}"></script>
+<script src="{% include asset.html path="assets/js/guestbook-format.js" %}"></script>
+<script src="{% include asset.html path="assets/js/guestbook.js" %}"></script>
 {%- else %}
 {% include geo/guestbook-closed.html %}
 {%- endif %}
