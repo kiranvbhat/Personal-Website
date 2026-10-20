@@ -1,0 +1,39 @@
+{%- comment -%}
+  Clicking a YouTube thumbnail (.video-poster, from media.html) replaces it with the video player, already playing.
+  The player comes from youtube-nocookie.com, YouTube's privacy-enhanced embed, so nothing from YouTube but the
+  thumbnail image loads until a visitor chooses to play a video.
+  Thumbnails start as the sharp 1280x720 one, but not every video has it (YouTube sends back a 120x90 placeholder),
+  so those switch to the 480x360 one every video has.
+{%- endcomment -%}
+<script>
+  (function () {
+    function fallBack(img) {
+      var small = img.src.replace("/maxresdefault.jpg", "/hqdefault.jpg");
+      if (small !== img.src) img.src = small;
+    }
+    function check(img) { if (img.naturalWidth && img.naturalWidth <= 120) fallBack(img); }
+    // load and error don't bubble, so listen on the way down. Some may have finished before this ran.
+    document.addEventListener("load", function (event) {
+      if (event.target.matches && event.target.matches(".video-poster > img")) check(event.target);
+    }, true);
+    document.addEventListener("error", function (event) {
+      if (event.target.matches && event.target.matches(".video-poster > img")) fallBack(event.target);
+    }, true);
+    document.querySelectorAll(".video-poster > img").forEach(function (img) {
+      if (img.complete) img.naturalWidth ? check(img) : fallBack(img);
+    });
+  })();
+
+  document.addEventListener("click", function (event) {
+    var poster = event.target.closest(".video-poster");
+    if (!poster || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;  // new tab: let it open YouTube
+    event.preventDefault();
+    var player = document.createElement("iframe");
+    player.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(poster.dataset.youtube) + "?autoplay=1";
+    player.title = poster.querySelector(":scope > img").alt;
+    player.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    player.allowFullscreen = true;
+    poster.replaceWith(player);
+    player.focus();
+  });
+</script>

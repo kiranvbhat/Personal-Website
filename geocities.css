@@ -281,7 +281,43 @@ h2 {
 }
 
 .frame-video { max-width: 480px; aspect-ratio: 16 / 9; }
-.frame-bandcamp { max-width: 350px; aspect-ratio: 2 / 3; }
+
+/* Bandcamp's player with small artwork: the album art, title and controls in a row, then the full-width track
+   list. Tall enough to list 6 tracks without a scrollbar (each track is about 33px more). */
+.frame-bandcamp { max-width: 480px; height: 340px; }
+
+/* A YouTube video before it's played: its thumbnail, with the old YouTube logo in the corner on a white tile like
+   the social network tiles (the black "You" would vanish on dark thumbnails). */
+.video-poster {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.video-poster > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* in case it's the smaller 4:3 thumbnail with black bars (see youtube-play.html) */
+}
+
+.video-badge {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    display: block;
+    padding: 2px 5px;
+    background: #fff;
+    border: 2px outset #ccc;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.video-badge img { display: block; height: 20px; }
+
+.video-poster:hover { background: none; }
+.video-poster:hover > img { filter: brightness(1.1); }
+.video-poster:hover .video-badge { background: var(--highlight-bg); transform: scale(1.1); }
 
 /* -------------------Home------------------- */
 .welcome {

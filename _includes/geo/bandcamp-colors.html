@@ -1,0 +1,32 @@
+{%- comment -%}
+  Bandcamp players (.bandcamp-player, from media.html) in light or dark colors to match the site. The colors are part
+  of the player's address, so changing them reloads it, which would stop a song that's playing. The page can't see
+  inside the player, so once a visitor clicks into one it keeps its colors until the next page load.
+{%- endcomment -%}
+<script>
+  (function () {
+    var players = document.querySelectorAll(".bandcamp-player");
+    if (!players.length) return;
+    var DARK = "/bgcol=000000/linkcol=ffff00/", LIGHT = "/bgcol=ffffff/linkcol=c00000/";
+
+    function match() {
+      var light = document.documentElement.dataset.color === "light";
+      players.forEach(function (player) {
+        if (player.dataset.used) return;
+        var src = light ? player.src.replace(DARK, LIGHT) : player.src.replace(LIGHT, DARK);
+        if (src !== player.src) player.src = src;
+      });
+    }
+
+    // Clicking into a player moves focus into it, which takes it away from the page.
+    addEventListener("blur", function () {
+      setTimeout(function () {
+        var active = document.activeElement;
+        if (active && active.classList.contains("bandcamp-player")) active.dataset.used = "true";
+      });
+    });
+
+    new MutationObserver(match).observe(document.documentElement, { attributes: true, attributeFilter: ["data-color"] });
+    match();
+  })();
+</script>

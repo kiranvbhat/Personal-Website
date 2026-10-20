@@ -1,6 +1,9 @@
 {%- comment -%}
   Renders an entry's media. Params: media (a `media:` entry from _data/), title (used for alt text / iframe title).
   An image can have a `background:` color (e.g. white), for see-through logos that vanish on the dark panels.
+  A YouTube video starts out as its thumbnail with the old YouTube logo in the corner (so YouTube's big play button
+  doesn't cover it); clicking it swaps in the player (see youtube-play.html). Without JavaScript it links to YouTube.
+  A Bandcamp player switches to light colors in light mode (see bandcamp-colors.html).
 {%- endcomment -%}
 {%- assign m = include.media -%}
 {%- if m.image -%}
@@ -8,11 +11,14 @@
   {%- if m.background %} style="background: {{ m.background }}"{% endif %}>
 {%- elsif m.youtube -%}
 <div class="entry-frame frame-video">
-  <iframe src="https://www.youtube.com/embed/{{ m.youtube }}" title="{{ include.title | escape }}" allow="accelerometer; gyroscope" allowfullscreen></iframe>
+  <a class="video-poster" href="https://www.youtube.com/watch?v={{ m.youtube }}" data-youtube="{{ m.youtube }}" title="Play {{ include.title | escape }}">
+    <img src="https://i.ytimg.com/vi/{{ m.youtube }}/maxresdefault.jpg" alt="{{ include.title | escape }}" loading="lazy">
+    <span class="video-badge"><img src="{{ 'assets/graphics/logos/YouTube (2005).svg' | relative_url }}" alt=""></span>
+  </a>
 </div>
 {%- elsif m.bandcamp -%}
 <div class="entry-frame frame-bandcamp">
-  <iframe src="https://bandcamp.com/EmbeddedPlayer/album={{ m.bandcamp }}/size=large/bgcol=000000/linkcol=ffff00/transparent=true/" title="{{ include.title | escape }}" seamless></iframe>
+  <iframe class="bandcamp-player" src="https://bandcamp.com/EmbeddedPlayer/album={{ m.bandcamp }}/size=large/bgcol=000000/linkcol=ffff00/artwork=small/transparent=true/" title="{{ include.title | escape }}" seamless></iframe>
 </div>
 {%- elsif m.embed -%}
 <div class="entry-frame frame-video">

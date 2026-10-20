@@ -8,7 +8,6 @@
 
 composition:
   - title: Piano Compositions
-    link: https://kiranvbhat.bandcamp.com/album/compositions
     media:
       bandcamp: 3282432850
     description: A Bandcamp album of a few of my favorite piano compositions.
@@ -24,7 +23,6 @@ composition:
     description: A piece I wrote for a short film titled "Coin Operated".
 
   - title: BREAK MONKEY
-    link: https://ccrma.stanford.edu/~kvbhat/cs476a/hw2/
     media:
       youtube: StXiBjWgxWc
     description: A breakcore style instrumental piece and Suzanne-based audio visualizer.
