@@ -30,7 +30,7 @@ contact:
     url: mailto:kvbhat@alumni.stanford.edu
     icon: assets/graphics/mail/email 137.gif
   - caption: sign my guestbook!
-    url: guestbook
+    url: guestbook-sign
 
 # Sidebar "social networks" box. Each logo is shown on a white tile.
 socials:

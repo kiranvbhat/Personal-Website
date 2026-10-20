@@ -1,0 +1,58 @@
+---
+layout: geocities
+background: assets/background/pattern 600.gif
+title: Sign my Guestbook
+---
+{%- comment -%}
+  The form to sign the guestbook (the entries are on guestbook.html). assets/js/guestbook.js sends it to the
+  guestbook's server, then shows a thank-you with a link to the entries.
+{%- endcomment -%}
+{% include geo/page-title.html %}
+{%- if site.guestbook_api %}
+{% include geo/guestbook-nav.html current="sign" %}
+<div id="guestbook" data-api="{{ site.guestbook_api }}" data-view="{{ 'guestbook' | relative_url }}">
+  <div class="box">
+    <div class="box-title">sign my guestbook</div>
+    {%- comment %} novalidate: guestbook.js checks the required (*) fields itself and says what's missing in words, instead of
+      the browser's pop-ups. {% endcomment %}
+    <form class="guestbook-form" id="guestbook-form" novalidate>
+      <label for="gb-name">Name:</label>
+      <input id="gb-name" name="name" maxlength="40" placeholder="Anonymous" autocomplete="name">
+
+      <label for="gb-homepage">Homepage:</label>
+      <input id="gb-homepage" name="homepage" maxlength="200" placeholder="(optional)" autocomplete="url">
+
+      <label for="gb-message">Message<span class="gb-required">*</span>:</label>
+      <div class="gb-message-field">
+        {%- comment %} guestbook.js adds the formatting buttons here. {% endcomment %}
+        <textarea id="gb-message" name="message" maxlength="2000" rows="5" required placeholder="Say something :)"></textarea>
+      </div>
+
+      {%- comment %} Hidden from people (see .gb-trap); bots fill in every field, which gives them away. {% endcomment %}
+      <div class="gb-trap" aria-hidden="true">
+        <label>Leave this empty: <input name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <div class="gb-robot">
+        <label for="gb-answer">Are you human?<span class="gb-required">*</span> <span id="gb-question">(loading...)</span></label>
+        <input id="gb-answer" name="answer" inputmode="numeric" maxlength="4" autocomplete="off" required>
+      </div>
+
+      {%- comment %} The Preview button shows the message here as it'll look on the guestbook (see guestbook.js). {% endcomment %}
+      <div class="gb-preview" id="gb-preview" hidden></div>
+
+      <div class="gb-submit">
+        <button type="submit">Send</button>
+        <button type="button" id="gb-preview-button" aria-expanded="false" aria-controls="gb-preview">Preview</button>
+        <span class="gb-status" id="gb-status" role="status"></span>
+      </div>
+    </form>
+  </div>
+
+</div>
+<noscript><p class="intro">Signing the guestbook needs JavaScript turned on, sorry!</p></noscript>
+<script src="{{ 'assets/js/guestbook-format.js' | relative_url }}"></script>
+<script src="{{ 'assets/js/guestbook.js' | relative_url }}"></script>
+{%- else %}
+{% include geo/guestbook-closed.html %}
+{%- endif %}

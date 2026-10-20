@@ -1,0 +1,14 @@
+{
+  "name": "kiranvbhat-guestbook",
+  "private": true,
+  "description": "The guestbook's server (a Cloudflare Worker). See README.md.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 migrations apply guestbook --local",
+    "db:remote": "wrangler d1 migrations apply guestbook --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.3"
+  }
+}

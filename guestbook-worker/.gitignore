@@ -1,0 +1,6 @@
+# Installed tools (npm install puts them here)
+node_modules/
+# Secrets for testing locally; never commit this
+.dev.vars
+# Wrangler's local database and cache
+.wrangler/

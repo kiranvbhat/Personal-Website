@@ -3,7 +3,22 @@ layout: geocities
 background: assets/background/pattern 600.gif
 title: Guestbook
 ---
+{%- comment -%}
+  The guestbook's entries, 10 per page; they're signed on guestbook-sign.html. Entries are stored by the guestbook's
+  server (guestbook-worker/, on Cloudflare) at `guestbook_api` in _config.yml; assets/js/guestbook.js fetches and
+  shows them. Until guestbook_api is set, a "coming soon" message shows instead.
+{%- endcomment -%}
 {% include geo/page-title.html %}
-<img class="centered" src="{{ 'assets/graphics/signs/coming soon.gif' | relative_url }}" alt="Coming soon">
-<p class="intro">My guestbook isn't open yet. Check back soon!</p>
-<p class="intro">In the meantime, <a href="mailto:{{ site.data.profile.email }}">email me</a> to say hi.</p>
+{%- if site.guestbook_api %}
+{% include geo/guestbook-nav.html current="view" %}
+<div id="guestbook" data-api="{{ site.guestbook_api }}" data-owner="{{ site.data.profile.name | split: " " | first }}">
+  <div class="gb-pager" id="gb-pager"></div>
+  <div id="gb-entries"></div>
+  <div class="gb-pager" id="gb-pager-bottom"></div>
+</div>
+<noscript><p class="intro">The guestbook needs JavaScript turned on, sorry!</p></noscript>
+<script src="{{ 'assets/js/guestbook-format.js' | relative_url }}"></script>
+<script src="{{ 'assets/js/guestbook.js' | relative_url }}"></script>
+{%- else %}
+{% include geo/guestbook-closed.html %}
+{%- endif %}

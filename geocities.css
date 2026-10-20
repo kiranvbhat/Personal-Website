@@ -21,6 +21,7 @@
     --tile: #111;                /* cursor menu options */
     --tile-hover: #2a2a2a;
     --tile-picked: #332b00;
+    --reply: #66ccff;            /* guestbook replies */
 }
 
 :root[data-color="light"] {
@@ -33,6 +34,7 @@
     --tile: #f4f4f4;
     --tile-hover: #e4e4e4;
     --tile-picked: #fff3b0;
+    --reply: #006699;
 }
 
 html {
@@ -555,48 +557,6 @@ h2 {
     }
 }
 
-/* Paint and lightsaber trails for some cursors (see _includes/geo/cursor-effects.html), over the whole window. */
-.cursor-effects {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 50;
-    pointer-events: none;
-}
-
-/* Explosion where you click (the explosion cursor effect): plays the 27 frames of explosion 5.gif once. The blast
-   starts from its frame's point (96, 166), so the margins put that point on the click. They go in a layer over the
-   page that cursor-effects.html sizes to the page while one is playing. */
-.cursor-effects.cursor-explosions {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-}
-
-.cursor-explosion {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    margin: -166px 0 0 -96px;
-    background: url("assets/graphics/misc/explosion%205%20frames.png") 0 0 / 5400px 200px;
-    animation: explode 2.7s steps(27) forwards;
-}
-
-@keyframes explode { to { background-position: -5400px 0; } }
-
-/* The paint canvas sits in the page instead, so drawings scroll with it. cursor-effects.html sets its size. */
-.cursor-effects.cursor-paint {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-}
-
 /* No cursor on touch screens, so no point offering the setting. */
 @media (hover: none), (pointer: coarse) {
     .cursor-setting { display: none; }
@@ -714,6 +674,212 @@ h2 {
 .cursor-option:hover .cursor-pic-link,
 .cursor-option:focus-visible .cursor-pic-link { display: block; }
 
+/* -------------------Guestbook------------------- */
+/* The sign form (and the admin login): labels on the left, fields on the right. See guestbook-sign.html. */
+.guestbook-form {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 10px;
+    align-items: center;
+    padding: 8px 10px;
+}
+
+.guestbook-form label small { color: var(--muted); }
+
+.guestbook-form input,
+.guestbook-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px 4px;
+    font: 13px Verdana, Tahoma, Geneva, sans-serif;
+    color: #000;
+    background: #fff;
+    border: 2px inset #ccc;
+}
+
+.guestbook-form textarea { resize: vertical; }
+
+.guestbook-form button,
+.gb-signed-in button,
+.gb-reply-editor button,
+.gb-admin-button {
+    font: bold 12px Verdana, Tahoma, Geneva, sans-serif;
+    cursor: pointer;
+}
+
+/* The message box, with the formatting buttons above it (from guestbook-format.js). */
+.gb-message-field { min-width: 0; }
+
+.gb-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 3px;
+}
+
+.gb-tool {
+    min-width: 24px;
+    height: 22px;
+    padding: 0 5px;
+    font: 12px Verdana, Tahoma, Geneva, sans-serif;
+    cursor: pointer;
+}
+
+.gb-tool b { color: inherit; }  /* not the yellow of bold text */
+
+/* The font and smiley panels that open under the toolbar. */
+.gb-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    flex-basis: 100%;
+    padding: 3px;
+    background: var(--tile);
+    border: 1px solid var(--accent);
+}
+
+/* Fonts: each name written in its font, in columns. */
+.gb-fonts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 3px;
+}
+
+.gb-panel .gb-font {
+    height: auto;
+    padding: 5px 8px;
+    font-size: 15px;
+    font-weight: normal;  /* as in messages (the form's buttons are bold) */
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #000;
+    background: #fff;
+    border: 1px solid #999;
+}
+
+.gb-panel .gb-font:hover { background: var(--highlight-bg); }
+
+.gb-emojis .gb-tool { height: auto; padding: 2px; background: none; border: 0; }
+.gb-smiley { vertical-align: middle; }  /* smileys in messages, at their own (small) size */
+.gb-panel[hidden], .gb-reply[hidden] { display: none; }
+
+.gb-reply-editor textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 6px;
+    font: 13px Verdana, Tahoma, Geneva, sans-serif;
+}
+
+/* The robot check gets its own row, with a small answer box after the question. */
+.gb-robot {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+}
+
+.guestbook-form .gb-robot input { width: 5em; }
+
+.gb-submit {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.gb-status { color: var(--heading); font-weight: bold; }
+.gb-required { color: var(--link); }  /* the * on required fields */
+.gb-error { color: var(--link); }
+
+/* The field only bots fill in: off-screen rather than display: none, which some bots know to skip. */
+.gb-trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.guestbook-form[hidden], .gb-signed-in[hidden] { display: none; }
+
+.gb-empty { text-align: center; font-weight: bold; color: var(--heading); }
+
+/* [ Sign Guestbook ] [ View Guestbook ] at the top of both pages (see _includes/geo/guestbook-nav.html). */
+.gb-nav { text-align: center; font-weight: bold; font-size: 14px; }
+
+/* The Preview button's box: the message as it'll look on the guestbook. */
+.gb-preview { grid-column: 1 / -1; }
+.gb-preview[hidden] { display: none; }
+.gb-preview .gb-entry { margin-bottom: 0; }
+.gb-preview-title { margin: 4px 0; font-weight: bold; color: var(--heading); }
+
+/* Replaces the form once it's sent. */
+.gb-thanks {
+    padding: 30px 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--heading);
+}
+
+/* "Page 1 of 3 (24 messages)" on the left, page numbers on the right, above and below the entries. */
+.gb-pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px 12px;
+    margin: 6px 0;
+    font-size: 12px;
+}
+
+.gb-page-info { color: var(--muted); }
+.gb-page-links { display: flex; gap: 6px; align-items: center; }
+.gb-page-current { color: var(--heading); }
+
+.gb-page {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--link);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.gb-page:hover { color: #000; background: var(--highlight-bg); }
+
+.gb-entry .box-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+}
+
+.gb-date { margin-left: auto; font-weight: normal; font-size: 12px; }
+.gb-admin-button { font-size: 11px; }
+
+/* My reply under a message: set off in its own color. */
+.gb-reply {
+    margin-top: 8px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--reply);
+    background: var(--tile);
+    color: var(--reply);
+}
+
+.gb-reply-title { margin: 0 0 4px; font-size: 12px; font-style: italic; }
+
+.gb-message {
+    white-space: pre-wrap;      /* keep the line breaks people typed */
+    overflow-wrap: anywhere;    /* a long unbroken word or link can't stretch the page */
+}
+
 /* -------------------Mobile bar------------------- */
 /* Small screens only: buttons that open the sidebar boxes (see sidebar.html). */
 .mobile-bar { display: none; }
@@ -750,4 +916,5 @@ h2 {
     .entry-thumb { float: none; display: block; width: 100%; max-width: 320px; margin: 0 auto 10px; }
     .side-thumb .entry-thumb { float: left; width: 35%; max-width: 130px; margin: 0 10px 4px 0; }
     .splash-warning { padding: 0 10px; font-size: 28px; }
+    .guestbook-form { grid-template-columns: 1fr; }
 }

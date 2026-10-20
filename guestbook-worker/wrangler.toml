@@ -1,0 +1,15 @@
+# Cloudflare settings for the guestbook's server (see README.md). Secrets (the admin password and SECRET) are not
+# in here; they're stored in Cloudflare with `npx wrangler secret put`, and in .dev.vars for testing locally.
+name = "kiranvbhat-guestbook"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+# Web pages allowed to use the guestbook (the first one is the default).
+ALLOWED_ORIGINS = "https://kiranvbhat.com,https://www.kiranvbhat.com,http://localhost:4000,http://127.0.0.1:4000"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "guestbook"
+# Filled in after creating the database (README.md, step 1).
+database_id = "f6ff6e0c-ba99-4fa1-88d1-2accf0f7d34c"

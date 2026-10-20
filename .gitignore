@@ -11,3 +11,6 @@ Gemfile.lock
 
 # Python cache (from running _scripts/)
 __pycache__/
+
+# Local-only Jekyll settings (e.g. pointing the guestbook at a test server; see guestbook-worker/README.md)
+_config.local.yml

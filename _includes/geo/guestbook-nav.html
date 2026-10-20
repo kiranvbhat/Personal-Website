@@ -1,0 +1,9 @@
+{%- comment -%}
+  The links between the guestbook's two pages, at the top of each: [ Sign Guestbook ] [ View Guestbook ].
+  Params: current ("sign" or "view"), which is shown in bold instead of as a link.
+{%- endcomment -%}
+<p class="gb-nav">
+  [ {% if include.current == "sign" %}<b>Sign Guestbook</b>{% else %}<a href="{{ 'guestbook-sign' | relative_url }}">Sign Guestbook</a>{% endif %} ]
+  &nbsp;
+  [ {% if include.current == "view" %}<b>View Guestbook</b>{% else %}<a href="{{ 'guestbook' | relative_url }}">View Guestbook</a>{% endif %} ]
+</p>

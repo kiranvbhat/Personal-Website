@@ -1,0 +1,38 @@
+---
+layout: geocities
+background: assets/background/pattern 600.gif
+title: Guestbook Admin
+noindex: true
+---
+{%- comment -%}
+  Not linked anywhere. Log in with the guestbook's admin password (stored on Cloudflare; see guestbook-worker/README.md)
+  to reply to and delete entries. See assets/js/guestbook-admin.js.
+{%- endcomment -%}
+{% include geo/page-title.html %}
+{%- if site.guestbook_api %}
+<div class="box">
+  <div class="box-title">admin</div>
+  <form class="guestbook-form" id="gb-login" novalidate>
+    <label for="gb-password">Password<span class="gb-required">*</span>:</label>
+    <input id="gb-password" name="password" type="password" required autocomplete="current-password">
+    <div class="gb-submit">
+      <button type="submit">Log in</button>
+      <span class="gb-status gb-error" id="gb-login-status" role="status"></span>
+    </div>
+  </form>
+  <p class="entry-body gb-signed-in" id="gb-signed-in" hidden>
+    Logged in. Each entry has reply and delete buttons. <button type="button" id="gb-log-out">Log out</button>
+  </p>
+</div>
+
+<div id="guestbook" data-api="{{ site.guestbook_api }}" data-owner="{{ site.data.profile.name | split: " " | first }}">
+  <div class="gb-pager" id="gb-pager"></div>
+  <div id="gb-entries"></div>
+  <div class="gb-pager" id="gb-pager-bottom"></div>
+</div>
+<script src="{{ 'assets/js/guestbook-format.js' | relative_url }}"></script>
+<script src="{{ 'assets/js/guestbook.js' | relative_url }}"></script>
+<script src="{{ 'assets/js/guestbook-admin.js' | relative_url }}"></script>
+{%- else %}
+<p class="intro">The guestbook isn't set up yet (see guestbook-worker/README.md).</p>
+{%- endif %}

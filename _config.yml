@@ -5,7 +5,13 @@ title: Kiran Bhat
 # Used for the "last updated" date, which is the build time.
 timezone: America/Los_Angeles
 
+# The guestbook's server (guestbook-worker/, on Cloudflare), e.g. https://kiranvbhat-guestbook.NAME.workers.dev.
+# Leave it empty until the server is set up; the guestbook page shows "coming soon" until then.
+guestbook_api: https://kiranvbhat-guestbook.kiranvbhat.workers.dev
+
 exclude:
+  # The guestbook's server code; it runs on Cloudflare, not as part of the site (see guestbook-worker/README.md).
+  - guestbook-worker
   - README.md
   - LICENSE
   - Gemfile

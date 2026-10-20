@@ -5,8 +5,8 @@
 #   source   where the cursor came from (just for reference; not shown on the site)
 #   size     the cursor's size in pixels (default 32; cursors over 32 can switch to the normal arrow near
 #            the edge of the browser window)
-#   effect   a special effect (see _includes/geo/cursor-effects.html): `paint` (hold the mouse button and drag
-#            to draw), `saber` (a short glowing red trail) or `explosion` (an explosion where you click)
+#   effect   a special effect, named after the cursor it was made for (see assets/js/cursor-effects/):
+#            `paintbrush` (drag to draw), `darth-vader` (a short red trail) or `megumin` (click to explode)
 #   static   put `static: true` under a state to use just the first frame of an animated cursor (animation
 #            can flicker)
 # and reorder entries. The script fills in the rest:
@@ -111,7 +111,7 @@
 - id: darth-vader
   name: Darth Vader
   source: RW Designer
-  effect: saber
+  effect: darth-vader
   cursor:
     hotspot: [0, 0]
     frames: 3
@@ -202,7 +202,7 @@
 - id: megumin
   name: Megumin
   source: Sweezy Cursors
-  effect: explosion
+  effect: megumin
   cursor:
     hotspot: [2, 1]
   link:
@@ -232,7 +232,7 @@
     hotspot: [7, 2]
 - id: paintbrush
   name: Paintbrush
-  effect: paint
+  effect: paintbrush
   cursor:
     hotspot: [0, 0]
     frames: 29
