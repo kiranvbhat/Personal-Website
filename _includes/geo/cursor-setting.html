@@ -1,7 +1,7 @@
 {%- comment -%}
-  Cursor setting for the settings box: a button that opens a window of every cursor in _data/cursors.yml, and a dice
-  button that picks one at random.
-  Each option shows the normal cursor, and the link version on hover. The choice is saved in the browser;
+  Cursor setting for the settings box: a button that opens a window of every cursor in _data/cursors.yml, a dice
+  button that picks one at random, and a left-handed checkbox that mirrors the cursors (see cursor-init.html).
+  Each option shows the normal cursor, and the link version on hover. Cursors with a special effect get a star. The choice is saved in the browser;
   cursor-init.html applies it on each page load. Hidden on touch devices (see .cursor-setting in geocities.css).
   Any link to #cursor-menu also opens the window.
 {%- endcomment -%}
@@ -13,6 +13,7 @@
       <img src="{{ 'assets/graphics/misc/dice 29.gif' | relative_url }}" alt="">
     </button>
   </div>
+  <label class="cursor-hand"><input type="checkbox" id="cursor-left"> left-handed</label>
 </div>
 
 <dialog class="cursor-menu" id="cursor-menu" aria-labelledby="cursor-menu-title">
@@ -20,7 +21,7 @@
     <span id="cursor-menu-title">Pick a cursor!!</span>
     <button type="button" class="window-close" id="cursor-close" aria-label="Close">X</button>
   </div>
-  <p class="cursor-hint">hover over one to see it on a link, then click to pick it</p>
+  <p class="cursor-hint">hover over one to see it on a link, then click to pick it<br>&#9733; = a special effect!</p>
   {%- assign states = "cursor,link" | split: "," %}
   <div class="cursor-grid">
     <button type="button" class="cursor-option" data-cursor="system">
@@ -29,7 +30,7 @@
     </button>
     {%- for cursor in site.data.cursors %}
     {%- capture dir %}assets/cursors/web/{{ cursor.id }}/{% endcapture %}
-    <button type="button" class="cursor-option" data-cursor="{{ cursor.id }}">
+    <button type="button" class="cursor-option{% if cursor.effect %} has-effect{% endif %}" data-cursor="{{ cursor.id }}">
       <span class="cursor-pics">
         {%- for state in states %}
         {%- if cursor[state].frames %}{% capture image %}{{ dir }}{{ state }}-preview.png{% endcapture %}
@@ -38,6 +39,9 @@
         {%- endfor %}
       </span>
       <span class="cursor-name">{{ cursor.name }}</span>
+      {%- if cursor.effect %}
+      <span class="cursor-effect" title="special effect!">&#9733;</span>
+      {%- endif %}
     </button>
     {%- endfor %}
   </div>
@@ -84,6 +88,10 @@
         .filter(function (id) { return id !== "system" && id !== current(); });
       pick(choices[Math.floor(Math.random() * choices.length)]);
     });
+
+    var leftBox = document.getElementById("cursor-left");
+    leftBox.checked = isLeftHanded();
+    leftBox.addEventListener("change", function () { setCursorHand(leftBox.checked); });
 
     openButton.addEventListener("click", function () { menu.showModal(); });
     // Links to #cursor-menu (like the one in the homepage bio) open it too.

@@ -9,8 +9,9 @@ Browsers can't use .ani (animated) cursors and support .cur unevenly, so each st
   assets/cursors/web/<id>/<state>.png           32px cursor (the first frame, if animated)
   assets/cursors/web/<id>/<state>-<n>.png       32px animation frames (animated cursors only)
   assets/cursors/web/<id>/<state>-preview.png   64px animated PNG for the cursor menu (animated cursors only)
-plus a 64px "@2x" copy of each 32px image for sharp cursors on high-resolution screens. A cursor can be made bigger
-with `size:` in _data/cursors.yml (in pixels, instead of 32).
+plus a 64px "@2x" copy of each 32px image for sharp cursors on high-resolution screens, and a mirrored "-left" copy
+of each (like cursor-left.png, cursor-1-left@2x.png) for left-handed mode in the settings box. A cursor can be made
+bigger with `size:` in _data/cursors.yml (in pixels, instead of 32).
 
 New folders are added to the end of _data/cursors.yml, titled from the folder name. Your edits there (`name`,
 `source`, `size`, `effect`, `static`, and the order) are kept when you re-run this; entries whose folder is gone are removed.
@@ -26,7 +27,7 @@ import sys
 from pathlib import Path
 
 import yaml
-from PIL import Image
+from PIL import Image, ImageOps
 
 Resampling = getattr(Image, "Resampling", Image)  # Pillow 9.1+ moved the resampling filters here
 
@@ -167,8 +168,12 @@ def convert(source, out_dir, state, static=False, size=CURSOR_SIZE):
 
     def save(frame, name):
         image, hot_x, hot_y = pick(frame, size)
+        sharp = pick(frame, size * 2)[0]
         image.save(out_dir / f"{name}.png")
-        pick(frame, size * 2)[0].save(out_dir / f"{name}@2x.png")
+        sharp.save(out_dir / f"{name}@2x.png")
+        # Mirrored, for left-handed mode (cursor-init.html mirrors the hotspot to match: x becomes size - 1 - x).
+        ImageOps.mirror(image).save(out_dir / f"{name}-left.png")
+        ImageOps.mirror(sharp).save(out_dir / f"{name}-left@2x.png")
         return [hot_x, hot_y]
 
     entry = {"hotspot": save(frames[0], state)}
