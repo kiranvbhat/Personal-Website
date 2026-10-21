@@ -18,7 +18,7 @@
       {%- for link in site.data.nav %}
       {%- assign link_url = link.url | prepend: "/" %}
       {%- if link_url == current_url %}
-      <li class="current">{{ link.name }}</li>
+      <li class="current" aria-current="page">{{ link.name }}</li>
       {%- else %}
       <li><a href="{{ link.url | relative_url }}">{{ link.name }}</a></li>
       {%- endif %}

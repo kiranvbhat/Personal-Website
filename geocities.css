@@ -11,7 +11,7 @@
 :root {
     --text: #33ff33;
     --heading: #ffff00;
-    --accent: #ff2020;
+    --accent: #e00000;           /* dark enough for the yellow text on it to be easy to read */
     --on-accent: #ffff00;        /* text on red boxes and buttons */
     --link: #ff4040;
     --link-visited: #ff9900;
@@ -903,6 +903,42 @@ h2 {
 .gb-message {
     white-space: pre-wrap;      /* keep the line breaks people typed */
     overflow-wrap: anywhere;    /* a long unbroken word or link can't stretch the page */
+}
+
+/* -------------------Accessibility------------------- */
+/* "Skip to content": the first thing the Tab key reaches, hidden until then. Lets keyboard users jump past the
+   sidebar (see geocities.html). */
+.skip-link {
+    position: absolute;
+    left: 8px;
+    top: -100px;
+    z-index: 20;
+    padding: 4px 10px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: bold;
+}
+.skip-link:focus { top: 8px; }
+.skip-link:visited { color: var(--on-accent); }
+/* Places the keyboard focus gets moved to (by the skip link, the guestbook pager and Send). tabindex="-1" lets them
+   take focus, but they aren't controls, so no outline. */
+main:focus, #gb-entries:focus, .gb-thanks:focus { outline: none; }
+
+/* Text for screen readers only (e.g. what the cursor menu's star means): there for them, invisible on screen. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Visitors who've asked their system for less motion: no smooth scrolling, and the homepage fly sits still (it can
+   still be squashed). The cursor effects check this too (see cursor-effects/core.js). */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .screen-bug { animation: none; }
 }
 
 /* -------------------Mobile bar------------------- */

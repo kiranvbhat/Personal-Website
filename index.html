@@ -16,15 +16,17 @@ layout: null
     <link rel="preload" href="{{ 'assets/fonts/SawdustMarionette.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{% include asset.html path="geocities.css" %}">
   </head>
-  <body class="splash">
-    <h1 class="splash-warning"><span class="bubble-text">ENTER</span></h1>
-    <a class="door" href="{{ 'home' | relative_url }}">
-      {%- if door_file %}
-      <img src="{{ site.data.profile.door_image | relative_url }}" alt="A red door: click to enter">
-      {%- else %}
-      <span class="door-placeholder">[ door image goes here ]<br><small>{{ site.data.profile.door_image }}</small></span>
-      {%- endif %}
-    </a>
+  <body>
+    <main class="splash">
+      <h1 class="splash-warning"><span class="bubble-text">ENTER</span></h1>
+      <a class="door" href="{{ 'home' | relative_url }}">
+        {%- if door_file %}
+        <img src="{{ site.data.profile.door_image | relative_url }}" alt="A red door: click to enter">
+        {%- else %}
+        <span class="door-placeholder">[ door image goes here ]<br><small>{{ site.data.profile.door_image }}</small></span>
+        {%- endif %}
+      </a>
+    </main>
     {% include geo/cursor-effects.html %}
     {% include goatcounter.html %}
   </body>

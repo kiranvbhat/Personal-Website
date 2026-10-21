@@ -13,7 +13,7 @@ title: Guestbook
 {% include geo/guestbook-nav.html current="view" %}
 <div id="guestbook" data-api="{{ site.guestbook_api }}" data-owner="{{ site.data.profile.name | split: " " | first }}">
   <div class="gb-pager" id="gb-pager"></div>
-  <div id="gb-entries"></div>
+  <div id="gb-entries" tabindex="-1"></div>
   <div class="gb-pager" id="gb-pager-bottom"></div>
 </div>
 <noscript><p class="intro">The guestbook needs JavaScript turned on, sorry!</p></noscript>

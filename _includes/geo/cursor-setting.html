@@ -21,7 +21,7 @@
     <span id="cursor-menu-title">Pick a cursor!!</span>
     <button type="button" class="window-close" id="cursor-close" aria-label="Close">X</button>
   </div>
-  <p class="cursor-hint">hover over one to see it on a link, then click to pick it<br>&#9733; = a special effect!</p>
+  <p class="cursor-hint">hover over one to see it on a link, then click to pick it<br><span aria-hidden="true">&#9733; = a special effect!</span></p>
   {%- assign states = "cursor,link" | split: "," %}
   <div class="cursor-grid">
     <button type="button" class="cursor-option" data-cursor="system">
@@ -40,7 +40,7 @@
       </span>
       <span class="cursor-name">{{ cursor.name }}</span>
       {%- if cursor.effect %}
-      <span class="cursor-effect" title="special effect!">&#9733;</span>
+      <span class="cursor-effect" title="special effect!" aria-hidden="true">&#9733;</span><span class="sr-only">(has a special effect)</span>
       {%- endif %}
     </button>
     {%- endfor %}

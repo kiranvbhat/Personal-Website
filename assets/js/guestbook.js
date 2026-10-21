@@ -124,9 +124,18 @@
     function pageLink(label, page, title) {
       var button = element("button", "gb-page", label);
       button.type = "button";
-      if (title) button.title = title;
+      if (title) {
+        button.title = title;
+        button.setAttribute("aria-label", title);  // so screen readers don't read the arrows as "black triangle"
+      } else {
+        button.setAttribute("aria-label", "Page " + page);
+      }
       button.addEventListener("click", function () {
-        load(page).then(function () { if (bottom) list.scrollIntoView(); });
+        // The pager is redrawn, so the clicked button is gone: put the keyboard focus on the new entries instead.
+        load(page).then(function () {
+          if (bottom) list.scrollIntoView();
+          list.focus({ preventScroll: true });
+        });
       });
       links.appendChild(button);
     }
@@ -216,7 +225,9 @@
         var view = element("a", null, "View Guestbook >>");
         view.href = root.dataset.view;
         thanks.appendChild(view);
+        thanks.tabIndex = -1;  // the Send button just vanished, so the keyboard focus moves here
         form.parentNode.appendChild(thanks);
+        thanks.focus();
       }).catch(function (error) {
         status.className = "gb-status gb-error";
         status.textContent = error.message;

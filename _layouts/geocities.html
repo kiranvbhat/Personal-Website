@@ -16,13 +16,14 @@
     <link rel="stylesheet" href="{% include asset.html path="geocities.css" %}">
   </head>
   <body id="top"{% if page.background_tint %} class="tinted"{% endif %}{% if page.background %} style="background-image: url('{{ page.background | relative_url }}'){% if page.background_size %}; background-size: {{ page.background_size }}{% endif %}{% if page.background_tint and page.background_tint != true %}; --tint-strength: {{ page.background_tint }}{% endif %}"{% endif %}>
+    <a class="skip-link" href="#content">skip to content</a>
     <div id="page">
       <header id="banner">
         <a class="site-name bubble-text" href="{{ 'home' | relative_url }}">kiranvbhat.com</a>
       </header>
       <div id="columns">
         {% include geo/sidebar.html %}
-        <main>
+        <main id="content" tabindex="-1">
           {{ content }}
         </main>
       </div>

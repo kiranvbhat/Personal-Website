@@ -27,7 +27,7 @@ noindex: true
 
 <div id="guestbook" data-api="{{ site.guestbook_api }}" data-owner="{{ site.data.profile.name | split: " " | first }}">
   <div class="gb-pager" id="gb-pager"></div>
-  <div id="gb-entries"></div>
+  <div id="gb-entries" tabindex="-1"></div>
   <div class="gb-pager" id="gb-pager-bottom"></div>
 </div>
 <script src="{% include asset.html path="assets/js/guestbook-format.js" %}"></script>
