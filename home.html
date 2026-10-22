@@ -67,15 +67,18 @@ title: Home
 </script>
 {%- endif %}
 
-<!-- A prank: a fly crawling on the screen, on 1 in 4 visits. Fixed in place, so it stays put while you scroll. Click
-     it to squash it. It's animated from a strip of the frames of assets/graphics/animals/bug 69.gif (see .screen-bug in
-     geocities.css) rather than the GIF itself, so the script can tell which frame is showing. -->
+<!-- A prank: a fly crawling on the screen, on 1 in 4 visits, until it's squashed. Fixed in place, so it stays put
+     while you scroll. Click it to squash it (and unlock the fly cursor). It's animated from a strip of the frames of
+     assets/graphics/animals/bug 69.gif (see .screen-bug in geocities.css) rather than the GIF itself, so the script
+     can tell which frame is showing. -->
 <div class="screen-bug" id="screen-bug" aria-hidden="true"></div>
 <script>
   (function () {
     var bug = document.getElementById("screen-bug");
-    // Only shows up on 1 in 4 visits, somewhere random on the screen.
-    if (Math.random() >= 0.25) {
+    // Only shows up on 1 in 4 visits, somewhere random on the screen, and never again once it's been squashed (that
+    // unlocks the fly cursor; see below).
+    var squashed = window.isCursorUnlocked && isCursorUnlocked("fly");
+    if (squashed || Math.random() >= 0.25) {
       bug.remove();
       return;
     }
@@ -110,6 +113,9 @@ title: Home
       document.body.appendChild(mark);
       mark.addEventListener("animationend", function () { mark.remove(); });
       bug.remove();
+      // The reward: the fly cursor (secret until now; see unlockCursor in cursor-setting.html), after a moment to
+      // see the splat.
+      if (window.unlockCursor) setTimeout(function () { unlockCursor("fly"); }, 700);
     });
   })();
 </script>

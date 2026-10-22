@@ -7,6 +7,8 @@
 #            the edge of the browser window)
 #   effect   a special effect, named after the cursor it was made for (see assets/js/cursor-effects/):
 #            `paintbrush` (drag to draw), `darth-vader` (a short red trail) or `megumin` (click to explode)
+#   secret   `secret: true` hides it from the menu until something on the site unlocks it (see
+#            unlockCursor in _includes/geo/cursor-setting.html), like squashing the fly on the homepage
 #   static   put `static: true` under a state to use just the first frame of an animated cursor (animation
 #            can flicker)
 # and reorder entries. The script fills in the rest:
@@ -144,6 +146,13 @@
     delay: 200
   link:
     hotspot: [3, 0]
+- id: fly
+  name: Fly
+  secret: true
+  cursor:
+    hotspot: [8, 11]
+  link:
+    hotspot: [8, 11]
 - id: fnf-boyfriend
   name: Friday Night Funkin' (BF)
   source: Sweezy Cursors
@@ -262,6 +271,14 @@
   cursor:
     hotspot: [0, 0]
   link:
+    hotspot: [0, 0]
+- id: rage-comics
+  name: Rage Comics
+  cursor:
+    hotspot: [0, 0]
+  link:
+    hotspot: [0, 0]
+  text:
     hotspot: [0, 0]
 - id: sakamoto
   name: Sakamoto

@@ -14,7 +14,7 @@ of each (like cursor-left.png, cursor-1-left@2x.png) for left-handed mode in the
 bigger with `size:` in _data/cursors.yml (in pixels, instead of 32).
 
 New folders are added to the end of _data/cursors.yml, titled from the folder name. Your edits there (`name`,
-`source`, `size`, `effect`, `static`, and the order) are kept when you re-run this; entries whose folder is gone are removed.
+`source`, `size`, `effect`, `secret`, `static`, and the order) are kept when you re-run this; entries whose folder is gone are removed.
 
 Usage (needs Pillow and PyYAML):
   python3 _scripts/convert_cursors.py
@@ -218,8 +218,8 @@ def main():
             static = (cursor.get(state) or {}).get("static")
             size = cursor.get("size", CURSOR_SIZE)
             cursor[state] = {**({"static": True} if static else {}), **convert(source, out_dir, state, static, size)}
-        # Keep a tidy key order: id, name, source, size, effect, then the states.
-        order = ["id", "name", "source", "size", "effect", *STATES]
+        # Keep a tidy key order: id, name, source, size, effect, secret, then the states.
+        order = ["id", "name", "source", "size", "effect", "secret", *STATES]
         cursor_items = sorted(cursor.items(), key=lambda item: order.index(item[0]) if item[0] in order else 99)
         cursor.clear()
         cursor.update(cursor_items)
@@ -235,6 +235,8 @@ def main():
         "#            the edge of the browser window)\n"
         "#   effect   a special effect, named after the cursor it was made for (see assets/js/cursor-effects/):\n"
         "#            `paintbrush` (drag to draw), `darth-vader` (a short red trail) or `megumin` (click to explode)\n"
+        "#   secret   `secret: true` hides it from the menu until something on the site unlocks it (see\n"
+        "#            unlockCursor in _includes/geo/cursor-setting.html), like squashing the fly on the homepage\n"
         "#   static   put `static: true` under a state to use just the first frame of an animated cursor (animation\n"
         "#            can flicker)\n"
         "# and reorder entries. The script fills in the rest:\n"

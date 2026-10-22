@@ -4,6 +4,9 @@
   Each option shows the normal cursor, and the link version on hover. Cursors with a special effect get a star. The choice is saved in the browser;
   cursor-init.html applies it on each page load. Hidden on touch devices (see .cursor-setting in geocities.css).
   Any link to #cursor-menu also opens the window.
+  Cursors with `secret: true` stay out of the menu (and the dice) until unlockCursor(id) is called, e.g. by squashing
+  the fly on the homepage. That shows the "you unlocked it" window below; unlocked cursors are saved in the browser,
+  and isCursorUnlocked(id) says whether one has been.
 {%- endcomment -%}
 <div class="setting cursor-setting">
   cursor:
@@ -30,7 +33,8 @@
     </button>
     {%- for cursor in site.data.cursors %}
     {%- capture dir %}assets/cursors/web/{{ cursor.id }}/{% endcapture %}
-    <button type="button" class="cursor-option{% if cursor.effect %} has-effect{% endif %}" data-cursor="{{ cursor.id }}">
+    <button type="button" class="cursor-option{% if cursor.effect %} has-effect{% endif %}" data-cursor="{{ cursor.id }}"
+      {%- if cursor.secret %} data-secret hidden{% endif %}>
       <span class="cursor-pics">
         {%- for state in states %}
         {%- if cursor[state].frames %}{% capture image %}{{ dir }}{{ state }}-preview.png{% endcapture %}
@@ -44,6 +48,22 @@
       {%- endif %}
     </button>
     {%- endfor %}
+  </div>
+</dialog>
+
+{%- comment %} The window that pops up when a secret cursor is unlocked; the script fills in which one. {% endcomment %}
+<dialog class="cursor-menu cursor-unlocked" id="cursor-unlocked" aria-labelledby="cursor-unlocked-title">
+  <div class="window-title">
+    <span id="cursor-unlocked-title">New cursor!!</span>
+    <button type="button" class="window-close" id="cursor-unlocked-close" aria-label="Close">X</button>
+  </div>
+  <div class="cursor-unlocked-body">
+    <img id="cursor-unlocked-pic" src="" alt="" width="64" height="64">
+    <p>You unlocked the <b id="cursor-unlocked-name"></b> cursor!</p>
+    <div class="cursor-unlocked-buttons">
+      <button type="button" id="cursor-unlocked-use">Use it!</button>
+      <button type="button" id="cursor-unlocked-later">Maybe later</button>
+    </div>
   </div>
 </dialog>
 
@@ -82,9 +102,47 @@
       });
     });
 
-    // Dice: any cursor except System and the current one.
+    // Secret cursors: the ones unlocked in this browser join the menu.
+    function unlocked() {
+      try { return JSON.parse(localStorage.getItem("unlocked-cursors")) || []; } catch (e) { return []; }
+    }
+    window.isCursorUnlocked = function (id) { return unlocked().indexOf(id) !== -1; };
+    function optionFor(id) { return menu.querySelector('.cursor-option[data-cursor="' + id + '"]'); }
+    unlocked().forEach(function (id) {
+      var option = optionFor(id);
+      if (option) option.hidden = false;
+    });
+
+    // Unlocks a secret cursor and says so in a pop-up window (on devices with a mouse, the only ones with cursors).
+    // Returns false if it was already unlocked or isn't a secret cursor.
+    var popup = document.getElementById("cursor-unlocked");
+    window.unlockCursor = function (id) {
+      var option = optionFor(id);
+      if (!option || !option.hidden) return false;
+      option.hidden = false;
+      var list = unlocked();
+      list.push(id);
+      try { localStorage.setItem("unlocked-cursors", JSON.stringify(list)); } catch (e) {}
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        document.getElementById("cursor-unlocked-pic").src = option.querySelector(".cursor-pic-cursor").src;
+        document.getElementById("cursor-unlocked-name").textContent = option.querySelector(".cursor-name").textContent;
+        popup.dataset.cursor = id;
+        popup.showModal();
+      }
+      return true;
+    };
+    document.getElementById("cursor-unlocked-use").addEventListener("click", function () {
+      pick(popup.dataset.cursor);
+      popup.close();
+    });
+    ["cursor-unlocked-close", "cursor-unlocked-later"].forEach(function (button) {
+      document.getElementById(button).addEventListener("click", function () { popup.close(); });
+    });
+
+    // Dice: any cursor in the menu except System and the current one.
     document.getElementById("cursor-random").addEventListener("click", function () {
-      var choices = Array.prototype.map.call(options, function (option) { return option.dataset.cursor; })
+      var choices = Array.prototype.filter.call(options, function (option) { return !option.hidden; })
+        .map(function (option) { return option.dataset.cursor; })
         .filter(function (id) { return id !== "system" && id !== current(); });
       pick(choices[Math.floor(Math.random() * choices.length)]);
     });

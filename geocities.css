@@ -643,6 +643,21 @@ h2 {
     text-align: center;
 }
 
+.cursor-option[hidden] { display: none; }  /* secret cursors, until they're unlocked */
+
+/* The "you unlocked a cursor" pop-up (a small cursor menu window). */
+.cursor-unlocked { width: min(300px, 92vw); }
+.cursor-unlocked-body { padding: 12px; text-align: center; }
+.cursor-unlocked-body img {
+    display: block;
+    margin: 0 auto;
+    border: 2px inset #fff;
+    background: #c0c0c0;  /* light, so dark cursors (like the fly) show up */
+}
+.cursor-unlocked-body p { margin: 8px 0 12px; color: var(--heading); font-size: 14px; }
+.cursor-unlocked-buttons { display: flex; justify-content: center; gap: 8px; }
+.left-handed .cursor-unlocked-body img { transform: scaleX(-1); }
+
 /* Scrolls when there are more cursors than fit. */
 .cursor-grid {
     display: grid;
