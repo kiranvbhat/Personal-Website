@@ -1,0 +1,8 @@
+{%- comment -%}
+  Prints the address of this Minimal page's GeoCities version (the opposite of minimal-url.html), e.g.
+  /minimal/experience -> /experience; the Minimal homepage -> /home. Used by the theme switch (appearance-select.html)
+  and to tell search engines which version is the main one (minimal.html).
+{%- endcomment -%}
+{%- assign geocities_path = page.url | remove_first: "/minimal" | remove: ".html" -%}
+{%- if geocities_path == "/" %}{% assign geocities_path = "/home" %}{% endif -%}
+{{- geocities_path | relative_url -}}

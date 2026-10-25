@@ -1,0 +1,14 @@
+{%- comment -%}
+  Opens links to other websites, and to files like PDFs, in a new tab; links between this site's pages stay in the
+  same tab. Done here for every link at once, rather than on each link in the page files. (The Resume link goes
+  through /resume, a page on this site that forwards to the PDF, so it sets target="_blank" itself: see
+  sidebar.html.)
+{%- endcomment -%}
+<script>
+  document.querySelectorAll("a[href]").forEach(function (link) {
+    var web = link.protocol === "http:" || link.protocol === "https:";  // not mailto: links
+    var otherSite = link.host !== location.host;
+    var file = /\.pdf$/i.test(link.pathname);
+    if (web && (otherSite || file)) link.target = "_blank";
+  });
+</script>

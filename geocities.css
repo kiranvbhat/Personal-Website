@@ -236,20 +236,41 @@ h2 {
     cursor: pointer;
 }
 
-.appearance select {
+
+/* The settings box's theme and color settings (appearance-select.html and color-setting.html): a Windows 98 style
+   button for each option, side by side, with the current one pressed in. */
+.toggle {
+    display: flex;
     margin-top: 4px;
-    width: 100%;
-    font-family: inherit;
 }
 
-.color-toggle {
-    display: block;
-    margin-top: 4px;
-    width: 100%;
+.toggle button {
+    flex: 1;
+    min-width: 0;
+    padding: 2px 0;
+    border: 2px outset #fff;
+    background: #c0c0c0;
+    color: #000;
     font-family: inherit;
     font-size: 12px;
     cursor: pointer;
 }
+
+.toggle button[aria-pressed="true"] {
+    border-style: inset;
+    background: #e8e8e8;
+    font-weight: bold;
+    cursor: default;
+}
+
+/* -------------------Previous / next section links (geo/page-nav.html)------------------- */
+.page-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    font-weight: bold;
+}
+.page-nav-next { margin-left: auto; }  /* stays on the right on Education, which has no previous link */
 
 /* -------------------Entries------------------- */
 .entry-body {

@@ -3,6 +3,8 @@
 name: Kiran Bhat
 email: kvbhat@alumni.stanford.edu
 portrait: assets/portraits/Portrait small.jpeg
+# A bigger copy (optional), for high-resolution screens on the Minimal homepage, where the picture is shown larger.
+portrait_large: assets/portraits/Portrait large.jpeg
 resume: assets/resume/Kiran_Bhat_Resume.pdf
 
 # GeoCities appearance
@@ -24,12 +26,21 @@ bio:
   - While you're here, please [sign my guestbook](/guestbook-sign) and check out all the [awesome cursor options](#cursor-menu) ![:cool:](/assets/graphics/emojis/cool.gif){:.smiley}
   - Thanks for stopping by! -Kiran
 
+# The bio on the Minimal appearance's homepage (under its "Hi, I'm ..." heading, in minimal/index.html), written like
+# `bio` above but without the smileys and the cursor menu link (Minimal has no cursor menu). Leave it out to use `bio`.
+minimal_bio:
+  - I just graduated from Stanford, where I studied computer science (AI) and its intersection with music.
+  - In my spare time, I enjoy writing [music](music), watching/[making films](performances), and playing basketball.
+  - Thanks for stopping by :)
+
 # Sidebar "contact" box. `url` is a full link (mailto:, https://) or a page on this site (e.g. guestbook).
 # `icon` is optional; the caption is shown under it, or on its own as a text link.
 contact:
-  - caption: email me!
+  - caption: email
     url: mailto:kvbhat@alumni.stanford.edu
     icon: assets/graphics/mail/email 137.gif
+  - caption: resume
+    url: resume
   - caption: sign my guestbook!
     url: guestbook-sign
 

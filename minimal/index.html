@@ -1,0 +1,16 @@
+---
+layout: minimal
+---
+{%- assign profile = site.data.profile -%}
+<div class="intro">
+  {%- comment %} srcset: the browser picks the large copy only when the screen needs it (high resolution). {% endcomment %}
+  <img class="portrait" src="{{ profile.portrait | relative_url }}" alt="{{ profile.name }}"
+    {%- if profile.portrait_large %} srcset="{{ profile.portrait | relative_url }} 640w, {{ profile.portrait_large | relative_url }} 1280w" sizes="(max-width: 720px) 100vw, 400px"{% endif %}>
+  <div>
+    <h1>Hi, I'm {{ profile.name | split: " " | first }}!</h1>
+    {%- assign bio = profile.minimal_bio | default: profile.bio -%}
+    {%- for paragraph in bio %}
+    {{ paragraph | markdownify }}
+    {%- endfor %}
+  </div>
+</div>

@@ -1,0 +1,15 @@
+{%- comment -%}
+  Links to the previous and next sections at the bottom of each page (see section-neighbors.html for which), as two
+  boxes. The GeoCities version has its own, in geo/page-nav.html.
+{%- endcomment -%}
+{%- include section-neighbors.html prefix="/minimal/" -%}
+{%- if previous_section or next_section %}
+<nav class="page-nav" aria-label="More sections">
+  {%- if previous_section %}
+  <a class="page-nav-previous" href="{{ previous_url }}"><span class="page-nav-label">Previous</span>{{ previous_section.name }}</a>
+  {%- endif %}
+  {%- if next_section %}
+  <a class="page-nav-next" href="{{ next_url }}"><span class="page-nav-label">Next</span>{{ next_section.name }}</a>
+  {%- endif %}
+</nav>
+{%- endif -%}

@@ -1,0 +1,10 @@
+{%- comment -%}
+  A link from _data/credits.yml, for both appearances' Credits pages: either just a web address, or a `url` with an
+  optional `name` (and `note`). Without a name, the address is shortened for showing, like
+  https://www.example.com/page/ -> example.com/page.
+  Params: link. Sets `link_url` and `link_name` for the file that includes this (Jekyll includes share its variables).
+{%- endcomment -%}
+{%- assign link_url = include.link.url | default: include.link -%}
+{%- assign link_name = include.link.name | default: link_url | remove_first: "https://" | remove_first: "http://" | remove_first: "www." | split: "?" | first -%}
+{%- assign last_char = link_name | slice: -1, 1 -%}
+{%- if last_char == "/" %}{% assign name_length = link_name.size | minus: 1 %}{% assign link_name = link_name | slice: 0, name_length %}{% endif -%}

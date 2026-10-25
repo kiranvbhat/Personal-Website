@@ -1,0 +1,24 @@
+{%- comment -%}
+  Pauses GIFs (images with data-pause, from entries.html) on their first frame. Browsers can't pause a GIF, so once
+  one loads, its first frame is drawn onto a canvas and saved as a still PNG, which replaces the GIF. The CSS hides
+  them until then, so they never visibly move (the pause-gifs class, set in minimal.html's <head>, makes sure that only
+  happens when scripts run; without JavaScript the GIFs just play).
+{%- endcomment -%}
+<script>
+  (function () {
+    document.querySelectorAll("img[data-pause]").forEach(function (image) {
+      function pause() {
+        var canvas = document.createElement("canvas");
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        try {
+          canvas.getContext("2d").drawImage(image, 0, 0);
+          image.src = canvas.toDataURL("image/png");
+        } catch (e) {}  // if it can't be copied, the GIF stays as it is
+        image.removeAttribute("data-pause");
+      }
+      if (image.complete && image.naturalWidth) pause();
+      else image.addEventListener("load", pause, { once: true });
+    });
+  })();
+</script>

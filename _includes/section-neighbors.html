@@ -1,0 +1,23 @@
+{%- comment -%}
+  Finds the sections before and after this page, in the menu's order (_data/nav.yml, without Home and items with
+  `menu: false`, like Resume), for both appearances' previous/next links (geo/page-nav.html, minimal/page-nav.html).
+  Params: prefix  the start of the appearance's page addresses: "/" (GeoCities) or "/minimal/"
+  Sets, for the file that includes this (Jekyll includes share its variables):
+    previous_section, next_section  their nav.yml entries, or nil (Education has no previous, Other no next; pages
+                                    that aren't sections, like Home and Credits, get neither)
+    previous_url, next_url          their addresses
+{%- endcomment -%}
+{%- assign sections = site.data.nav | where_exp: "link", "link.menu != false" | where_exp: "link", "link.url != 'home'" -%}
+{%- assign current_url = page.url | remove: ".html" -%}
+{%- assign previous_section = nil -%}
+{%- assign next_section = nil -%}
+{%- for link in sections -%}
+  {%- assign link_url = link.url | prepend: include.prefix -%}
+  {%- if link_url == current_url -%}
+    {%- assign previous_index = forloop.index0 | minus: 1 -%}
+    {%- if previous_index >= 0 %}{% assign previous_section = sections[previous_index] %}{% endif -%}
+    {%- assign next_section = sections[forloop.index] -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign previous_url = previous_section.url | prepend: include.prefix | relative_url -%}
+{%- assign next_url = next_section.url | prepend: include.prefix | relative_url -%}

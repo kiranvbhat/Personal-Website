@@ -24,6 +24,7 @@
   end: 2025-01
   media:
     image: assets/portfolio/coding/doppler.gif
+    still: assets/portfolio/coding/doppler still.png  # its first frame is nearly all black
   description: >-
     A 3D simulation of the Doppler effect with custom-built spatialized audio in ChucK, including spatial sound
     attenuation, stereo panning, Doppler shift, and a basic physics engine.

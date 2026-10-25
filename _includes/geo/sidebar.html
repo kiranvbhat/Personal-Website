@@ -16,6 +16,7 @@
     <div class="box-title">menu</div>
     <ul class="nav">
       {%- for link in site.data.nav %}
+      {%- if link.menu == false %}{% continue %}{% endif %}
       {%- assign link_url = link.url | prepend: "/" %}
       {%- if link_url == current_url %}
       <li class="current" aria-current="page">{{ link.name }}</li>
@@ -50,8 +51,14 @@
 
   <div class="box" id="box-settings">
     <div class="box-title">settings</div>
-    {% include appearance-select.html current="geocities" %}
-    {% include geo/color-setting.html %}
+    <div class="appearance">
+      theme:
+      {% include appearance-select.html current="geocities" %}
+    </div>
+    <div class="appearance">
+      color:
+      {% include color-setting.html default="dark" %}
+    </div>
     {% include geo/cursor-setting.html %}
   </div>
 

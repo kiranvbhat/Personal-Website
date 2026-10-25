@@ -1,0 +1,92 @@
+{%- comment -%}
+  The sidebar, like the GeoCities one (geo/sidebar.html): the site name, then the menu, contact, social and settings
+  sections. On wide screens it sits beside the page and stays in view while scrolling. On small screens, like the
+  GeoCities mobile bar, the sections are hidden behind a row of buttons, one per section: each button opens its
+  section under the row (and closes the others); pressing it again, Escape or a tap outside closes it. (The script
+  marks the page so the CSS only hides the sections when the buttons work; without JavaScript they just show.)
+  Menu: _data/nav.yml (the same list as the GeoCities sidebar), each link going to the page's Minimal version in
+  minimal/. Contact: email and the resume (the PDF, through /resume, in a new tab). Social: profile.yml. Settings:
+  theme (appearance-select.html) and color (color-setting.html).
+{%- endcomment -%}
+{%- assign current_url = page.url | remove: ".html" -%}
+{%- assign profile = site.data.profile -%}
+<aside class="sidebar">
+  <script>document.documentElement.classList.add("has-section-buttons");</script>
+  <div class="sidebar-top">
+    <a class="site-name" href="{{ '/minimal/' | relative_url }}">{{ profile.name }}</a>
+  </div>
+  <div class="section-buttons">
+    <button type="button" aria-expanded="false" aria-controls="sidebar-menu">Menu</button>
+    <button type="button" aria-expanded="false" aria-controls="sidebar-contact-section">Contact</button>
+    <button type="button" aria-expanded="false" aria-controls="sidebar-social-section">Social</button>
+    <button type="button" aria-expanded="false" aria-controls="sidebar-settings-section">Settings</button>
+  </div>
+  <div class="sidebar-inner">
+    <nav class="sidebar-section" id="sidebar-menu" aria-label="Menu">
+      <ul class="sidebar-list">
+        {%- for link in site.data.nav %}
+        {%- if link.menu == false %}{% continue %}{% endif %}
+        {%- if link.url == "home" %}{% assign link_url = "/minimal/" %}{% else %}{% assign link_url = link.url | prepend: "/minimal/" %}{% endif %}
+        <li><a href="{{ link_url | relative_url }}"{% if link_url == current_url %} aria-current="page"{% endif %}>{{ link.name }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    <section class="sidebar-section" id="sidebar-contact-section" aria-labelledby="sidebar-contact">
+      <h2 class="sidebar-heading" id="sidebar-contact">Contact</h2>
+      <ul class="sidebar-list">
+        <li><a href="mailto:{{ profile.email }}">Email</a></li>
+        <li><a href="{{ '/resume' | relative_url }}" target="_blank">Resume</a></li>
+      </ul>
+    </section>
+
+    <section class="sidebar-section" id="sidebar-social-section" aria-labelledby="sidebar-social">
+      <h2 class="sidebar-heading" id="sidebar-social">Social</h2>
+      <ul class="sidebar-list">
+        {%- for social in profile.socials %}
+        <li><a href="{{ social.url }}">{{ social.name }}</a></li>
+        {%- endfor %}
+      </ul>
+    </section>
+
+    <section class="sidebar-section" id="sidebar-settings-section" aria-labelledby="sidebar-settings">
+      <h2 class="sidebar-heading" id="sidebar-settings">Settings</h2>
+      <div class="setting">
+        <span class="setting-label" aria-hidden="true">Theme</span>
+        {% include appearance-select.html current="minimal" %}
+      </div>
+      <div class="setting">
+        <span class="setting-label" aria-hidden="true">Color</span>
+        {% include color-setting.html default="system" %}
+      </div>
+    </section>
+  </div>
+  <script>
+    // Small screens: each button shows its section and hides the others; pressing it again closes it.
+    (function () {
+      var buttons = document.querySelectorAll(".section-buttons button");
+      function show(opened) {
+        buttons.forEach(function (button) {
+          var open = button === opened;
+          button.setAttribute("aria-expanded", open);
+          document.getElementById(button.getAttribute("aria-controls")).classList.toggle("open", open);
+        });
+      }
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          show(button.getAttribute("aria-expanded") === "true" ? null : button);
+        });
+      });
+      document.addEventListener("keydown", function (event) {
+        var opened = document.querySelector('.section-buttons [aria-expanded="true"]');
+        if (event.key === "Escape" && opened) {
+          show(null);
+          opened.focus();
+        }
+      });
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".sidebar")) show(null);
+      });
+    })();
+  </script>
+</aside>

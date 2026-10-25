@@ -1,6 +1,12 @@
+{%- comment -%}
+  Visitors who picked the Minimal appearance are sent to this page's Minimal version before it renders (see
+  minimal-url.html). Pages without one stay as they are.
+{%- endcomment -%}
+{%- capture minimal_url %}{% include minimal-url.html %}{% endcapture -%}
+{%- if minimal_url != "" %}
 <script>
-  // Visitors who picked the modern appearance are sent there before this page renders.
   try {
-    if (localStorage.getItem("appearance") === "modern") location.replace("{{ 'modern' | relative_url }}");
+    if (localStorage.getItem("appearance") === "minimal") location.replace({{ minimal_url | jsonify }} + location.hash);
   } catch (e) {}
 </script>
+{%- endif %}

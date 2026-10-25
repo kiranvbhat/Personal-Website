@@ -1,17 +1,32 @@
 {%- comment -%}
-  Theme dropdown (GeoCities or Modern). Saves the choice in the browser and jumps to that version of the site.
-  Params: current ("geocities" or "modern").
+  Theme switch for both appearances' settings: a button for each appearance (GeoCities, Minimal), side by side, with
+  the current one pressed in (a .toggle, like the color setting in color-setting.html). Clicking another saves the
+  choice in the browser and jumps to this page in that appearance (or the homepage, if this page doesn't have a
+  Minimal version). To add an appearance, add it to `appearances` below.
+  Params: current ("geocities" or "minimal")
 {%- endcomment -%}
-<label class="appearance">
-  theme:
-  <select onchange="setAppearance(this.value)">
-    <option value="geocities"{% if include.current == "geocities" %} selected{% endif %}>GeoCities</option>
-    <option value="modern"{% if include.current == "modern" %} selected{% endif %}>Modern</option>
-  </select>
-</label>
+{%- if include.current == "minimal" -%}
+  {%- capture geocities_url %}{% include geocities-url.html %}{% endcapture -%}
+  {%- assign minimal_url = page.url | remove: ".html" | relative_url -%}
+{%- else -%}
+  {%- assign geocities_url = page.url | remove: ".html" | relative_url -%}
+  {%- capture minimal_url %}{% include minimal-url.html %}{% endcapture -%}
+  {%- if minimal_url == "" %}{% assign minimal_url = "/minimal/" | relative_url %}{% endif -%}
+{%- endif -%}
+{%- assign appearances = "geocities:GeoCities|minimal:Minimal" | split: "|" -%}
+<div class="toggle" role="group" aria-label="Theme">
+  {%- for appearance in appearances %}
+  {%- assign id = appearance | split: ":" | first %}
+  {%- if id == include.current %}
+  <button type="button" aria-pressed="true">{{ appearance | split: ":" | last }}</button>
+  {%- else %}
+  <button type="button" aria-pressed="false" onclick="setAppearance('{{ id }}')">{{ appearance | split: ":" | last }}</button>
+  {%- endif %}
+  {%- endfor %}
+</div>
 <script>
   function setAppearance(value) {
     try { localStorage.setItem("appearance", value); } catch (e) {}
-    location.href = value === "modern" ? "{{ 'modern' | relative_url }}" : "{{ 'home' | relative_url }}";
+    location.href = (value === "minimal" ? {{ minimal_url | jsonify }} : {{ geocities_url | jsonify }}) + location.hash;
   }
 </script>

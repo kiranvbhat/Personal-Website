@@ -1,0 +1,19 @@
+---
+layout: minimal
+title: Credits
+---
+{%- assign credits = site.data.credits -%}
+<p>Websites I looked at for inspiration, and where I found the graphics on this site (the GeoCities version). Thank you!</p>
+
+{%- assign sections = "inspiration|Inspiration,graphics|Graphics" | split: "," -%}
+{%- for section in sections %}
+{%- assign key = section | split: "|" | first -%}
+{%- assign heading = section | split: "|" | last -%}
+<h2>{{ heading }}</h2>
+<ul>
+  {%- for link in credits[key] %}
+  {%- include link-name.html link=link %}
+  <li><a href="{{ link_url }}">{{ link_name }}</a>{% if link.note %}: {{ link.note }}{% endif %}</li>
+  {%- endfor %}
+</ul>
+{%- endfor %}

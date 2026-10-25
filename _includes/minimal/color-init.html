@@ -1,0 +1,8 @@
+<script>
+  // Light or dark colors, if the visitor picked one in settings (color-setting.html; shared with the GeoCities
+  // version). Applied before the page draws. Without a choice, minimal.css follows the device's setting.
+  try {
+    var color = localStorage.getItem("color");
+    if (color === "light" || color === "dark") document.documentElement.dataset.color = color;
+  } catch (e) {}
+</script>

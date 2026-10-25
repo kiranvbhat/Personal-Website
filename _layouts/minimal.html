@@ -1,0 +1,42 @@
+{%- comment -%}
+  The Minimal appearance: text and still pictures (GIFs are paused) beside a sidebar, like the GeoCities layout; no
+  backgrounds or custom fonts or cursors.
+  Its pages are in minimal/, its pieces in _includes/minimal/, and its styles in minimal.css. Light or dark follows
+  the visitor's device setting, unless they pick one in the sidebar's settings. Pages with a `title:` get it as their
+  heading (the homepage writes its own).
+{%- endcomment -%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.data.profile.name }}</title>
+    <link rel="icon" href="{{ 'assets/graphics/characters/TinyWingsBird.png' | relative_url }}">
+    <!-- Tells search engines the GeoCities page is the main version of this one, so they don't count both -->
+    {%- capture geocities_url %}{% include geocities-url.html %}{% endcapture %}
+    <link rel="canonical" href="{{ geocities_url | absolute_url }}">
+    {% include minimal/color-init.html %}
+    <link rel="stylesheet" href="{% include asset.html path="minimal.css" %}">
+    <!-- GIFs are hidden until they're paused (see minimal/pause-gifs.html) -->
+    <script>document.documentElement.classList.add("pause-gifs");</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <div class="layout">
+      {% include minimal/sidebar.html %}
+      <div class="layout-main">
+        <main id="content" tabindex="-1">
+          {%- if page.title %}
+          <h1>{{ page.title }}</h1>
+          {%- endif %}
+          {{ content }}
+          {% include minimal/page-nav.html %}
+        </main>
+        {% include minimal/footer.html %}
+      </div>
+    </div>
+    {% include minimal/pause-gifs.html %}
+    {% include minimal/new-tab-links.html %}
+    {% include goatcounter.html %}
+  </body>
+</html>

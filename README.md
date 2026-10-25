@@ -26,10 +26,15 @@ The "last updated" date is filled in automatically with the date the site was bu
 Entries can have optional `start` and `end` dates written as `YYYY-MM` (use `end: present` for ongoing things). Experience, Research, Coding and Performances are sorted newest first by those dates; Music and Other keep the order written in their files.
 
 ## Design
-The site has two appearances, picked with the theme dropdown in the sidebar (the choice is saved in the visitor's browser):
+The site has two appearances, picked with the theme setting in the sidebar (the choice is saved in the visitor's browser):
 
 - **GeoCities** (default): `index.html` (splash page), `home.html` and the other page templates, `_layouts/geocities.html`, `_includes/geo/` and `geocities.css`.
-- **Modern**: `modern.html`, currently a placeholder.
+- **Minimal**: easy-to-read text with still pictures, and no backgrounds or custom fonts. GIFs are paused on their first frame; to show a different picture there instead (like a plain logo), add a `still:` image under the entry's `media:` (see `_data/education.yml`). Its pages are in `minimal/` (each named like its GeoCities page), with `_layouts/minimal.html`, `_includes/minimal/` and `minimal.css`. Visitors who pick it are sent from a GeoCities page to its Minimal version, if it has one (see `_includes/minimal-url.html`); pages without one, like the guestbook, stay GeoCities. To give a page a Minimal version, add a file with the same name to `minimal/`; its `title:` becomes its heading. Minimal pages tell search engines that their GeoCities page is the main version, so the two don't count as duplicates.
+
+Both use the same `_data/` files, and share some pieces in `_includes/`:
+- `appearance-select.html` and `color-setting.html`: the sidebar's theme and color settings. The color choice is shared: picking light in one appearance makes the other light too (Minimal follows the device's light or dark mode until one is picked; GeoCities starts dark).
+- `section-neighbors.html`: the previous/next section links at the bottom of each section page, in the menu's order (`_data/nav.yml`).
+- `dates.html`, `sort-items.html` and `link-name.html`: dates, newest-first sorting, and the Credits pages' link names.
 
 Images live in `assets/`. Each page picks its tiling background with `background:` in its front matter (the block at the top of the page file), optionally with `background_size:` and a dark-mode tint, `background_tint:` (`true`, or a strength like `0.3`). Any `.gif` in `assets/graphics/ads/` is added to the rotation of fake banner ads automatically.
 

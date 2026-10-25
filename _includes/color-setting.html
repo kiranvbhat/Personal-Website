@@ -1,0 +1,39 @@
+{%- comment -%}
+  Color setting, for both appearances' settings: Dark and Light buttons, with the current one pressed in (a .toggle,
+  like the theme setting in appearance-select.html). The choice is saved in the browser, shared by both appearances,
+  and put on <html> as data-color="dark" or "light"; geo/color-init.html and minimal/color-init.html apply it on each
+  page load.
+  Params: default  the colors before a visitor picks: "dark" (GeoCities) or "system" (Minimal: the device's setting)
+{%- endcomment -%}
+<div class="toggle" role="group" aria-label="Color" id="color-toggle">
+  <button type="button" data-color="dark">Dark</button>
+  <button type="button" data-color="light">Light</button>
+</div>
+<script>
+  (function () {
+    var buttons = document.querySelectorAll("#color-toggle button"), root = document.documentElement;
+    var system = window.matchMedia && matchMedia("(prefers-color-scheme: dark)");
+    var followSystem = {{ include.default | default: "dark" | jsonify }} === "system";
+
+    function current() {
+      if (root.dataset.color) return root.dataset.color;
+      if (followSystem && system) return system.matches ? "dark" : "light";
+      return "dark";
+    }
+    function show() {
+      buttons.forEach(function (button) {
+        button.setAttribute("aria-pressed", button.dataset.color === current());
+      });
+    }
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        root.dataset.color = button.dataset.color;
+        try { localStorage.setItem("color", button.dataset.color); } catch (e) {}
+        show();
+      });
+    });
+    // Until a color is picked, the device's setting can change (like at sunset): keep the pressed button in step.
+    if (followSystem && system && system.addEventListener) system.addEventListener("change", show);
+    show();
+  })();
+</script>

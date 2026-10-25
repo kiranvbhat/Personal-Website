@@ -1,0 +1,9 @@
+{%- comment -%}
+  Prints the address of this page's Minimal version: the page with the same name in minimal/ (e.g. /experience ->
+  /minimal/experience). The splash page and Home both go to the Minimal homepage, minimal/index.html. Prints nothing
+  if there isn't one (like the guestbook), so those pages stay GeoCities.
+{%- endcomment -%}
+{%- assign minimal_path = page.url | prepend: "/minimal" -%}
+{%- if page.url == "/home.html" %}{% assign minimal_path = "/minimal/" %}{% endif -%}
+{%- assign minimal_page = site.pages | where: "url", minimal_path | first -%}
+{%- if minimal_page %}{{ minimal_page.url | remove: ".html" | relative_url }}{% endif -%}

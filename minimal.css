@@ -1,0 +1,408 @@
+/* Minimal appearance (_layouts/minimal.html): text and still pictures beside a sidebar, in the device's own font.
+   Colors are set in the variables below, each as light-dark(light color, dark color). Which one is used follows the
+   device's light or dark mode, unless the visitor picks one in settings (color-setting.html), which puts
+   data-color="light" or "dark" on <html>. */
+
+:root {
+    color-scheme: light dark;
+    --text: light-dark(#1f1f1f, #e6e6e6);
+    --muted: light-dark(#5f5f5f, #a6a6a6);
+    --link: light-dark(#0b57d0, #8ab4f8);
+    --line: light-dark(#dddddd, #3a3a3a);
+    --surface: light-dark(#f1f1f1, #252525);      /* behind hovered and current sidebar links, and settings toggles */
+    --raised: light-dark(#ffffff, #3a3a3a);       /* the pressed option in a settings toggle */
+    --background: light-dark(#ffffff, #161616);
+}
+
+:root[data-color="light"] { color-scheme: light; }
+:root[data-color="dark"] { color-scheme: dark; }
+
+html {
+    scroll-padding-top: 24px;  /* a little space above the spot that links like #coursework jump to */
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    background: var(--background);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Links are just colored, and underlined when hovered or reached with the keyboard. */
+a { color: var(--link); text-decoration: none; text-underline-offset: 3px; }
+a:hover, a:focus-visible { text-decoration: underline; }
+
+/* Except links inside a sentence or list (like "music" in the bio), which get a faint underline, so they stand out
+   without relying on color (for colorblind visitors; blue next to black text isn't enough on its own). */
+main p a, main li a, .site-footer p a {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+main p a:hover, main li a:hover, .site-footer p a:hover { text-decoration-color: currentColor; }
+
+/* Links that stand on their own don't need it; like other links, they're underlined only on hover. (The hover rule
+   has to be repeated here: this selector is as specific as `a:hover` above and comes later, so it'd win.) */
+.entry-links a { text-decoration: none; }
+.entry-links a:hover, .entry-links a:focus-visible { text-decoration: underline; }
+
+h1, h2, h3 { line-height: 1.25; }
+h1 { font-size: 2rem; margin: 0 0 1rem; }
+h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; }
+h3 { font-size: 1.1rem; margin: 1.75rem 0 0.5rem; }
+
+/* ---- Layout: the sidebar, with the page beside it ---- */
+
+.layout {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 48px;
+    max-width: 68rem;  /* about the GeoCities page's 800px, scaled up for this version's bigger text */
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* The page's width decides how entries are laid out (see the @container rules below), since the sidebar takes up
+   some of the screen. */
+.layout-main { container-type: inline-size; }
+
+main { padding-top: 48px; }
+
+/* ---- Sidebar (_includes/minimal/sidebar.html) ---- */
+
+/* Stays in view while scrolling. If it's taller than the screen, it scrolls on its own. */
+.sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    box-sizing: border-box;
+    max-height: 100vh;
+    max-height: 100dvh;  /* the screen's height without phone browsers' address bars, where supported */
+    overflow-y: auto;
+    /* 10px of room on each side for the links' highlight (see .sidebar-inner), which would otherwise be cut off,
+       since scrolling (overflow) also hides anything sticking out past the edges */
+    margin: 0 -10px;
+    padding: 48px 10px 32px;
+}
+
+.site-name {
+    font-size: 1.25rem;
+    font-weight: 650;
+    color: var(--text);
+    text-decoration: none;
+}
+.site-name:visited { color: var(--text); }
+.site-name:hover { text-decoration: none; }
+
+.sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 20px -10px 0;  /* the links' highlight sticks out a little, so their text lines up with the name */
+}
+
+.sidebar-heading {
+    margin: 0 0 4px;
+    padding: 0 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.sidebar-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95rem;
+}
+
+/* Gray links that get a soft highlight when hovered; the current page keeps it and is bold. */
+.sidebar-list a {
+    display: block;
+    padding: 5px 10px;
+    border-radius: 8px;
+    color: var(--muted);
+    line-height: 1.4;
+    text-decoration: none;
+}
+.sidebar-list a:hover, .sidebar-list a:focus-visible { color: var(--text); background: var(--surface); text-decoration: none; }
+.sidebar-list a[aria-current="page"] { color: var(--text); background: var(--surface); font-weight: 600; }
+
+/* Settings: theme (appearance-select.html) and color (color-setting.html), each a pair of options with the current
+   one raised, like a switch. Each setting's name is above its options (beside them on small screens; see below). */
+.setting {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 4px 0 6px 10px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.toggle {
+    display: flex;
+    padding: 2px;
+    background: var(--surface);
+    border-radius: 999px;
+}
+
+/* The settings' options and the small screens' section buttons (below): gray text on the gray background, with the
+   chosen one raised. */
+.toggle button, .section-buttons button {
+    font: inherit;
+    color: var(--muted);
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+.toggle button:hover, .section-buttons button:hover { color: var(--text); }
+
+.toggle button[aria-pressed="true"], .section-buttons button[aria-expanded="true"] {
+    color: var(--text);
+    background: var(--raised);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
+    font-weight: 600;
+}
+
+.toggle button {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    border-radius: 999px;
+}
+.toggle button[aria-pressed="true"] { cursor: default; }
+
+/* The row of section buttons (small screens only; see below). */
+.section-buttons { display: none; }
+
+/* Small screens: no room beside the page, so the sidebar becomes a bar across the top, with a button for each
+   section (has-section-buttons: see sidebar.html); the open one shows under the bar. When scrolling, the name
+   scrolls away and the buttons stay at the top of the screen. */
+@media (max-width: 900px) {
+    html { scroll-padding-top: 72px; }  /* links like #coursework land below the buttons */
+    .layout { display: block; padding: 0 20px; }
+    main { padding-top: 32px; }
+    .sidebar {
+        top: -44px;  /* the name's row (52px) scrolls away, leaving 8px above the buttons, which stick */
+        z-index: 10;
+        margin: 0 -20px;
+        padding: 0 20px;
+        background: var(--background);
+        border-bottom: 1px solid var(--line);
+    }
+    .sidebar-top { height: 52px; }
+
+    .has-section-buttons .section-buttons {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 10px;
+        padding: 3px;
+        background: var(--surface);
+        border-radius: 10px;
+    }
+    .section-buttons button {
+        flex: 1;
+        min-width: 0;
+        padding: 6px 2px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+    /* A small arrow after each name that flips when its section is open. */
+    .section-buttons button::after {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-left: 6px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: translateY(-3px) rotate(45deg);
+        transition: transform 0.2s ease;
+    }
+    .section-buttons button[aria-expanded="true"]::after { transform: translateY(1px) rotate(225deg); }
+
+    .sidebar-inner { margin-top: 0; gap: 0; }
+    .has-section-buttons .sidebar-section { display: none; }
+    .has-section-buttons .sidebar-section.open {
+        display: block;
+        padding-bottom: 12px;
+        animation: section-in 0.18s ease-out;
+    }
+    .has-section-buttons .sidebar-heading { display: none; }  /* the pressed button already says what it is */
+    .setting { flex-direction: row; align-items: center; justify-content: space-between; }
+}
+
+@keyframes section-in {
+    from { opacity: 0; transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-buttons button::after, .sidebar-section.open { transition: none; animation: none; }
+}
+
+/* ---- Previous and next sections (_includes/minimal/page-nav.html) ---- */
+
+/* Two boxes like the entries: the previous section on the left, the next on the right. */
+.page-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+}
+
+.page-nav a {
+    display: block;
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+}
+.page-nav a:hover, .page-nav a:focus-visible { border-color: var(--muted); text-decoration: none; }
+
+.page-nav-label {
+    display: block;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.page-nav-label::before { content: "← "; }
+.page-nav-next { grid-column: 2; text-align: right; }  /* stays on the right on the first page, with no Previous */
+.page-nav-next .page-nav-label::before { content: none; }
+.page-nav-next .page-nav-label::after { content: " →"; }
+
+/* ---- Footer ---- */
+
+.site-footer {
+    margin-top: 64px;
+    padding: 16px 0 40px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.875rem;
+}
+.site-footer p { margin: 4px 0; }
+
+/* ---- Homepage ---- */
+
+.intro {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+/* High-resolution screens get the 1280px copy (portrait_large in profile.yml), so it stays sharp at this size. */
+.portrait {
+    flex-shrink: 0;
+    width: 400px;
+    border-radius: 10px;
+}
+
+.intro p:first-of-type { margin-top: 0; }
+
+@container (max-width: 760px) {
+    .intro { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .portrait { width: 100%; max-width: 400px; }
+}
+
+.courses {
+    padding-left: 1.25rem;
+}
+
+/* ---- Entries (_includes/minimal/entries.html) ---- */
+
+/* Each entry sits in a box with a thin outline. */
+.entry {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.entry + .entry {
+    margin-top: 1.25rem;
+}
+
+.entry-text > :last-child { margin-bottom: 0; }
+
+.entry h2, .entry h3 { margin-top: 0; margin-bottom: 0.25rem; }
+
+/* Entries with a picture: the picture on the left, the text beside it, lined up on their middles. On phones, the
+   picture goes above. */
+.entry.has-picture {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 28px;
+    align-items: center;
+}
+
+/* Logos and photos shrink to fit inside 240 x 180px without being cropped, centered in their column (so a tall logo
+   has equal space on both sides instead of all on the right). The picture itself shrinks, rather than being fitted
+   inside a fixed-size box, so the rounded corners are on the picture's own corners. */
+.entry-picture {
+    display: block;
+    justify-self: center;
+    max-width: 100%;
+    max-height: 180px;
+    border-radius: 6px;
+}
+
+/* GIFs, until pause-gifs.html has paused them. */
+.pause-gifs img[data-pause] { visibility: hidden; }
+
+/* YouTube thumbnails: cropped to 16:9, which trims the black bars YouTube adds above and below. */
+.video-thumb {
+    justify-self: stretch;  /* the full width of the column */
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+.video-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* A narrow page: the picture goes above the text. */
+@container (max-width: 700px) {
+    .entry { padding: 16px; }
+    .entry.has-picture { grid-template-columns: 1fr; gap: 12px; }
+}
+
+.entry-meta {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.entry p { margin: 0.5rem 0; }
+
+.entry-note {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.entry-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    font-size: 0.95rem;
+}
+
+/* ---- Accessibility ---- */
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 8px;
+    padding: 8px 12px;
+    background: var(--background);
+    border: 1px solid var(--line);
+}
+.skip-link:focus { top: 8px; }
+
+main:focus { outline: none; }

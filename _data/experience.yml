@@ -74,6 +74,7 @@
   link: https://www.osisoft.com/
   media:
     image: assets/portfolio/experience/SnackVision small.gif
+    still: assets/portfolio/experience/SnackVision still.png  # its first frame is a title card
   description: >-
     I led a project to create a real-time, **weight-based inventory management** system using company software. Our
     team constructed weight sensors and wrote **Python** code on a **Raspberry Pi** to collect and upload weight data.

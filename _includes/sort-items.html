@@ -1,0 +1,23 @@
+{%- comment -%}
+  Sorts a list of items from _data/ newest first, by `end` then `start` ("present" counts as newest). Entries without
+  dates go last, keeping their order from the file. Used by both appearances' entries.html.
+  Params: items (the list). Sets `sorted_items` for the file that includes this (Jekyll includes share its variables).
+
+  Liquid can only sort by one field, so build a text key per entry: "end|start|position", sort the keys
+  newest-first, then look each entry back up by its position. YYYY-MM dates sort correctly as text.
+{%- endcomment -%}
+{%- assign sort_keys = "" | split: "" -%}
+{%- for item in include.items -%}
+  {%- assign end_key = item.end | default: item.start | default: "0000-00" | downcase | replace: "present", "9999-99" -%}
+  {%- assign start_key = item.start | default: "0000-00" -%}
+  {%- comment %} Reversed position, so entries with the same dates keep their file order after the reverse below. {% endcomment -%}
+  {%- assign position = 9999 | minus: forloop.index0 | prepend: "000" | slice: -4, 4 -%}
+  {%- capture sort_key %}{{ end_key }}|{{ start_key }}|{{ position }}{% endcapture -%}
+  {%- assign sort_keys = sort_keys | push: sort_key -%}
+{%- endfor -%}
+{%- assign sort_keys = sort_keys | sort | reverse -%}
+{%- assign sorted_items = "" | split: "" -%}
+{%- for sort_key in sort_keys -%}
+  {%- assign index = sort_key | split: "|" | last | plus: 0 | minus: 9999 | abs -%}
+  {%- assign sorted_items = sorted_items | push: include.items[index] -%}
+{%- endfor -%}

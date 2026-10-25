@@ -1,0 +1,81 @@
+{%- comment -%}
+  Renders a list of items from _data/ as plain text entries: a heading, a line with the organization or conference
+  and dates, the description, and links. Entries with `hidden: true` are skipped. From `media:`:
+    image     shown beside the text; GIFs are paused on their first frame (see pause-gifs.html)
+    still     optional: a picture that doesn't move, shown instead of `image` (e.g. a plain logo for a GIF one)
+    height    optional: the picture's biggest height in pixels, instead of 180 (e.g. to shrink a tall logo)
+    youtube   the video's thumbnail (from YouTube), linking to the video, plus a "Watch on YouTube" link
+    bandcamp  a "Listen on Bandcamp" link to `bandcamp_url`, if it's set
+    embed     a link
+  Params:
+    items  the data list
+    style  "experience": role as heading, "organization · dates" under it
+           otherwise: title as heading, "conference · dates" under it (each if any)
+    sort   true: newest first (see sort-items.html). Otherwise the file's order.
+    level  the heading level for each entry (default 2; use 3 under a section's h2)
+{%- endcomment -%}
+{%- assign visible_items = include.items | where_exp: "i", "i.hidden != true" -%}
+{%- if include.sort -%}
+  {%- include sort-items.html items=visible_items -%}
+  {%- assign visible_items = sorted_items -%}
+{%- endif -%}
+{%- assign level = include.level | default: 2 -%}
+{%- assign link_fields = "paper:Read the paper|demo:Watch the demo|poster:See the poster|github:View on GitHub" | split: "|" -%}
+
+{%- for item in visible_items %}
+{%- capture entry_dates %}{% include dates.html start=item.start end=item.end %}{% endcapture -%}
+{%- if include.style == "experience" -%}
+  {%- assign entry_title = item.role -%}
+  {%- assign entry_place = item.organization -%}
+{%- else -%}
+  {%- assign entry_title = item.title -%}
+  {%- assign entry_place = item.conference -%}
+{%- endif -%}
+{%- capture entry_meta %}{{ entry_place }}{% if entry_place and entry_dates != "" %} · {% endif %}{{ entry_dates }}{% endcapture -%}
+{%- assign m = item.media -%}
+{%- assign youtube_url = m.youtube | prepend: "https://www.youtube.com/watch?v=" -%}
+{%- capture entry_links -%}
+  {%- if m.youtube %}<a href="{{ youtube_url }}">Watch on YouTube</a>{% endif -%}
+  {%- if m.bandcamp_url %}<a href="{{ m.bandcamp_url }}">Listen on Bandcamp</a>{% endif -%}
+  {%- if m.embed %}<a href="{{ m.embed }}">View it</a>{% endif -%}
+  {%- for link_field in link_fields -%}
+    {%- assign field = link_field | split: ":" | first -%}
+    {%- assign label = link_field | split: ":" | last -%}
+    {%- assign href = item[field] -%}
+    {%- if href -%}
+      {%- unless href contains "://" %}{% assign href = href | relative_url %}{% endunless %}
+      <a href="{{ href }}">{{ label }}</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign picture = m.still | default: m.image -%}
+{%- assign extension = picture | split: "." | last | downcase %}
+<article class="entry{% if picture or m.youtube %} has-picture{% endif %}">
+  {%- if picture %}
+  <img class="entry-picture" src="{{ picture | relative_url }}" alt="{{ entry_title | escape }}" loading="lazy"
+    {%- if extension == "gif" %} data-pause{% endif %}
+    {%- if m.background or m.height %} style="{% if m.background %}background: {{ m.background }}; {% endif %}{% if m.height %}max-height: {{ m.height }}px{% endif %}"{% endif %}>
+  {%- elsif m.youtube %}
+  {%- comment %} hqdefault is the thumbnail every video has; it has black bars, which the CSS crops off. Hidden from
+    keyboards and screen readers, since the "Watch on YouTube" link below goes to the same place. {% endcomment %}
+  <a class="entry-picture video-thumb" href="{{ youtube_url }}" tabindex="-1" aria-hidden="true">
+    <img src="https://i.ytimg.com/vi/{{ m.youtube }}/hqdefault.jpg" alt="" loading="lazy">
+  </a>
+  {%- endif %}
+  <div class="entry-text">
+    <h{{ level }}>{% if item.link %}<a href="{{ item.link }}">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif %}</h{{ level }}>
+    {%- if entry_meta != "" %}
+    <p class="entry-meta">{{ entry_meta }}</p>
+    {%- endif %}
+    {%- if item.description %}
+    {{ item.description | markdownify | strip }}
+    {%- endif %}
+    {%- if item.note %}
+    <p class="entry-note">{{ item.note }}</p>
+    {%- endif %}
+    {%- if entry_links != "" %}
+    <p class="entry-links">{{ entry_links | strip }}</p>
+    {%- endif %}
+  </div>
+</article>
+{%- endfor %}

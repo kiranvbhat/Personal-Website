@@ -17,11 +17,8 @@ title: Credits
   <div class="box-title">{{ heading }}</div>
   <ul>
     {%- for link in links %}
-    {%- assign url = link.url | default: link -%}
-    {%- assign name = link.name | default: url | remove_first: "https://" | remove_first: "http://" | remove_first: "www." | split: "?" | first -%}
-    {%- assign last_char = name | slice: -1, 1 -%}
-    {%- if last_char == "/" %}{% assign name_length = name.size | minus: 1 %}{% assign name = name | slice: 0, name_length %}{% endif %}
-    <li><a href="{{ url }}" target="_blank">{{ name }}</a>{% if link.note %} - {{ link.note }}{% endif %}</li>
+    {%- include link-name.html link=link %}
+    <li><a href="{{ link_url }}" target="_blank">{{ link_name }}</a>{% if link.note %} - {{ link.note }}{% endif %}</li>
     {%- else %}
     <li>coming soon!</li>
     {%- endfor %}
