@@ -1,0 +1,10 @@
+<!-- The CS198 logo, from https://cs198.stanford.edu/web (its site icon). Copied with the strokes in a dark grey instead
+     of white, a fixed stroke width (the original's `strokeWidth` is ignored by browsers) and a bigger size. On the
+     Minimal site it's recolored to match the text (`recolor: true` in _data/experience.yml). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="114" height="138" viewBox="1.8 0.8 19 23" color="#1f1f1f">
+  <path d="M6.13 2.04 L16.34 2.04 L19.41 5.11 L19.41 19.41 L9.19 19.41 L6.13 16.34 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M9.19 5.11 l5.88 0 l0 8.93 l-5.88 0 l0 -8.93 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M12.13,16.85 L16.34,16.85" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M2.55 16.34 L2.55 12.77 L6.13 12.77 L6.13 14.56 L4.34 14.56 L4.34 16.34 Z" fill="currentColor"/>
+  <path d="M12.13 19.41 l0 3.57 l4.58 0 l0 -1.79 l-2.79 0 l0 -1.78 Z" fill="currentColor"/>
+</svg>

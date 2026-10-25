@@ -14,7 +14,7 @@
     --accent: #e00000;           /* dark enough for the yellow text on it to be easy to read */
     --on-accent: #ffff00;        /* text on red boxes and buttons */
     --link: #ff4040;
-    --link-visited: #ff9900;
+    /* --link-visited: #ff9900; */
     --highlight-bg: #ffff00;     /* behind hovered links */
     --panel: #000;
     --muted: #99cc99;
@@ -28,7 +28,7 @@
     --text: #000080;
     --heading: #c00000;
     --link: #0000ee;
-    --link-visited: #551a8b;
+    /* --link-visited: #551a8b; */
     --panel: #fffdf0;
     --muted: #557755;
     --tile: #f4f4f4;
@@ -66,8 +66,10 @@ body.tinted::before {
 }
 :root[data-color="light"] body.tinted::before { display: none; }
 
+/* Visited links are the same color too (this rule covers them). To give them their own color again, uncomment the
+   rule below and the --link-visited colors at the top. */
 a { color: var(--link); }
-a:visited { color: var(--link-visited); }
+/* a:visited { color: var(--link-visited); } */
 a:hover { color: #000; background: var(--highlight-bg); }
 
 b, strong { color: var(--heading); }
@@ -197,7 +199,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 34px;
+    height: 30px;
     padding: 1px 6px;
     background: #fff;
     border: 2px outset #ccc;

@@ -1,0 +1,5 @@
+<!-- The Stanford ACM logo, from the sidebar of https://www.stanfordacm.org/ (drawn in the page there, not a file).
+     Copied as is, with the space around it trimmed (the viewBox) and a size added. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="172" height="172" viewBox="2.2 3.6 172 172">
+  <path fill="#cc0000" d="m2.66667,4.08333l0,27.22017l116.4,57.7307l-116.4,58.92719l0,27.22018l171.00002,-86.44649l-171.00002,-84.65176z"/>
+</svg>

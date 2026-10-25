@@ -1,11 +1,13 @@
 {%- comment -%}
   The sidebar, like the GeoCities one (geo/sidebar.html): the site name, then the menu, contact, social and settings
   sections. On wide screens it sits beside the page and stays in view while scrolling. On small screens, like the
-  GeoCities mobile bar, the sections are hidden behind a row of buttons, one per section: each button opens its
+  GeoCities mobile bar, the sections are hidden behind a row of buttons, one per section, with the name's initials
+  at its start (linking home): each button opens its
   section under the row (and closes the others); pressing it again, Escape or a tap outside closes it. (The script
   marks the page so the CSS only hides the sections when the buttons work; without JavaScript they just show.)
   Menu: _data/nav.yml (the same list as the GeoCities sidebar), each link going to the page's Minimal version in
-  minimal/. Contact: email and the resume (the PDF, through /resume, in a new tab). Social: profile.yml. Settings:
+  minimal/. Each link can have an emoji or logo before it (sidebar-icon.html): the menu's from `emoji` in nav.yml,
+  the social networks' from `logo` in profile.yml. Contact: email and the resume (the PDF, through /resume, in a new tab). Social: profile.yml. Settings:
   theme (appearance-select.html) and color (color-setting.html).
 {%- endcomment -%}
 {%- assign current_url = page.url | remove: ".html" -%}
@@ -13,7 +15,10 @@
 <aside class="sidebar">
   <script>document.documentElement.classList.add("has-section-buttons");</script>
   <div class="sidebar-top">
-    <a class="site-name" href="{{ '/minimal/' | relative_url }}">{{ profile.name }}</a>
+    {%- comment %} The full name, and its initials (e.g. KB) for small screens, where the name shares the row with the
+      section buttons. Screen readers always read the full name. {% endcomment %}
+    {%- assign name_words = profile.name | split: " " %}
+    <a class="site-name" href="{{ '/minimal/' | relative_url }}"><span class="site-name-full">{{ profile.name }}</span><span class="site-name-initials" aria-hidden="true">{% for word in name_words %}{{ word | slice: 0 }}{% endfor %}</span></a>
   </div>
   <div class="section-buttons">
     <button type="button" aria-expanded="false" aria-controls="sidebar-menu">Menu</button>
@@ -27,7 +32,7 @@
         {%- for link in site.data.nav %}
         {%- if link.menu == false %}{% continue %}{% endif %}
         {%- if link.url == "home" %}{% assign link_url = "/minimal/" %}{% else %}{% assign link_url = link.url | prepend: "/minimal/" %}{% endif %}
-        <li><a href="{{ link_url | relative_url }}"{% if link_url == current_url %} aria-current="page"{% endif %}>{{ link.name }}</a></li>
+        <li><a href="{{ link_url | relative_url }}"{% if link_url == current_url %} aria-current="page"{% endif %}>{% include minimal/sidebar-icon.html emoji=link.emoji image=link.emoji_image %}{{ link.name }}</a></li>
         {%- endfor %}
       </ul>
     </nav>
@@ -35,8 +40,9 @@
     <section class="sidebar-section" id="sidebar-contact-section" aria-labelledby="sidebar-contact">
       <h2 class="sidebar-heading" id="sidebar-contact">Contact</h2>
       <ul class="sidebar-list">
-        <li><a href="mailto:{{ profile.email }}">Email</a></li>
-        <li><a href="{{ '/resume' | relative_url }}" target="_blank">Resume</a></li>
+        {%- assign resume_link = site.data.nav | where: "url", "resume" | first %}
+        <li><a href="mailto:{{ profile.email }}">{% include minimal/sidebar-icon.html emoji="📬" %}Email</a></li>
+        <li><a href="{{ '/resume' | relative_url }}" target="_blank">{% include minimal/sidebar-icon.html emoji=resume_link.emoji image=resume_link.emoji_image %}Resume</a></li>
       </ul>
     </section>
 
@@ -44,7 +50,7 @@
       <h2 class="sidebar-heading" id="sidebar-social">Social</h2>
       <ul class="sidebar-list">
         {%- for social in profile.socials %}
-        <li><a href="{{ social.url }}">{{ social.name }}</a></li>
+        <li><a href="{{ social.url }}">{% include minimal/sidebar-icon.html logo=social.logo %}{{ social.name }}</a></li>
         {%- endfor %}
       </ul>
     </section>
@@ -57,7 +63,7 @@
       </div>
       <div class="setting">
         <span class="setting-label" aria-hidden="true">Color</span>
-        {% include color-setting.html default="system" %}
+        {% include color-setting.html default="system" fade=true %}
       </div>
     </section>
   </div>

@@ -6,8 +6,12 @@
   organization: SoundPatrol
   start: 2024-12
   end: 2026-10
+  link: https://www.soundpatrol.com/press-release
   media:
     image: assets/portfolio/experience/soundpatrol logo black.png  # the original is see-through, and vanished in light mode
+    still: assets/portfolio/experience/soundpatrol logo.png  # Minimal shows the see-through original instead
+    recolor: true  # drawn in the text color, for dark/light mode
+    height: 60
   description: >-
     I prototyped a novel **distortion-free watermarking** method for generative AI music, with **100% detection** in
     high-entropy generations. I aligned **1700+ hours of MIDI-audio data** for fine-tuning a transcription model,
@@ -21,7 +25,9 @@
   end: 2026-06
   link: https://chuck.stanford.edu/
   media:
-    image: assets/portfolio/experience/chuck small.png
+    image: assets/portfolio/experience/chuck_logo_big small.png
+    still: assets/portfolio/experience/chuck_logo.png  # Minimal shows the see-through logo instead
+    height: 120
   description: >-
     I'm developing new features for the **music programming language ChucK**, in collaboration with several PhD
     students at CCRMA and the creator of ChucK, Professor Ge Wang. I helped design SMucK, a system for **simplified
@@ -35,6 +41,8 @@
   link: https://cs198.stanford.edu/cs198/
   media:
     image: assets/portfolio/experience/SectionLeading small.gif
+    still: assets/portfolio/experience/cs198 logo.svg  # Minimal shows this instead
+    recolor: true  # drawn in the text color, for dark/light mode
   description: >-
     I **instructed** moderately sized groups of computer science students in **Python and C++** in the CS106 program.
     I **graded assignments/exams** and provided feedback to students. I **worked closely with professors** and other
@@ -47,6 +55,8 @@
   link: https://www.stanfordacm.org/
   media:
     image: assets/portfolio/experience/ACMLab small.jpg
+    still: assets/portfolio/experience/stanford acm logo.svg  # Minimal shows the club's logo instead
+    height: 90
   description: >-
     I worked with a team to build a **convolutional neural network** using **Python** and **PyTorch** to predict
     average income based on satellite imagery. We achieved the **3rd best validation loss** out of Stanford teams who
@@ -60,6 +70,9 @@
   link: https://www.wati.io/
   media:
     image: assets/portfolio/experience/wati_logo small.JPG
+    still: assets/portfolio/experience/wati_logo_transparent.svg  # Minimal shows the see-through logo instead
+    dark_invert: true  # its black text turns white in dark mode
+    height: 60
   description: >-
     I trained several ML classifiers to **predict if contacts would become customers** of Wati, after setting up
     classes to collect and preprocess a changing dataset of contacts. I achieved 98% training accuracy and **92% test
@@ -74,7 +87,10 @@
   link: https://www.osisoft.com/
   media:
     image: assets/portfolio/experience/SnackVision small.gif
-    still: assets/portfolio/experience/SnackVision still.png  # its first frame is a title card
+    # still: assets/portfolio/experience/SnackVision still.png  # its first frame is a title card
+    still: assets/portfolio/experience/Aveva_logo.svg  # Minimal shows this instead
+    recolor: true  # drawn in the text color, for dark/light mode
+    height: 60
   description: >-
     I led a project to create a real-time, **weight-based inventory management** system using company software. Our
     team constructed weight sensors and wrote **Python** code on a **Raspberry Pi** to collect and upload weight data.
@@ -88,6 +104,9 @@
   link: https://www.osisoft.com/
   media:
     image: assets/portfolio/experience/RetroPiCropped small.gif
+    still: assets/portfolio/experience/Aveva_logo.svg  # Minimal shows this instead
+    recolor: true  # drawn in the text color, for dark/light mode
+    height: 60
   description: >-
     I **modified Python code** of 4 retro video games to receive **real-time data** to influence game mechanics. We
     used a **REST API** to relay data from the company data management system into the retro games. I also wrote a

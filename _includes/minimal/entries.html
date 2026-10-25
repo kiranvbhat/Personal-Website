@@ -4,15 +4,23 @@
     image     shown beside the text; GIFs are paused on their first frame (see pause-gifs.html)
     still     optional: a picture that doesn't move, shown instead of `image` (e.g. a plain logo for a GIF one)
     height    optional: the picture's biggest height in pixels, instead of 180 (e.g. to shrink a tall logo)
+    recolor   optional: true for a one-color logo (e.g. an SVG): it's drawn in the text color instead, so it follows
+              dark/light mode. Its shape comes from the picture's see-through parts.
+    dark_invert  optional: true for a see-through logo with dark parts that would vanish in dark mode: in dark mode,
+              its light and dark are flipped (black turns white), keeping its other colors.
+    background  optional: a color behind the picture (e.g. white for see-through logos with dark artwork). Left out
+              with `recolor` or `dark_invert`, which handle dark mode themselves.
     youtube   the video's thumbnail (from YouTube), linking to the video, plus a "Watch on YouTube" link
     bandcamp  a "Listen on Bandcamp" link to `bandcamp_url`, if it's set
     embed     a link
   Params:
     items  the data list
-    style  "experience": role as heading, "organization · dates" under it
+    style  "experience": role as heading, "organization · dates" under it (`link` goes on the organization)
+           "education": organization (the school) as heading, "role (the degree) · dates" under it
            otherwise: title as heading, "conference · dates" under it (each if any)
     sort   true: newest first (see sort-items.html). Otherwise the file's order.
     level  the heading level for each entry (default 2; use 3 under a section's h2)
+    pictures  false: leave out the pictures and video thumbnails (the "Watch on YouTube" link stays)
 {%- endcomment -%}
 {%- assign visible_items = include.items | where_exp: "i", "i.hidden != true" -%}
 {%- if include.sort -%}
@@ -24,14 +32,20 @@
 
 {%- for item in visible_items %}
 {%- capture entry_dates %}{% include dates.html start=item.start end=item.end %}{% endcapture -%}
+{%- assign title_link = item.link -%}
 {%- if include.style == "experience" -%}
   {%- assign entry_title = item.role -%}
-  {%- assign entry_place = item.organization -%}
+  {%- assign title_link = nil -%}
+  {%- capture entry_place %}{% if item.link %}<a href="{{ item.link }}">{{ item.organization }}</a>{% else %}{{ item.organization }}{% endif %}{% endcapture -%}
+{%- elsif include.style == "education" -%}
+  {%- assign entry_title = item.organization -%}
+  {%- assign entry_place = item.role -%}
 {%- else -%}
   {%- assign entry_title = item.title -%}
   {%- assign entry_place = item.conference -%}
 {%- endif -%}
-{%- capture entry_meta %}{{ entry_place }}{% if entry_place and entry_dates != "" %} · {% endif %}{{ entry_dates }}{% endcapture -%}
+{%- assign entry_place = entry_place | default: "" -%}
+{%- capture entry_meta %}{{ entry_place }}{% if entry_place != "" and entry_dates != "" %} · {% endif %}{{ entry_dates }}{% endcapture -%}
 {%- assign m = item.media -%}
 {%- assign youtube_url = m.youtube | prepend: "https://www.youtube.com/watch?v=" -%}
 {%- capture entry_links -%}
@@ -49,13 +63,21 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign picture = m.still | default: m.image -%}
+{%- assign show_thumb = m.youtube -%}
+{%- if include.pictures == false %}{% assign picture = nil %}{% assign show_thumb = nil %}{% endif -%}
+{%- comment %} `background` is for GeoCities' dark panels; logos this file adapts to dark/light mode don't need it. {% endcomment -%}
+{%- assign picture_background = m.background -%}
+{%- if m.dark_invert %}{% assign picture_background = nil %}{% endif -%}
 {%- assign extension = picture | split: "." | last | downcase %}
-<article class="entry{% if picture or m.youtube %} has-picture{% endif %}">
-  {%- if picture %}
-  <img class="entry-picture" src="{{ picture | relative_url }}" alt="{{ entry_title | escape }}" loading="lazy"
+<article class="entry{% if picture or show_thumb %} has-picture{% endif %}">
+  {%- if picture and m.recolor %}
+  {%- comment %} A box in the text color, cut to the logo's shape (see "recolor" in minimal.css). {% endcomment %}
+  <span class="entry-picture recolor" role="img" aria-label="{{ entry_title | escape }}" style="--logo: url('{{ picture | relative_url }}'){% if m.height %}; height: {{ m.height }}px{% endif %}"></span>
+  {%- elsif picture %}
+  <img class="entry-picture{% if m.dark_invert %} dark-invert{% endif %}" src="{{ picture | relative_url }}" alt="{{ entry_title | escape }}" loading="lazy"
     {%- if extension == "gif" %} data-pause{% endif %}
-    {%- if m.background or m.height %} style="{% if m.background %}background: {{ m.background }}; {% endif %}{% if m.height %}max-height: {{ m.height }}px{% endif %}"{% endif %}>
-  {%- elsif m.youtube %}
+    {%- if picture_background or m.height %} style="{% if picture_background %}background: {{ picture_background }}; {% endif %}{% if m.height %}max-height: {{ m.height }}px{% endif %}"{% endif %}>
+  {%- elsif show_thumb %}
   {%- comment %} hqdefault is the thumbnail every video has; it has black bars, which the CSS crops off. Hidden from
     keyboards and screen readers, since the "Watch on YouTube" link below goes to the same place. {% endcomment %}
   <a class="entry-picture video-thumb" href="{{ youtube_url }}" tabindex="-1" aria-hidden="true">
@@ -63,7 +85,7 @@
   </a>
   {%- endif %}
   <div class="entry-text">
-    <h{{ level }}>{% if item.link %}<a href="{{ item.link }}">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif %}</h{{ level }}>
+    <h{{ level }}>{% if title_link %}<a href="{{ title_link }}">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif %}</h{{ level }}>
     {%- if entry_meta != "" %}
     <p class="entry-meta">{{ entry_meta }}</p>
     {%- endif %}

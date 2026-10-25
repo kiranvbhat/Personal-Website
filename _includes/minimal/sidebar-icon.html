@@ -1,0 +1,14 @@
+{%- comment -%}
+  The emoji or logo before a sidebar link's name, if it has one. Hidden from screen readers, which read the name.
+  Params: emoji  an emoji (e.g. from `emoji` in _data/nav.yml)
+          image  or a small picture, shown instead (e.g. `emoji_image` in nav.yml)
+          logo   or a one-color logo file (e.g. `logo` in profile.yml's socials), drawn in the link's color: a box
+                 filled with that color, cut to the logo's shape (like `recolor` on the entries' pictures)
+{%- endcomment -%}
+{%- if include.logo -%}
+  <span class="sidebar-icon sidebar-logo" aria-hidden="true" style="--logo: url('{{ include.logo | relative_url }}')"></span>
+{%- elsif include.image -%}
+  <img class="sidebar-icon sidebar-image" src="{{ include.image | relative_url }}" alt="">
+{%- elsif include.emoji -%}
+  <span class="sidebar-icon" aria-hidden="true">{{ include.emoji }}</span>
+{%- endif -%}

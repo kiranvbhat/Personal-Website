@@ -1,0 +1,10 @@
+{%- comment -%}
+  A homepage card's emoji (`emoji` in _data/nav.yml, for the `link` being shown), or its picture instead
+  (`emoji_image`), if it has one. Hidden from screen readers, which would otherwise read its name (like "graduation
+  cap") before the section's.
+{%- endcomment -%}
+{%- if link.emoji_image -%}
+  <img class="section-card-emoji" src="{{ link.emoji_image | relative_url }}" alt="">
+{%- elsif link.emoji -%}
+  <span class="section-card-emoji" aria-hidden="true">{{ link.emoji }}</span>
+{%- endif -%}

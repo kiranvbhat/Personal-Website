@@ -1,16 +1,18 @@
 # Sidebar links, in order. `url` is the page name without .html.
 # `gif` is the clickable picture for that page on the homepage. Leave it out to show a placeholder there.
 # `caption` is the text under the gif.
+# `emoji` is shown beside the link in the Minimal sidebar, and on that page's card on the Minimal homepage.
+# `emoji_image` (optional) is a small picture shown there instead of the emoji.
 # `scale` (optional) shows the gif bigger or smaller than the others, e.g. 1.3, without changing the spacing.
 # `menu: false` keeps it out of the sidebar menus (it's still on the homepage), like Resume, which is in the sidebars'
 # contact sections instead (see `contact` in profile.yml, and _includes/minimal/sidebar.html).
 
-- { name: Home, url: home }
-- { name: Education, url: education, gif: assets/portfolio/education/stanford logo.gif, caption: education }
-- { name: Experience, url: experience, gif: assets/graphics/misc/briefcase 1.gif, caption: experience }
-- { name: Research, url: research, gif: assets/graphics/misc/chemistry 4.gif, caption: research }
-- { name: Coding, url: coding, gif: assets/graphics/characters/computer wizard.gif, caption: coding }
-- { name: Performances, url: performances, gif: assets/graphics/characters/magician 1.gif, caption: performances }
-- { name: Music, url: music, gif: assets/graphics/misc/ipod cube 2.gif, caption: music }
-- { name: Other, url: other, gif: assets/graphics/tech/camera 50.gif, caption: other stuff }
-- { name: Resume, url: resume, gif: assets/graphics/misc/resume distort.gif, caption: resume, scale: 1.5, menu: false }
+- { name: Home, url: home, emoji: 🏠 }
+- { name: Education, url: education, emoji: 🎓, gif: assets/portfolio/education/stanford logo.gif, caption: education }
+- { name: Experience, url: experience, emoji: 💼, gif: assets/graphics/misc/briefcase 1.gif, caption: experience }
+- { name: Research, url: research, emoji: 🔬, gif: assets/graphics/misc/chemistry 4.gif, caption: research }
+- { name: Coding, url: coding, emoji: 💻, gif: assets/graphics/characters/computer wizard.gif, caption: coding }
+- { name: Performances, url: performances, emoji: 🎭, gif: assets/graphics/characters/magician 1.gif, caption: performances }
+- { name: Music, url: music, emoji: 🎹, gif: assets/graphics/misc/ipod cube 2.gif, caption: music }
+- { name: Other, url: other, emoji: 📷, emoji_image: assets/graphics/characters/TinyWingsBird small.png, gif: assets/graphics/tech/camera 50.gif, caption: other stuff }
+- { name: Resume, url: resume, emoji: 📄, gif: assets/graphics/misc/resume distort.gif, caption: resume, scale: 1.5, menu: false }

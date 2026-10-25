@@ -2,7 +2,8 @@
   Renders a list of items from _data/ as boxed entries. Entries with `hidden: true` are skipped.
   Params:
     items  the data list
-    style  "experience": role as title, "organization, dates" as subtitle
+    style  "experience": role as title, "organization, dates" as subtitle (`link` goes on the organization)
+           "education": organization (the school) as title, "role (the degree), dates" as subtitle
            otherwise: title as title, "conference, dates" as subtitle (each if any)
     Optional link fields, shown as buttons under the description: paper, demo, poster, github. Each is a web address
     or a file in the site (e.g. assets/portfolio/coding/ghostwriter_paper.pdf).
@@ -20,16 +21,21 @@
 
 {%- for item in visible_items %}
 {%- capture entry_dates %}{% include dates.html start=item.start end=item.end %}{% endcapture -%}
+{%- assign title_link = item.link -%}
 {%- if include.style == "experience" -%}
   {%- assign entry_title = item.role -%}
-  {%- capture entry_subtitle %}{{ item.organization }}{% if entry_dates != "" %}, {{ entry_dates }}{% endif %}{% endcapture -%}
+  {%- assign title_link = nil -%}
+  {%- capture entry_subtitle %}{% if item.link %}<a href="{{ item.link }}" target="_blank">{{ item.organization }}</a>{% else %}{{ item.organization }}{% endif %}{% if entry_dates != "" %}, {{ entry_dates }}{% endif %}{% endcapture -%}
+{%- elsif include.style == "education" -%}
+  {%- assign entry_title = item.organization -%}
+  {%- capture entry_subtitle %}{{ item.role }}{% if item.role and entry_dates != "" %}, {% endif %}{{ entry_dates }}{% endcapture -%}
 {%- else -%}
   {%- assign entry_title = item.title -%}
   {%- capture entry_subtitle %}{{ item.conference }}{% if item.conference and entry_dates != "" %}, {% endif %}{{ entry_dates }}{% endcapture -%}
 {%- endif %}
 <div class="box entry{% if include.side_thumbs %} side-thumb{% endif %}">
   <div class="box-title">
-    {%- if item.link %}<a href="{{ item.link }}" target="_blank">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif -%}
+    {%- if title_link %}<a href="{{ title_link }}" target="_blank">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif -%}
   </div>
   <div class="entry-body">
     {% include geo/media.html media=item.media title=entry_title %}

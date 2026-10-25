@@ -1,6 +1,7 @@
 {%- comment -%}
   Links to the previous and next sections at the bottom of each page (see section-neighbors.html for which), as two
-  boxes. The GeoCities version has its own, in geo/page-nav.html.
+  boxes. The left and right arrow keys follow them too, and up and down move between the entries (arrow-keys.html).
+  The GeoCities version has its own, in geo/page-nav.html.
 {%- endcomment -%}
 {%- include section-neighbors.html prefix="/minimal/" -%}
 {%- if previous_section or next_section %}
@@ -12,4 +13,5 @@
   <a class="page-nav-next" href="{{ next_url }}"><span class="page-nav-label">Next</span>{{ next_section.name }}</a>
   {%- endif %}
 </nav>
+{% include arrow-keys.html entries=true %}
 {%- endif -%}

@@ -1,6 +1,7 @@
 {%- comment -%}
   Links to the previous and next sections at the bottom of each page (see section-neighbors.html for which), as
-  [bracket] links like the ones under entries. The Minimal version has its own, in minimal/page-nav.html.
+  [bracket] links like the ones under entries. The left and right arrow keys follow them too
+  (arrow-keys.html). The Minimal version has its own, in minimal/page-nav.html.
 {%- endcomment -%}
 {%- include section-neighbors.html prefix="/" -%}
 {%- if previous_section or next_section %}
@@ -12,4 +13,5 @@
   <a class="page-nav-next" href="{{ next_url }}">[{{ next_section.name | downcase }} &gt;&gt;]</a>
   {%- endif %}
 </nav>
+{% include arrow-keys.html %}
 {%- endif -%}

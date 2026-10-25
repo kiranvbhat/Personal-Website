@@ -8,10 +8,18 @@
     --text: light-dark(#1f1f1f, #e6e6e6);
     --muted: light-dark(#5f5f5f, #a6a6a6);
     --link: light-dark(#0b57d0, #8ab4f8);
-    --line: light-dark(#dddddd, #3a3a3a);
-    --surface: light-dark(#f1f1f1, #252525);      /* behind hovered and current sidebar links, and settings toggles */
-    --raised: light-dark(#ffffff, #3a3a3a);       /* the pressed option in a settings toggle */
+    --line: light-dark(rgb(0 0 0 / 0.09), rgb(255 255 255 / 0.1));
+    --surface: light-dark(rgb(0 0 0 / 0.045), rgb(255 255 255 / 0.07));  /* behind hovered and current sidebar links,
+                                                                             and settings toggles */
+    --raised: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.14));  /* the pressed option in a toggle */
     --background: light-dark(#ffffff, #161616);
+
+    /* Glass (see "Glass" below): the see-through panels. */
+    --glass: light-dark(rgb(255 255 255 / 0.3), rgb(255 255 255 / 0.02));    /* a panel's see-through background */
+    --sheen: light-dark(rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.04));   /* the shine across its top left */
+    --rim: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.1));       /* the bright top edge of a toggle's chosen
+                                                                                 option */
+    --shadow: light-dark(rgb(30 40 80 / 0.06), rgb(0 0 0 / 0.3));
 }
 
 :root[data-color="light"] { color-scheme: light; }
@@ -28,6 +36,20 @@ body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     font-size: 18px;
     line-height: 1.6;
+}
+
+/* ---- Glass ---- */
+
+/* Panels (entries, the previous/next boxes and the homepage's section cards): see-through, with a faint shine across
+   the top left and a soft shadow, like a piece of glass. */
+.entry, .page-nav a, .section-card {
+    background: linear-gradient(135deg, var(--sheen), transparent 45%), var(--glass);
+    box-shadow: 0 1px 2px var(--shadow), 0 8px 24px var(--shadow);
+}
+
+/* For visitors whose device is set to reduce transparency: solid panels. */
+@media (prefers-reduced-transparency: reduce) {
+    .entry, .page-nav a, .section-card { background: var(--background); }
 }
 
 /* Links are just colored, and underlined when hovered or reached with the keyboard. */
@@ -68,7 +90,39 @@ h3 { font-size: 1.1rem; margin: 1.75rem 0 0.5rem; }
    some of the screen. */
 .layout-main { container-type: inline-size; }
 
+/* On short pages (like the homepage), the footer sits at the bottom of the screen instead of right under the page. */
+@media (min-width: 901px) {
+    .layout-main { display: flex; flex-direction: column; min-height: 100vh; }
+    .layout-main main { flex: 1; }
+}
+
 main { padding-top: 48px; }
+
+/* ---- Opening animation ---- */
+/* When a page opens, its parts (the title, then each entry or section) fade in while rising 10px, one just after
+   another. Only the first five are spaced out; the rest start together, so long pages don't take long to appear.
+   `backwards` holds each part hidden during its wait, and lets go once it has played, so it doesn't interfere with
+   the hover fade (see "Entries" below). Skipped for visitors whose device is set to reduce motion. */
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(10px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+    main > * { animation: rise-in 0.28s ease-out backwards; }
+    main > :nth-child(2) { animation-delay: 0.03s; }
+    main > :nth-child(3) { animation-delay: 0.06s; }
+    main > :nth-child(4) { animation-delay: 0.09s; }
+    main > :nth-child(5) { animation-delay: 0.12s; }
+    main > :nth-child(n+6) { animation-delay: 0.15s; }
+}
+
+/* ---- Switching between dark and light ---- */
+/* Picking Dark or Light in settings cross-fades the whole page from the old colors to the new ones over 0.4s (see
+   "fade" in color-setting.html). */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+}
 
 /* ---- Sidebar (_includes/minimal/sidebar.html) ---- */
 
@@ -94,6 +148,7 @@ main { padding-top: 48px; }
     text-decoration: none;
 }
 .site-name:visited { color: var(--text); }
+.site-name-initials { display: none; }  /* shown instead of the full name on small screens (see below) */
 .site-name:hover { text-decoration: none; }
 
 .sidebar-inner {
@@ -132,6 +187,28 @@ main { padding-top: 48px; }
 .sidebar-list a:hover, .sidebar-list a:focus-visible { color: var(--text); background: var(--surface); text-decoration: none; }
 .sidebar-list a[aria-current="page"] { color: var(--text); background: var(--surface); font-weight: 600; }
 
+/* The emoji or logo before a link's name (sidebar-icon.html), in a column of its own so the names line up. Logos are
+   drawn in the link's color (gray, or darker when hovered), like `recolor` on the entries' pictures. */
+.sidebar-icon {
+    display: inline-block;
+    width: 1.25em;
+    margin-right: 8px;
+    text-align: center;
+    font-size: 0.95em;
+}
+.sidebar-image { width: 1.1em; height: 1.1em; margin-left: 0.075em; margin-right: calc(8px + 0.075em); vertical-align: -0.2em; object-fit: contain; }
+.sidebar-logo {
+    height: 0.95em;
+    vertical-align: -0.1em;
+    background: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+}
+@media (forced-colors: active) {
+    .sidebar-image { width: 1.1em; height: 1.1em; margin-left: 0.075em; margin-right: calc(8px + 0.075em); vertical-align: -0.2em; object-fit: contain; }
+.sidebar-logo { forced-color-adjust: none; background: LinkText; }
+}
+
 /* Settings: theme (appearance-select.html) and color (color-setting.html), each a pair of options with the current
    one raised, like a switch. Each setting's name is above its options (beside them on small screens; see below). */
 .setting {
@@ -162,10 +239,11 @@ main { padding-top: 48px; }
 }
 .toggle button:hover, .section-buttons button:hover { color: var(--text); }
 
+/* 5. The chosen one is a little glass capsule: a bright top edge and a soft shadow. */
 .toggle button[aria-pressed="true"], .section-buttons button[aria-expanded="true"] {
     color: var(--text);
     background: var(--raised);
-    box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
+    box-shadow: inset 0 1px 0 var(--rim), 0 1px 3px var(--shadow), 0 2px 8px var(--shadow);
     font-weight: 600;
 }
 
@@ -187,14 +265,45 @@ main { padding-top: 48px; }
     .layout { display: block; padding: 0 20px; }
     main { padding-top: 32px; }
     .sidebar {
-        top: -44px;  /* the name's row (52px) scrolls away, leaving 8px above the buttons, which stick */
         z-index: 10;
         margin: 0 -20px;
         padding: 0 20px;
-        background: var(--background);
+        /* 6. Frosted glass: the page shows through, blurred, as it scrolls underneath */
+        background: color-mix(in srgb, var(--background) 72%, transparent);
+        -webkit-backdrop-filter: blur(16px) saturate(1.4);
+        backdrop-filter: blur(16px) saturate(1.4);
         border-bottom: 1px solid var(--line);
     }
-    .sidebar-top { height: 52px; }
+    /* The bar doesn't scroll on its own (unlike on wide screens), so it can't be left part-way scrolled, e.g. from
+       before the window was made narrower, which pushed the name up against the top. Only an open section that's
+       taller than the screen lets it scroll, so the section's bottom can still be reached. */
+    .sidebar { overflow-y: visible; }
+    .sidebar:has(.sidebar-section.open) { overflow-y: auto; }
+    .sidebar-top { padding: 14px 0 6px; }  /* without the buttons (no JavaScript): the full name, above the sections */
+
+    /* With the buttons: one row, the name's initials then the buttons, which sticks to the top of the screen. An open
+       section goes on the next row, across the whole width. Both items in the row get the same space below, so the
+       initials line up with the buttons' middle. */
+    .has-section-buttons .sidebar {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        column-gap: 10px;
+        padding-top: 8px;
+    }
+    .has-section-buttons .sidebar-top { padding: 0; margin-bottom: 10px; }
+    .has-section-buttons .sidebar-inner { grid-column: 1 / -1; }
+    .has-section-buttons .site-name { display: block; padding: 4px 2px; font-size: 1.1rem; letter-spacing: 0.02em; }
+    .has-section-buttons .site-name-initials { display: inline; }
+    /* Hidden from view but still read by screen readers (like .skip-link before it's focused). */
+    .has-section-buttons .site-name-full {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
 
     .has-section-buttons .section-buttons {
         display: flex;
@@ -205,8 +314,9 @@ main { padding-top: 48px; }
         border-radius: 10px;
     }
     .section-buttons button {
-        flex: 1;
+        flex: auto;  /* each as wide as its name, sharing out what's left over */
         min-width: 0;
+        white-space: nowrap;
         padding: 6px 2px;
         font-size: 0.9rem;
         border-radius: 8px;
@@ -238,6 +348,18 @@ main { padding-top: 48px; }
 
 @keyframes section-in {
     from { opacity: 0; transform: translateY(-4px); }
+}
+
+/* The smallest phones (like the first iPhone SE): slightly smaller buttons, so the row still fits on one line. */
+@media (max-width: 359px) {
+    .has-section-buttons .section-buttons { gap: 2px; }
+    .section-buttons button { font-size: 0.85rem; }
+    .section-buttons button::after { margin-left: 4px; }
+    .has-section-buttons .sidebar { column-gap: 8px; }
+}
+
+@media (max-width: 900px) and (prefers-reduced-transparency: reduce) {
+    .sidebar { background: var(--background); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -290,25 +412,62 @@ main { padding-top: 48px; }
 
 /* ---- Homepage ---- */
 
+/* The photo beside the text, their tops lined up (with the sidebar's name, too). */
 .intro {
     display: flex;
     gap: 40px;
-    align-items: center;
+    align-items: flex-start;
 }
+.intro h1 { margin-top: 0; }
 
 /* High-resolution screens get the 1280px copy (portrait_large in profile.yml), so it stays sharp at this size. */
 .portrait {
     flex-shrink: 0;
-    width: 400px;
+    width: 320px;
     border-radius: 10px;
 }
 
+/* The line under the heading (minimal_tagline in profile.yml), in the grey of the entries' dates. */
+.intro .tagline {
+    margin: -0.25rem 0 1rem;
+    color: var(--muted);
+}
 .intro p:first-of-type { margin-top: 0; }
 
-@container (max-width: 760px) {
-    .intro { flex-direction: column; align-items: flex-start; gap: 24px; }
+@container (max-width: 680px) {
+    .intro { flex-direction: column; gap: 24px; }
     .portrait { width: 100%; max-width: 400px; }
 }
+
+/* The sections, as a grid of cards under the intro, each with the section's emoji and name. Four to a row (two on
+   narrow screens), with a shorter last row centered (if there's one). They replace the homepage's Next link (hidden below, but the
+   arrow keys still use it). */
+.section-grid {
+    --columns: 4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 48px;
+}
+@container (max-width: 560px) {
+    .section-grid { --columns: 2; }
+}
+.section-card {
+    box-sizing: border-box;
+    width: calc((100% - (var(--columns) - 1) * 12px) / var(--columns));
+    padding: 18px 12px;
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    font-weight: 600;
+    transition: border-color 0.2s ease;
+}
+.section-card-emoji { display: block; margin-bottom: 6px; font-size: 1.75rem; line-height: 1; }
+img.section-card-emoji { width: 1.75rem; height: 1.75rem; margin: 0 auto 6px; object-fit: contain; }
+.section-card:hover, .section-card:focus-visible { border-color: var(--muted); text-decoration: none; }
+main:has(.section-grid) .page-nav { display: none; }
 
 .courses {
     padding-left: 1.25rem;
@@ -325,6 +484,21 @@ main { padding-top: 48px; }
 
 .entry + .entry {
     margin-top: 1.25rem;
+}
+
+/* Hovering over an entry (or reaching one of its links with the keyboard) fades the page's other entries a little and
+   puts them slightly out of focus, to focus on that one. Only with a mouse: touch screens have no hovering. */
+.entry { transition: opacity 0.2s ease, filter 0.2s ease, border-color 0.2s ease; }
+@media (hover: hover) {
+    main:has(.entry:hover, .entry:focus-within) .entry:not(:hover, :focus-within) { opacity: 0.45; filter: blur(0.75px); }
+}
+/* The up and down arrow keys focus an entry (see arrow-keys.html), on any device: the same fade, and a darker
+   outline instead of the browser's focus ring. */
+main:has(.entry:focus) .entry:not(:focus) { opacity: 0.45; filter: blur(0.75px); }
+.entry:focus { outline: none; }
+.entry:focus-visible { border-color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+    .entry { transition: none; }
 }
 
 .entry-text > :last-child { margin-bottom: 0; }
@@ -349,6 +523,28 @@ main { padding-top: 48px; }
     max-width: 100%;
     max-height: 180px;
     border-radius: 6px;
+}
+
+/* One-color logos (`recolor: true`): a box filled with the text color, cut to the logo's shape by using the picture
+   as a mask, so the logo turns light in dark mode and dark in light mode. In Windows' high contrast mode, it uses
+   that mode's text color. */
+.entry-picture.recolor {
+    width: 100%;
+    height: 120px;
+    border-radius: 0;
+    background: var(--text);
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+}
+@media (forced-colors: active) {
+    .entry-picture.recolor { forced-color-adjust: none; background: CanvasText; }
+}
+
+/* See-through logos with dark parts (`dark_invert: true`): in dark mode, invert() flips light and dark (so black text
+   turns white), and hue-rotate() turns the colors, which invert() also flipped, back to roughly their own hues. */
+:root[data-color="dark"] .entry-picture.dark-invert { filter: invert(1) hue-rotate(180deg); }
+@media (prefers-color-scheme: dark) {
+    :root:not([data-color]) .entry-picture.dark-invert { filter: invert(1) hue-rotate(180deg); }
 }
 
 /* GIFs, until pause-gifs.html has paused them. */

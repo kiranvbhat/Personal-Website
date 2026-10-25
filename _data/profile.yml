@@ -26,6 +26,9 @@ bio:
   - While you're here, please [sign my guestbook](/guestbook-sign) and check out all the [awesome cursor options](#cursor-menu) ![:cool:](/assets/graphics/emojis/cool.gif){:.smiley}
   - Thanks for stopping by! -Kiran
 
+# A short line under the Minimal homepage's heading, saying who you are at a glance (optional).
+minimal_tagline: Audio ML Engineer · Stanford CS & Music
+
 # The bio on the Minimal appearance's homepage (under its "Hi, I'm ..." heading, in minimal/index.html), written like
 # `bio` above but without the smileys and the cursor menu link (Minimal has no cursor menu). Leave it out to use `bio`.
 minimal_bio:
@@ -44,20 +47,25 @@ contact:
   - caption: sign my guestbook!
     url: guestbook-sign
 
-# Sidebar "social networks" box. Each logo is shown on a white tile.
+# Sidebar "social networks" box. Each `icon` is shown on a white tile (GeoCities); `logo` (optional) is a one-color
+# logo shown beside the name in the Minimal sidebar, in the text color.
 socials:
   - name: GitHub
     url: https://github.com/kiranvbhat
     icon: assets/graphics/logos/Github (2008).png
+    logo: assets/graphics/logos/simple-icons/github.svg
   - name: LinkedIn
     url: https://www.linkedin.com/in/kiranvbhat/
     icon: assets/graphics/logos/LinkedIn (2003 wide).svg
+    logo: assets/graphics/logos/simple-icons/linkedin.svg
   - name: YouTube
     url: https://www.youtube.com/channel/UClfHxiQZ94nuXDJ6DGyF7BQ
     icon: assets/graphics/logos/YouTube (2005).svg
+    logo: assets/graphics/logos/simple-icons/youtube.svg
   - name: Bandcamp
     url: https://kiranvbhat.bandcamp.com/
     icon: assets/graphics/logos/Bandcamp (2007 wide).png
+    logo: assets/graphics/logos/simple-icons/bandcamp.svg
   # - name: Instagram
   #   url: ""
   #   icon: assets/graphics/logos/Instagram.png

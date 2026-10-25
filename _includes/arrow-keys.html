@@ -1,0 +1,70 @@
+{%- comment -%}
+  Keyboard shortcuts for section pages (page-nav.html in geo/ and minimal/ includes this):
+    left, right  go to the previous and next sections, by following the links at the bottom of the page
+    up, down     only with `entries=true` (Minimal): move between the page's entries (projects, jobs, ...). Each one
+                 is scrolled into view and focused, which minimal.css shows by fading the others, like hovering. Past
+                 the first or last entry, up and down scroll the page as usual. Held down, they move on as fast as
+                 the page can scroll. Without it (GeoCities), up and down just scroll the page.
+  Ignored while typing (e.g. in the guestbook), in anything that uses the arrow keys itself (like a dropdown or a
+  video), and with Shift, Ctrl, Alt or Cmd held, so the browser's own shortcuts still work.
+{%- endcomment -%}
+<script>
+  (function () {
+    var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // The entry to go to from `current` (the focused entry, or none yet) in `direction` (1 down, -1 up).
+    function nextEntry(entries, current, direction) {
+      var index = entries.indexOf(current);
+      if (index !== -1) return entries[index + direction];
+      // None focused yet: down picks the first entry that starts on screen, up the last one that ends on screen.
+      if (direction === 1) return entries.find(function (entry) { return entry.getBoundingClientRect().top >= 0; });
+      return entries.slice().reverse().find(function (entry) { return entry.getBoundingClientRect().bottom <= innerHeight; });
+    }
+
+    // While the page is still scrolling to the last entry. Holding a key down repeats it about 30 times a second,
+    // faster than the page can scroll, so repeats wait for the scroll to finish (or 0.5s, for browsers that don't say
+    // when it has), keeping the page in step with the selection.
+    var scrolling = false, scrollTimer;
+    function scrolled() { scrolling = false; clearTimeout(scrollTimer); }
+    addEventListener("scrollend", scrolled);
+
+    function show(entry) {
+      entry.tabIndex = -1;  // lets it take focus without adding it to the Tab order
+      entry.focus({ preventScroll: true });
+      // Centered on screen, unless it's too tall to fit: then its top goes near the top.
+      var tall = entry.offsetHeight > innerHeight * 0.8;
+      entry.scrollIntoView({ block: tall ? "start" : "center", behavior: calm ? "auto" : "smooth" });
+      scrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(scrolled, 500);
+    }
+
+    addEventListener("keydown", function (event) {
+      if (event.defaultPrevented || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) return;
+      var focused = document.activeElement;
+      if (focused && focused.closest("input, textarea, select, [contenteditable], iframe, video, audio")) return;
+
+      var link = { ArrowLeft: ".page-nav-previous", ArrowRight: ".page-nav-next" }[event.key];
+      if (link) {
+        link = document.querySelector(link);
+        if (link) location.href = link.href;
+        return;
+      }
+
+      var direction = {{ include.entries | default: false | jsonify }} && { ArrowDown: 1, ArrowUp: -1 }[event.key];
+      if (!direction) return;
+      if (event.repeat && scrolling) { event.preventDefault(); return; }  // held down: wait for the page (see above)
+      var entries = Array.prototype.slice.call(document.querySelectorAll("main .entry"));
+      var entry = nextEntry(entries, focused && focused.closest(".entry"), direction);
+      if (!entry) return;  // past the first or last entry: let the page scroll
+      event.preventDefault();
+      show(entry);
+    });
+
+    // Using the mouse again hands the focus back, so a hovered entry and a focused one don't both stand out.
+    addEventListener("mousemove", function () {
+      var focused = document.activeElement;
+      if (focused && focused.classList.contains("entry")) focused.blur();
+    });
+  })();
+</script>

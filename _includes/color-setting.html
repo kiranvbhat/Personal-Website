@@ -4,6 +4,8 @@
   and put on <html> as data-color="dark" or "light"; geo/color-init.html and minimal/color-init.html apply it on each
   page load.
   Params: default  the colors before a visitor picks: "dark" (GeoCities) or "system" (Minimal: the device's setting)
+          fade     true: cross-fade from the old colors to the new ones, instead of switching at once (Minimal). The
+                   fade's length is set in the appearance's CSS (::view-transition-old/new(root)).
 {%- endcomment -%}
 <div class="toggle" role="group" aria-label="Color" id="color-toggle">
   <button type="button" data-color="dark">Dark</button>
@@ -14,6 +16,7 @@
     var buttons = document.querySelectorAll("#color-toggle button"), root = document.documentElement;
     var system = window.matchMedia && matchMedia("(prefers-color-scheme: dark)");
     var followSystem = {{ include.default | default: "dark" | jsonify }} === "system";
+    var fade = {{ include.fade | default: false | jsonify }};
 
     function current() {
       if (root.dataset.color) return root.dataset.color;
@@ -27,9 +30,19 @@
     }
     buttons.forEach(function (button) {
       button.addEventListener("click", function () {
-        root.dataset.color = button.dataset.color;
+        function apply() {
+          root.dataset.color = button.dataset.color;
+          show();
+        }
         try { localStorage.setItem("color", button.dataset.color); } catch (e) {}
-        show();
+        // A view transition takes a picture of the page, applies the change, then fades from the picture to the
+        // new page. Browsers without it, and visitors whose device is set to reduce motion, get the instant switch.
+        var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (fade && document.startViewTransition && !calm && button.dataset.color !== current()) {
+          document.startViewTransition(apply);
+        } else {
+          apply();
+        }
       });
     });
     // Until a color is picked, the device's setting can change (like at sunset): keep the pressed button in step.
