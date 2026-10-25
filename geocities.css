@@ -171,6 +171,9 @@ h2 {
     white-space: nowrap;
 }
 
+/* Entries' titles can be long (like a paper's), so they wrap onto more lines when the box is narrow (on phones). */
+.entry .box-title { white-space: normal; }
+
 .box-title a, .box-title a:visited { color: var(--on-accent); }
 .box-title a:hover { color: #000; }
 
