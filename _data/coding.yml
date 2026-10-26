@@ -8,6 +8,8 @@
 #   like assets/portfolio/coding/ghostwriter_paper.pdf)
 # hidden: true keeps an entry here without showing it on the site.
 # Descriptions support Markdown (e.g. *italics*, **bold**).
+# featured: true marks it as featured: section pages show only their featured entries at first, with a
+# Featured / All switch at the top to see the rest (see _includes/entries-filter.html).
 
 - title: Symbolic and Audio-based Music Identification
   start: 2025-03
@@ -19,6 +21,7 @@
     Also searches 2,000 noisy phone recordings with MuQ embeddings, matching all 13 queries that had a true match.
 
 - title: Spatialized Doppler Effect Simulator
+  featured: true
   demo: https://youtu.be/Sd2On7RebGc
   start: 2024-12
   end: 2025-01
@@ -36,6 +39,7 @@
   description: A multi-track looper instrument you play with your voice and an xbox controller.
 
 - title: RLevator
+  featured: true
   paper: assets/portfolio/coding/rlevator_paper.pdf
   github: https://github.com/tnarayanan/RLevator
   media:
@@ -55,6 +59,7 @@
   description: An image compression algorithm utilizing an unsupervised machine learning technique known as k-means clustering.
 
 - title: Ghostwriter
+  featured: true
   start: 2023-02
   end: 2023-03
   paper: assets/portfolio/coding/ghostwriter_paper.pdf
@@ -66,6 +71,7 @@
     Received best project award and TA's choice best poster in *CS 224N: Natural Language Processing*.
 
 - title: Audio Inpainting With Diffusion
+  featured: true
   start: 2023-09
   end: 2023-12
   poster: assets/portfolio/coding/audio_inpainting_poster.pdf
@@ -81,6 +87,7 @@
   description: Unity 2D platformer designed to train pitch interval recognition and short-term memory.
 
 - title: Arduino LED Display + Tetris
+  featured: true
   demo: https://www.youtube.com/watch?v=hBOwo1rJkic
   github: https://github.com/kiranvbhat/Arduino-LED-Display-Tetris
   media:

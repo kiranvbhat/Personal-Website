@@ -30,6 +30,7 @@
 {%- assign level = include.level | default: 2 -%}
 {%- assign link_fields = "paper:Read the paper|demo:Watch the demo|poster:See the poster|github:View on GitHub" | split: "|" -%}
 
+<div class="entries">
 {%- for item in visible_items %}
 {%- capture entry_dates %}{% include dates.html start=item.start end=item.end %}{% endcapture -%}
 {%- assign title_link = item.link -%}
@@ -69,7 +70,7 @@
 {%- assign picture_background = m.background -%}
 {%- if m.dark_invert %}{% assign picture_background = nil %}{% endif -%}
 {%- assign extension = picture | split: "." | last | downcase %}
-<article class="entry{% if picture or show_thumb %} has-picture{% endif %}">
+<article class="entry{% if item.featured %} featured{% endif %}{% if picture or show_thumb %} has-picture{% endif %}">
   {%- if picture and m.recolor %}
   {%- comment %} A box in the text color, cut to the logo's shape (see "recolor" in minimal.css). {% endcomment %}
   <span class="entry-picture recolor" role="img" aria-label="{{ entry_title | escape }}" style="--logo: url('{{ picture | relative_url }}'){% if m.height %}; height: {{ m.height }}px{% endif %}"></span>
@@ -101,3 +102,4 @@
   </div>
 </article>
 {%- endfor %}
+</div>

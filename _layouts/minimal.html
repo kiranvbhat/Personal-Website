@@ -17,6 +17,7 @@
     <link rel="canonical" href="{{ geocities_url | absolute_url }}">
     {% include minimal/color-init.html %}
     {% include shortcuts-init.html %}
+    {% include entries-init.html %}
     <link rel="stylesheet" href="{% include asset.html path="minimal.css" %}">
     <!-- GIFs are hidden until they're paused (see minimal/pause-gifs.html) -->
     <script>document.documentElement.classList.add("pause-gifs");</script>
@@ -29,6 +30,7 @@
         <main id="content" tabindex="-1">
           {%- if page.title %}
           <h1>{{ page.title }}</h1>
+          {% include entries-filter.html %}
           {%- endif %}
           {{ content }}
           {% include minimal/page-nav.html %}

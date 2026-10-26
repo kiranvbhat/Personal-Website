@@ -1,0 +1,36 @@
+{%- comment -%}
+  The Featured / All switch at the top of section pages (a .toggle, like the settings). Featured, the default, shows
+  only the entries marked `featured: true` in _data/; All shows every entry. The choice is saved in the browser and
+  shared by both appearances (entries-init.html applies it on each page load). The CSS shows the switch only on pages
+  that have both featured and other entries, and hides a sub-heading (like Other's "Photography") whose entries are
+  all hidden. Included under the page title by geo/page-title.html and the Minimal layout.
+{%- endcomment -%}
+<div class="entries-filter">
+  <div class="toggle" role="group" aria-label="Show">
+    <button type="button" data-entries="featured">Featured</button>
+    <button type="button" data-entries="all">All <span class="entries-count"></span></button>
+  </div>
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, filter = document.currentScript.previousElementSibling;
+    var buttons = filter.querySelectorAll("button");
+    function show() {
+      buttons.forEach(function (button) {
+        button.setAttribute("aria-pressed", button.dataset.entries === root.dataset.entries);
+      });
+    }
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        root.dataset.entries = button.dataset.entries;
+        try { localStorage.setItem("entries", button.dataset.entries); } catch (e) {}
+        show();
+      });
+    });
+    // How many entries the page has in all, e.g. "All (8)".
+    addEventListener("DOMContentLoaded", function () {
+      filter.querySelector(".entries-count").textContent = "(" + document.querySelectorAll("main .entry").length + ")";
+    });
+    show();
+  })();
+</script>

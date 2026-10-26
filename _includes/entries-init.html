@@ -1,0 +1,8 @@
+<script>
+  // Featured entries only or all of them, on section pages (entries-filter.html; shared by both appearances), put on <html>
+  // as data-entries before the page draws, so the other entries are never shown for a moment. Only set when scripts
+  // run, so without JavaScript every entry shows.
+  var entriesChoice = "featured";
+  try { if (localStorage.getItem("entries") === "all") entriesChoice = "all"; } catch (e) {}
+  document.documentElement.dataset.entries = entriesChoice;
+</script>

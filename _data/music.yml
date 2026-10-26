@@ -6,15 +6,19 @@
 #             "Listen on Bandcamp" link)
 #   image: path to an image/gif
 # `link`, `note`, `start` and `end` (YYYY-MM) are optional. Entries show in the order written here.
+# featured: true marks it as featured: section pages show only their featured entries at first, with a
+# Featured / All switch at the top to see the rest (see _includes/entries-filter.html).
 
 composition:
   - title: Piano Compositions
+    featured: true
     media:
       bandcamp: 3282432850
       bandcamp_url: https://kiranvbhat.bandcamp.com/album/compositions
     description: A Bandcamp album of a few of my favorite piano compositions.
 
   - title: My First Composition
+    featured: true
     media:
       youtube: dq-4fGOLrzw
     description: A piece I wrote when I was 7 years old titled "my made-up song".
@@ -25,11 +29,18 @@ composition:
     description: A piece I wrote for a short film titled "Coin Operated".
 
   - title: BREAK MONKEY
+    featured: true
     media:
       youtube: StXiBjWgxWc
     description: A breakcore style instrumental piece and Suzanne-based audio visualizer.
 
-  - title: Excerpts
+  - title: Senior Piano Recital
+    start: 2020-07
+    media:
+      youtube: XrxldF58UIg
+    description: A recital to commemorate my journey as a pianist up to my senior year in high school.
+
+  - title: Piano Excerpts
     media:
       youtube: 2xG6bvdmTIo
     description: Excerpts from some of my favorite pieces that I have performed.

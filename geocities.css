@@ -171,6 +171,15 @@ h2 {
     white-space: nowrap;
 }
 
+/* Featured entries (see _includes/entries-filter.html). Shown by default on pages that have some: the other entries are
+   hidden, along with a sub-heading whose entries are all hidden. The switch only shows where it changes something. */
+html[data-entries="featured"] main:has(.entry.featured) .entry:not(.featured) { display: none; }
+html[data-entries="featured"] main:has(.entry.featured) h2:has(+ .entries:not(:has(.featured))) { display: none; }
+.entries-filter { display: none; margin: 0 0 12px; text-align: center; }
+html[data-entries] main:has(.entry.featured):has(.entry:not(.featured)) .entries-filter { display: block; }
+.entries-filter .toggle { display: inline-flex; margin: 0; }
+.entries-filter .toggle button { flex: none; padding: 2px 12px; white-space: nowrap; }  /* as wide as their words */
+
 /* Entries' titles can be long (like a paper's), so they wrap onto more lines when the box is narrow (on phones). */
 .entry .box-title { white-space: normal; }
 

@@ -9,8 +9,11 @@
 #          _includes/minimal/entries.html)
 #   youtube: YouTube video id
 # Descriptions support Markdown (e.g. **bold**).
+# featured: true marks it as featured: section pages show only their featured entries at first, with a
+# Featured / All switch at the top to see the rest (see _includes/entries-filter.html).
 
 - title: Robust Neural Audio Fingerprinting using Music Foundation Models
+  featured: true
   conference: NeurIPS 2025 AI for Music Workshop
   paper: https://openreview.net/forum?id=oaeP03QCjE
   media:
@@ -26,6 +29,7 @@
     state of the art (BEATs), and beat the Shazam-like Dejavu by 39 points (49.2% hit rate). Co-first author.
 
 - title: "SMucK: Symbolic Music in ChucK"
+  featured: true
   conference: NIME 2025
   paper: https://nime.org/web_archive/2025/proceedings/284.html
   media:

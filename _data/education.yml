@@ -5,6 +5,8 @@
 # `still` (under media, optional): a picture that doesn't move, shown instead of a GIF `image` on the Minimal version
 # of the site (which otherwise shows the GIF paused on its first frame). Works in the other _data/ files too.
 # `height` (under media, optional): on the Minimal version, the picture's biggest height in pixels, instead of 180.
+# featured: true marks it as featured: section pages show only their featured entries at first, with a
+# Featured / All switch at the top to see the rest (see _includes/entries-filter.html).
 
 - role: MA in Music, Science, and Technology
   organization: CCRMA, Stanford University

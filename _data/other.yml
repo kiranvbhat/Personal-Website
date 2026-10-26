@@ -7,9 +7,12 @@
 # `start` and `end` (YYYY-MM) are optional. Entries show in the order written here, except volunteering, which is
 # shown newest first by date (entries without dates go last).
 # Descriptions support Markdown (e.g. **bold**).
+# featured: true marks it as featured: section pages show only their featured entries at first, with a
+# Featured / All switch at the top to see the rest (see _includes/entries-filter.html).
 
 photography:
   - title: 360° Photos
+    featured: true
     media:
       embed: https://panoraven.com/en/embed/Cilny6bvKo
     description: >-
@@ -26,6 +29,7 @@ photography:
 
 volunteering:
   - title: Camp Kaleidoscope
+    featured: true
     link: https://campkaleidoscope.org/
     start: 2024-11
     end: 2026-06
@@ -36,6 +40,7 @@ volunteering:
       and counselor for silver unit (9th/10th grade).
 
   - title: Camp Kesem
+    featured: true
     link: https://www.kesem.org/
     start: 2022-11
     end: 2024-10
@@ -54,6 +59,7 @@ volunteering:
 
 misc:
   - title: Tiny Wings World Record
+    featured: true
     media:
       youtube: chqVxox2FHs
     description: >-

@@ -55,7 +55,10 @@
       var direction = {{ include.entries | default: false | jsonify }} && { ArrowDown: 1, ArrowUp: -1 }[event.key];
       if (!direction) return;
       if (event.repeat && scrolling) { event.preventDefault(); return; }  // held down: wait for the page (see above)
-      var entries = Array.prototype.slice.call(document.querySelectorAll("main .entry"));
+      // The entries on show (not the ones hidden by the Featured / All switch, see entries-filter.html).
+      var entries = Array.prototype.filter.call(document.querySelectorAll("main .entry"), function (entry) {
+        return entry.getClientRects().length > 0;
+      });
       var entry = nextEntry(entries, focused && focused.closest(".entry"), direction);
       if (!entry) return;  // past the first or last entry: let the page scroll
       event.preventDefault();

@@ -19,6 +19,7 @@
   {%- assign visible_items = sorted_items -%}
 {%- endif -%}
 
+<div class="entries">
 {%- for item in visible_items %}
 {%- capture entry_dates %}{% include dates.html start=item.start end=item.end %}{% endcapture -%}
 {%- assign title_link = item.link -%}
@@ -33,7 +34,7 @@
   {%- assign entry_title = item.title -%}
   {%- capture entry_subtitle %}{{ item.conference }}{% if item.conference and entry_dates != "" %}, {% endif %}{{ entry_dates }}{% endcapture -%}
 {%- endif %}
-<div class="box entry{% if include.side_thumbs %} side-thumb{% endif %}">
+<div class="box entry{% if item.featured %} featured{% endif %}{% if include.side_thumbs %} side-thumb{% endif %}">
   <div class="box-title">
     {%- if title_link %}<a href="{{ title_link }}" target="_blank">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif -%}
   </div>
@@ -66,3 +67,4 @@
   </div>
 </div>
 {%- endfor %}
+</div>

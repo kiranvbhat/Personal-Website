@@ -107,12 +107,19 @@ main { padding-top: 48px; }
     from { opacity: 0; transform: translateY(10px); }
 }
 @media (prefers-reduced-motion: no-preference) {
-    main > * { animation: rise-in 0.28s ease-out backwards; }
+    main > *, .entries > * { animation: rise-in 0.28s ease-out backwards; }
     main > :nth-child(2) { animation-delay: 0.03s; }
     main > :nth-child(3) { animation-delay: 0.06s; }
     main > :nth-child(4) { animation-delay: 0.09s; }
     main > :nth-child(5) { animation-delay: 0.12s; }
     main > :nth-child(n+6) { animation-delay: 0.15s; }
+    /* Entries are grouped in a list (.entries, from entries.html): the list itself stays put while each entry in it
+       comes in, after the title and the Featured / All switch. */
+    main > .entries { animation: none; }
+    .entries > :nth-child(1) { animation-delay: 0.06s; }
+    .entries > :nth-child(2) { animation-delay: 0.09s; }
+    .entries > :nth-child(3) { animation-delay: 0.12s; }
+    .entries > :nth-child(n+4) { animation-delay: 0.15s; }
 }
 
 /* ---- Switching between dark and light ---- */
@@ -567,6 +574,18 @@ main:has(.section-grid) .page-nav { display: none; }
 .entry + .entry {
     margin-top: 1.25rem;
 }
+
+/* Featured entries (see _includes/entries-filter.html). Shown by default on pages that have some: the other entries are
+   hidden, along with a sub-heading whose entries are all hidden. The switch only shows where it changes something. */
+html[data-entries="featured"] main:has(.entry.featured) .entry:not(.featured) { display: none; }
+html[data-entries="featured"] main:has(.entry.featured) :is(h2, h3):has(+ .entries:not(:has(.featured))) { display: none; }
+/* With entries hidden before it, the first shown entry in a list doesn't need the space above it. */
+html[data-entries="featured"] main:has(.entry.featured) .entry.featured:not(.featured ~ .featured) { margin-top: 0; }
+
+.entries-filter { display: none; margin: -0.5rem 0 1.5rem; }
+html[data-entries] main:has(.entry.featured):has(.entry:not(.featured)) .entries-filter { display: block; }
+.entries-filter .toggle { display: inline-flex; font-size: 0.9rem; }
+.entries-count { color: var(--muted); }
 
 /* Hovering over an entry (or reaching one of its links with the keyboard) fades the page's other entries a little and
    puts them slightly out of focus, to focus on that one. Only with a mouse: touch screens have no hovering.

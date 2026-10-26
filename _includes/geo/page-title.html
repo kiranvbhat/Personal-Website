@@ -1,4 +1,6 @@
 {%- comment -%}
   A section page's heading: page.title, plus a small picture next to it if the page sets `title_gif:` in its front matter.
+  Then the Featured / All switch (entries-filter.html), which only shows on pages with featured entries.
 {%- endcomment -%}
 <h1><span class="bubble-text">{{ page.title }}</span>{% if page.title_gif %} <img class="title-gif" src="{{ page.title_gif | relative_url }}" alt="">{% endif %}</h1>
+{% include entries-filter.html %}

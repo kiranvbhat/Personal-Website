@@ -1,9 +1,12 @@
 # Work experience. Shown newest first, sorted by `end` then `start`.
 # Dates are YYYY-MM (e.g. 2024-03); use `end: present` for ongoing work. Both are optional.
 # Descriptions support Markdown (e.g. **bold**).
+# featured: true marks it as featured: section pages show only their featured entries at first, with a
+# Featured / All switch at the top to see the rest (see _includes/entries-filter.html).
 
 - role: Audio ML Engineer (Part-time)
   organization: SoundPatrol
+  featured: true
   start: 2024-12
   end: 2026-10
   link: https://www.soundpatrol.com/press-release
@@ -21,6 +24,7 @@
 
 - role: Researcher
   organization: ChucK Development Team
+  featured: true
   start: 2024-03
   end: 2026-06
   link: https://chuck.stanford.edu/
@@ -36,6 +40,7 @@
 
 - role: Computer Science Section Leader
   organization: Stanford University School of Engineering
+  featured: true
   start: 2022-03
   end: 2022-12
   link: https://cs198.stanford.edu/cs198/
@@ -66,6 +71,7 @@
 
 - role: Software Engineering Intern
   organization: Wati
+  featured: true
   start: 2023-06
   end: 2023-08
   link: https://www.wati.io/
