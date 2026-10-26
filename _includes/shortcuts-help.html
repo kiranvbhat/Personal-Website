@@ -1,10 +1,11 @@
 {%- comment -%}
-  The keyboard shortcuts window, opened by the "?" button beside the shortcuts setting's On/Off switch (in both appearances'
-  settings, with id="shortcuts-help-open"). Lists what each key does (see shortcut-keys.html and arrow-keys.html).
+  The keyboard shortcuts window, opened by the "?" button beside the shortcuts setting's On/Off switch (in both
+  appearances' settings, with id="shortcuts-help-open"). Lists what each key does (see shortcut-keys.html and arrow-keys.html).
   It's added at the end of the page (by the layouts) rather than in the sidebar, so it still opens when the sidebar's
   section is hidden, like on small screens. Styled by each appearance: an old Windows window (geocities.css) or a
   plain card (modern.css).
-  Params: appearance  "geocities" or "modern" (they have a few different keys)
+  Both appearances list the same keys; the ones that only work in one are marked "(Modern only)" or "(GeoCities only)".
+  Params: appearance  "geocities" or "modern" (for the close button's look)
 {%- endcomment -%}
 <dialog class="shortcuts-help" id="shortcuts-help" aria-labelledby="shortcuts-help-title">
   <div class="window-title">
@@ -14,19 +15,18 @@
   <dl class="shortcuts-list">
     <dt><kbd aria-label="Left arrow">&larr;</kbd> <kbd aria-label="Right arrow">&rarr;</kbd></dt>
     <dd>Go to the previous / next section</dd>
-    {%- if include.appearance == "modern" %}
     <dt><kbd aria-label="Up arrow">&uarr;</kbd> <kbd aria-label="Down arrow">&darr;</kbd></dt>
-    <dd>Move between the entries on a page</dd>
-    {%- endif %}
+    <dd>Move between the entries on a page <span class="shortcut-only">(Modern only)</span></dd>
     <dt><kbd>Z</kbd></dt>
     <dd>Switch theme (GeoCities / Modern)</dd>
     <dt><kbd>X</kbd></dt>
     <dd>Switch colors (dark / light)</dd>
-    {%- if include.appearance == "geocities" %}
     <dt><kbd>C</kbd></dt>
-    <dd>Open the cursor menu</dd>
-    {%- endif %}
+    <dd>Open the cursor menu <span class="shortcut-only">(GeoCities only)</span></dd>
+    <dt><kbd>/</kbd></dt>
+    <dd>Show this list</dd>
   </dl>
+  <p class="shortcuts-note">These can be turned off in settings, for visitors using assistive tools that shortcuts may interfere with.</p>
 </dialog>
 <script>
   (function () {

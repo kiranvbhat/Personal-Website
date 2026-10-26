@@ -3,9 +3,11 @@
     Z  switch theme (GeoCities / Modern), like clicking the other option in appearance-select.html
     X  switch colors (dark / light), like clicking the other option in color-setting.html
     C  open or close the cursor menu (GeoCities only; see geo/cursor-setting.html)
-  Ignored while typing (e.g. in the guestbook), with Ctrl, Alt, Cmd or Shift held (so shortcuts like Cmd+C still copy),
-  when the key is held down, and when shortcuts are turned off in settings (shortcuts-setting.html). The settings show
-  each key next to its setting, e.g. "theme (Z)" (`.key-hint`).
+    /  open or close the list of shortcuts (shortcuts-help.html), like its "?" button in settings (and instead of
+       Firefox's quick find, which "/" would otherwise open)
+  Ignored while typing (e.g. in the guestbook), with Ctrl, Alt, Cmd or Shift held (so shortcuts like Cmd+C still
+  copy), when the key is held down, and when shortcuts are turned off in settings (shortcuts-setting.html). The
+  settings show each key next to its setting, e.g. "theme (Z)" (`.key-hint`).
 {%- endcomment -%}
 <script>
   addEventListener("keydown", function (event) {
@@ -13,6 +15,14 @@
     if (event.defaultPrevented || event.repeat || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) return;
     var focused = document.activeElement;
     if (focused && focused.closest("input, textarea, select, [contenteditable]")) return;
+
+    var help = document.getElementById("shortcuts-help");
+    if (event.key === "/" && help) {
+      event.preventDefault();
+      if (help.open) help.close();
+      else help.showModal();
+      return;
+    }
 
     var key = event.key.toLowerCase(), button;
     if (key === "z") button = document.querySelector('.toggle[aria-label="Theme"] button[aria-pressed="false"]');

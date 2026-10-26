@@ -725,6 +725,8 @@ html[data-shortcuts="off"] .key-hint { display: none; }
 /* The On/Off switch with the "?" button to its right, like the cursor button and its dice. */
 .shortcuts-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
 .shortcuts-row .toggle { flex: 1; margin-top: 0; }
+.shortcut-only { color: var(--muted); font-size: 12px; }
+.shortcuts-note { margin: 0 12px 12px; color: var(--muted); font-size: 12px; }
 .help-button {
     flex: none;
     width: 24px;

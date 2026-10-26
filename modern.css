@@ -447,6 +447,9 @@ main { padding-top: 48px; }
     text-align: center;
 }
 
+.shortcut-only { color: var(--muted); font-size: 0.85rem; }
+.shortcuts-note { margin: 16px 0 0; color: var(--muted); font-size: 0.85rem; }
+
 /* Keyboard shortcut hints next to settings, like "(Z)" (see shortcut-keys.html). Hidden when shortcuts are turned
    off, and on touch screens, which have no keyboard, along with the shortcuts setting itself. */
 .key-hint { font-weight: normal; }
