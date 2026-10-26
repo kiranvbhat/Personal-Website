@@ -2,9 +2,9 @@
 # Uses the same fields as experience.yml (dates are YYYY-MM): `organization` is the school, shown as the heading, and
 # `role` the degree, shown with the dates under it. `role`, `start`, `end`, `link`, `media` and `description` are
 # optional.
-# `still` (under media, optional): a picture that doesn't move, shown instead of a GIF `image` on the Minimal version
+# `still` (under media, optional): a picture that doesn't move, shown instead of a GIF `image` on the Modern version
 # of the site (which otherwise shows the GIF paused on its first frame). Works in the other _data/ files too.
-# `height` (under media, optional): on the Minimal version, the picture's biggest height in pixels, instead of 180.
+# `height` (under media, optional): on the Modern version, the picture's biggest height in pixels, instead of 180.
 # featured: true marks it as featured: section pages show only their featured entries at first, with a
 # Featured / All switch at the top to see the rest (see _includes/entries-filter.html).
 

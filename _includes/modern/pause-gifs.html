@@ -1,7 +1,7 @@
 {%- comment -%}
   Pauses GIFs (images with data-pause, from entries.html) on their first frame. Browsers can't pause a GIF, so once
   one loads, its first frame is drawn onto a canvas and saved as a still PNG, which replaces the GIF. The CSS hides
-  them until then, so they never visibly move (the pause-gifs class, set in minimal.html's <head>, makes sure that only
+  them until then, so they never visibly move (the pause-gifs class, set in modern.html's <head>, makes sure that only
   happens when scripts run; without JavaScript the GIFs just play).
 {%- endcomment -%}
 <script>

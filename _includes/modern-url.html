@@ -1,0 +1,9 @@
+{%- comment -%}
+  Prints the address of this page's Modern version: the page with the same name in modern/ (e.g. /experience ->
+  /modern/experience). The splash page and Home both go to the Modern homepage, modern/index.html. Prints nothing
+  if there isn't one (like the guestbook), so those pages stay GeoCities.
+{%- endcomment -%}
+{%- assign modern_path = page.url | prepend: "/modern" -%}
+{%- if page.url == "/home.html" %}{% assign modern_path = "/modern/" %}{% endif -%}
+{%- assign modern_page = site.pages | where: "url", modern_path | first -%}
+{%- if modern_page %}{{ modern_page.url | remove: ".html" | relative_url }}{% endif -%}

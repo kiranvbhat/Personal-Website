@@ -1,5 +1,5 @@
 ---
-layout: minimal
+layout: modern
 ---
 {%- assign profile = site.data.profile -%}
 <div class="intro">
@@ -8,10 +8,10 @@ layout: minimal
     {%- if profile.portrait_large %} srcset="{{ profile.portrait | relative_url }} 640w, {{ profile.portrait_large | relative_url }} 1280w" sizes="(max-width: 720px) 100vw, 320px"{% endif %}>
   <div>
     <h1>Hi, I'm {{ profile.name | split: " " | first }}!</h1>
-    {%- if profile.minimal_tagline %}
-    <p class="tagline">{{ profile.minimal_tagline }}</p>
+    {%- if profile.modern_tagline %}
+    <p class="tagline">{{ profile.modern_tagline }}</p>
     {%- endif %}
-    {%- assign bio = profile.minimal_bio | default: profile.bio -%}
+    {%- assign bio = profile.modern_bio | default: profile.bio -%}
     {%- for paragraph in bio %}
     {{ paragraph | markdownify }}
     {%- endfor %}
@@ -19,15 +19,15 @@ layout: minimal
 </div>
 
 {%- comment %} A card for each section (from _data/nav.yml, like the GeoCities homepage's grid of pictures), except
-  Home, with its emoji (`emoji` in nav.yml). Items left out of the menu, like Resume, have no Minimal page: their
+  Home, with its emoji (`emoji` in nav.yml). Items left out of the menu, like Resume, have no Modern page: their
   cards go to the shared address (for Resume, the PDF) in a new tab, like the sidebar's Resume link. {% endcomment %}
 <nav class="section-grid" aria-label="Sections">
   {%- for link in site.data.nav %}
   {%- if link.url == "home" %}{% continue %}{% endif %}
   {%- if link.menu == false %}
-  <a class="section-card" href="{{ link.url | prepend: '/' | relative_url }}" target="_blank">{% include minimal/card-emoji.html %}{{ link.name }}</a>
+  <a class="section-card" href="{{ link.url | prepend: '/' | relative_url }}" target="_blank">{% include modern/card-emoji.html %}{{ link.name }}</a>
   {%- else %}
-  <a class="section-card" href="{{ link.url | prepend: '/minimal/' | relative_url }}">{% include minimal/card-emoji.html %}{{ link.name }}</a>
+  <a class="section-card" href="{{ link.url | prepend: '/modern/' | relative_url }}">{% include modern/card-emoji.html %}{{ link.name }}</a>
   {%- endif %}
   {%- endfor %}
 </nav>

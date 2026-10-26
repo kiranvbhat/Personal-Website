@@ -1,7 +1,7 @@
 {%- comment -%}
   Finds the sections before and after this page, in the menu's order (_data/nav.yml, without items with
-  `menu: false`, like Resume), for both appearances' previous/next links (geo/page-nav.html, minimal/page-nav.html).
-  Params: prefix  the start of the appearance's page addresses: "/" (GeoCities) or "/minimal/"
+  `menu: false`, like Resume), for both appearances' previous/next links (geo/page-nav.html, modern/page-nav.html).
+  Params: prefix  the start of the appearance's page addresses: "/" (GeoCities) or "/modern/"
   Sets, for the file that includes this (Jekyll includes share its variables):
     previous_section, next_section  their nav.yml entries, or nil (Home has no previous, Other no next; pages that
                                     aren't sections, like Credits, get neither)
@@ -11,14 +11,14 @@
 {%- assign current_url = page.url | remove: ".html" -%}
 {%- assign previous_section = nil -%}
 {%- assign next_section = nil -%}
-{%- comment %} Minimal's Home is /minimal/, not /minimal/home. {% endcomment -%}
+{%- comment %} Modern's Home is /modern/, not /modern/home. {% endcomment -%}
 {%- for link in sections -%}
-  {%- assign section_url = link.url | prepend: include.prefix | replace: "/minimal/home", "/minimal/" -%}
+  {%- assign section_url = link.url | prepend: include.prefix | replace: "/modern/home", "/modern/" -%}
   {%- if section_url == current_url -%}
     {%- assign previous_index = forloop.index0 | minus: 1 -%}
     {%- if previous_index >= 0 %}{% assign previous_section = sections[previous_index] %}{% endif -%}
     {%- assign next_section = sections[forloop.index] -%}
   {%- endif -%}
 {%- endfor -%}
-{%- assign previous_url = previous_section.url | prepend: include.prefix | replace: "/minimal/home", "/minimal/" | relative_url -%}
-{%- assign next_url = next_section.url | prepend: include.prefix | replace: "/minimal/home", "/minimal/" | relative_url -%}
+{%- assign previous_url = previous_section.url | prepend: include.prefix | replace: "/modern/home", "/modern/" | relative_url -%}
+{%- assign next_url = next_section.url | prepend: include.prefix | replace: "/modern/home", "/modern/" | relative_url -%}

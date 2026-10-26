@@ -2,7 +2,7 @@
 #
 # media: exactly one of
 #   youtube: YouTube video id
-#   bandcamp: Bandcamp album id (add `bandcamp_url:`, the album's address, for the Minimal version's
+#   bandcamp: Bandcamp album id (add `bandcamp_url:`, the album's address, for the Modern version's
 #             "Listen on Bandcamp" link)
 #   image: path to an image/gif
 # `link`, `note`, `start` and `end` (YYYY-MM) are optional. Entries show in the order written here.

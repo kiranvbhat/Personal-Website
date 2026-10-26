@@ -21,6 +21,8 @@ exclude:
   - assets/cursors/originals
   # The original font file; the site uses the smaller .woff2 copy.
   - assets/fonts/*.otf
+  # Notes about the files in a folder, not pages of the site (GitHub Pages would otherwise publish a README as one).
+  - assets/graphics/logos/simple-icons/README.md
 
 kramdown:
   # Keep quotes and dashes in _data/ text exactly as typed instead of converting them to curly quotes / en dashes.

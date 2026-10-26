@@ -1,10 +1,10 @@
 {%- comment -%}
   Color setting, for both appearances' settings: Dark and Light buttons, with the current one pressed in (a .toggle,
   like the theme setting in appearance-select.html). The choice is saved in the browser, shared by both appearances,
-  and put on <html> as data-color="dark" or "light"; geo/color-init.html and minimal/color-init.html apply it on each
+  and put on <html> as data-color="dark" or "light"; geo/color-init.html and modern/color-init.html apply it on each
   page load.
-  Params: default  the colors before a visitor picks: "dark" (GeoCities) or "system" (Minimal: the device's setting)
-          fade     true: cross-fade from the old colors to the new ones, instead of switching at once (Minimal). The
+  Params: default  the colors before a visitor picks: "dark" (GeoCities) or "system" (Modern: the device's setting)
+          fade     true: cross-fade from the old colors to the new ones, instead of switching at once (Modern). The
                    fade's length is set in the appearance's CSS (::view-transition-old/new(root)). Hovered elements
                    get the hover-held class during the fade, for the CSS to keep their hover effects.
 {%- endcomment -%}

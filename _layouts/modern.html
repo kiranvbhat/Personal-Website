@@ -1,7 +1,7 @@
 {%- comment -%}
-  The Minimal appearance: text and still pictures (GIFs are paused) beside a sidebar, like the GeoCities layout; no
+  The Modern appearance: text and still pictures (GIFs are paused) beside a sidebar, like the GeoCities layout; no
   backgrounds or custom fonts or cursors.
-  Its pages are in minimal/, its pieces in _includes/minimal/, and its styles in minimal.css. Light or dark follows
+  Its pages are in modern/, its pieces in _includes/modern/, and its styles in modern.css. Light or dark follows
   the visitor's device setting, unless they pick one in the sidebar's settings. Pages with a `title:` get it as their
   heading (the homepage writes its own).
 {%- endcomment -%}
@@ -15,17 +15,17 @@
     <!-- Tells search engines the GeoCities page is the main version of this one, so they don't count both -->
     {%- capture geocities_url %}{% include geocities-url.html %}{% endcapture %}
     <link rel="canonical" href="{{ geocities_url | absolute_url }}">
-    {% include minimal/color-init.html %}
+    {% include modern/color-init.html %}
     {% include shortcuts-init.html %}
     {% include entries-init.html %}
-    <link rel="stylesheet" href="{% include asset.html path="minimal.css" %}">
-    <!-- GIFs are hidden until they're paused (see minimal/pause-gifs.html) -->
+    <link rel="stylesheet" href="{% include asset.html path="modern.css" %}">
+    <!-- GIFs are hidden until they're paused (see modern/pause-gifs.html) -->
     <script>document.documentElement.classList.add("pause-gifs");</script>
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
     <div class="layout">
-      {% include minimal/sidebar.html %}
+      {% include modern/sidebar.html %}
       <div class="layout-main">
         <main id="content" tabindex="-1">
           {%- if page.title %}
@@ -33,15 +33,15 @@
           {% include entries-filter.html %}
           {%- endif %}
           {{ content }}
-          {% include minimal/page-nav.html %}
+          {% include modern/page-nav.html %}
         </main>
-        {% include minimal/footer.html %}
+        {% include modern/footer.html %}
       </div>
     </div>
-    {% include minimal/pause-gifs.html %}
-    {% include minimal/new-tab-links.html %}
+    {% include modern/pause-gifs.html %}
+    {% include modern/new-tab-links.html %}
     {% include shortcut-keys.html %}
-    {% include shortcuts-help.html appearance="minimal" %}
+    {% include shortcuts-help.html appearance="modern" %}
     {% include goatcounter.html %}
   </body>
 </html>

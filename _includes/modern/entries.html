@@ -72,7 +72,7 @@
 {%- assign extension = picture | split: "." | last | downcase %}
 <article class="entry{% if item.featured %} featured{% endif %}{% if picture or show_thumb %} has-picture{% endif %}">
   {%- if picture and m.recolor %}
-  {%- comment %} A box in the text color, cut to the logo's shape (see "recolor" in minimal.css). {% endcomment %}
+  {%- comment %} A box in the text color, cut to the logo's shape (see "recolor" in modern.css). {% endcomment %}
   <span class="entry-picture recolor" role="img" aria-label="{{ entry_title | escape }}" style="--logo: url('{{ picture | relative_url }}'){% if m.height %}; height: {{ m.height }}px{% endif %}"></span>
   {%- elsif picture %}
   <img class="entry-picture{% if m.dark_invert %} dark-invert{% endif %}" src="{{ picture | relative_url }}" alt="{{ entry_title | escape }}" loading="lazy"

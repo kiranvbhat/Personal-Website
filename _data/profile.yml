@@ -3,7 +3,7 @@
 name: Kiran Bhat
 email: kvbhat@alumni.stanford.edu
 portrait: assets/portraits/Portrait small.jpeg
-# A bigger copy (optional), for high-resolution screens on the Minimal homepage, where the picture is shown larger.
+# A bigger copy (optional), for high-resolution screens on the Modern homepage, where the picture is shown larger.
 portrait_large: assets/portraits/Portrait large.jpeg
 resume: assets/resume/Kiran_Bhat_Resume.pdf
 
@@ -26,12 +26,12 @@ bio:
   - While you're here, please [sign my guestbook](/guestbook-sign) and check out all the [awesome cursor options](#cursor-menu) ![:cool:](/assets/graphics/emojis/cool.gif){:.smiley}
   - Thanks for stopping by! -Kiran
 
-# A short line under the Minimal homepage's heading, saying who you are at a glance (optional).
-minimal_tagline: Audio ML Engineer · Stanford CS & Music
+# A short line under the Modern homepage's heading, saying who you are at a glance (optional).
+modern_tagline: Audio ML Engineer · Stanford CS & Music
 
-# The bio on the Minimal appearance's homepage (under its "Hi, I'm ..." heading, in minimal/index.html), written like
-# `bio` above but without the smileys and the cursor menu link (Minimal has no cursor menu). Leave it out to use `bio`.
-minimal_bio:
+# The bio on the Modern appearance's homepage (under its "Hi, I'm ..." heading, in modern/index.html), written like
+# `bio` above but without the smileys and the cursor menu link (Modern has no cursor menu). Leave it out to use `bio`.
+modern_bio:
   - I just graduated from Stanford, where I studied computer science (AI) and its intersection with music.
   - In my spare time, I enjoy writing [music](music), watching/[making films](performances), and playing basketball.
   - Thanks for stopping by :)
@@ -48,7 +48,7 @@ contact:
     url: guestbook-sign
 
 # Sidebar "social networks" box. Each `icon` is shown on a white tile (GeoCities); `logo` (optional) is a one-color
-# logo shown beside the name in the Minimal sidebar, in the text color.
+# logo shown beside the name in the Modern sidebar, in the text color.
 socials:
   - name: GitHub
     url: https://github.com/kiranvbhat

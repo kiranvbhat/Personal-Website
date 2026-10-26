@@ -1,12 +1,12 @@
 {%- comment -%}
-  Visitors who picked the Minimal appearance are sent to this page's Minimal version before it renders (see
-  minimal-url.html). Pages without one stay as they are.
+  Visitors who picked the Modern appearance are sent to this page's Modern version before it renders (see
+  modern-url.html). Pages without one stay as they are.
 {%- endcomment -%}
-{%- capture minimal_url %}{% include minimal-url.html %}{% endcapture -%}
-{%- if minimal_url != "" %}
+{%- capture modern_url %}{% include modern-url.html %}{% endcapture -%}
+{%- if modern_url != "" %}
 <script>
   try {
-    if (localStorage.getItem("appearance") === "minimal") location.replace({{ minimal_url | jsonify }} + location.hash);
+    if (localStorage.getItem("appearance") === "modern") location.replace({{ modern_url | jsonify }} + location.hash);
   } catch (e) {}
 </script>
 {%- endif %}

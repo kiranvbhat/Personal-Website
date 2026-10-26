@@ -12,7 +12,7 @@
   link: https://www.soundpatrol.com/press-release
   media:
     image: assets/portfolio/experience/soundpatrol logo black.png  # the original is see-through, and vanished in light mode
-    still: assets/portfolio/experience/soundpatrol logo.png  # Minimal shows the see-through original instead
+    still: assets/portfolio/experience/soundpatrol logo.png  # Modern shows the see-through original instead
     recolor: true  # drawn in the text color, for dark/light mode
     height: 72
   description: >-
@@ -30,7 +30,7 @@
   link: https://chuck.stanford.edu/
   media:
     image: assets/portfolio/experience/chuck_logo_big small.png
-    still: assets/portfolio/experience/chuck_logo.png  # Minimal shows the see-through logo instead
+    still: assets/portfolio/experience/chuck_logo.png  # Modern shows the see-through logo instead
     height: 140
   description: >-
     I'm developing new features for the **music programming language ChucK**, in collaboration with several PhD
@@ -46,7 +46,7 @@
   link: https://cs198.stanford.edu/cs198/
   media:
     image: assets/portfolio/experience/SectionLeading small.gif
-    still: assets/portfolio/experience/cs198 logo.svg  # Minimal shows this instead
+    still: assets/portfolio/experience/cs198 logo.svg  # Modern shows this instead
     recolor: true  # drawn in the text color, for dark/light mode
     height: 126
   description: >-
@@ -61,7 +61,7 @@
   link: https://www.stanfordacm.org/
   media:
     image: assets/portfolio/experience/ACMLab small.jpg
-    still: assets/portfolio/experience/stanford acm logo.svg  # Minimal shows the club's logo instead
+    still: assets/portfolio/experience/stanford acm logo.svg  # Modern shows the club's logo instead
     height: 90
   description: >-
     I worked with a team to build a **convolutional neural network** using **Python** and **PyTorch** to predict
@@ -77,7 +77,7 @@
   link: https://www.wati.io/
   media:
     image: assets/portfolio/experience/wati_logo small.JPG
-    still: assets/portfolio/experience/wati_logo_transparent.svg  # Minimal shows the see-through logo instead
+    still: assets/portfolio/experience/wati_logo_transparent.svg  # Modern shows the see-through logo instead
     dark_invert: true  # its black text turns white in dark mode
     height: 60
   description: >-
@@ -95,7 +95,7 @@
   media:
     image: assets/portfolio/experience/SnackVision small.gif
     # still: assets/portfolio/experience/SnackVision still.png  # its first frame is a title card
-    still: assets/portfolio/experience/Aveva_logo.svg  # Minimal shows this instead
+    still: assets/portfolio/experience/Aveva_logo.svg  # Modern shows this instead
     recolor: true  # drawn in the text color, for dark/light mode
     height: 86
   description: >-
@@ -111,7 +111,7 @@
   link: https://www.osisoft.com/
   media:
     image: assets/portfolio/experience/RetroPiCropped small.gif
-    still: assets/portfolio/experience/Aveva_logo.svg  # Minimal shows this instead
+    still: assets/portfolio/experience/Aveva_logo.svg  # Modern shows this instead
     recolor: true  # drawn in the text color, for dark/light mode
     height: 86
   description: >-

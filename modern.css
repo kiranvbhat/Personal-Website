@@ -1,4 +1,4 @@
-/* Minimal appearance (_layouts/minimal.html): text and still pictures beside a sidebar, in the device's own font.
+/* Modern appearance (_layouts/modern.html): text and still pictures beside a sidebar, in the device's own font.
    Colors are set in the variables below, each as light-dark(light color, dark color). Which one is used follows the
    device's light or dark mode, unless the visitor picks one in settings (color-setting.html), which puts
    data-color="light" or "dark" on <html>. */
@@ -131,7 +131,7 @@ main { padding-top: 48px; }
     animation-timing-function: ease-in-out;
 }
 
-/* ---- Sidebar (_includes/minimal/sidebar.html) ---- */
+/* ---- Sidebar (_includes/modern/sidebar.html) ---- */
 
 /* Stays in view while scrolling. If it's taller than the screen, it scrolls on its own. */
 .sidebar {
@@ -455,7 +455,7 @@ html[data-shortcuts="off"] .key-hint { display: none; }
     .key-hint, .shortcuts-setting { display: none; }
 }
 
-/* ---- Previous and next sections (_includes/minimal/page-nav.html) ---- */
+/* ---- Previous and next sections (_includes/modern/page-nav.html) ---- */
 
 /* Two boxes like the entries: the previous section on the left, the next on the right. */
 .page-nav {
@@ -516,7 +516,7 @@ html[data-shortcuts="off"] .key-hint { display: none; }
     border-radius: 10px;
 }
 
-/* The line under the heading (minimal_tagline in profile.yml), in the grey of the entries' dates. */
+/* The line under the heading (modern_tagline in profile.yml), in the grey of the entries' dates. */
 .intro .tagline {
     margin: -0.25rem 0 1rem;
     color: var(--muted);
@@ -562,7 +562,7 @@ main:has(.section-grid) .page-nav { display: none; }
     padding-left: 1.25rem;
 }
 
-/* ---- Entries (_includes/minimal/entries.html) ---- */
+/* ---- Entries (_includes/modern/entries.html) ---- */
 
 /* Each entry sits in a box with a thin outline. */
 .entry {
