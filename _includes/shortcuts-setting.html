@@ -1,0 +1,31 @@
+{%- comment -%}
+  Keyboard shortcuts setting, for both appearances' settings: On and Off buttons, with the current one pressed in (a
+  .toggle, like color-setting.html). Off turns off every shortcut (shortcut-keys.html's letters and arrow-keys.html's
+  arrows) and hides the key hints next to the settings. Some visitors need that: voice control can set off a
+  one-letter shortcut by accident (e.g. saying a word that starts with Z). The choice is saved in the browser, shared
+  by both appearances, and put on <html> as data-shortcuts="off" (shortcuts-init.html applies it on each page load).
+{%- endcomment -%}
+<div class="toggle" role="group" aria-label="Keyboard shortcuts" id="shortcuts-toggle">
+  <button type="button" data-shortcuts="on">On</button>
+  <button type="button" data-shortcuts="off">Off</button>
+</div>
+<script>
+  (function () {
+    var buttons = document.querySelectorAll("#shortcuts-toggle button"), root = document.documentElement;
+    function show() {
+      var current = root.dataset.shortcuts === "off" ? "off" : "on";
+      buttons.forEach(function (button) {
+        button.setAttribute("aria-pressed", button.dataset.shortcuts === current);
+      });
+    }
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        if (button.dataset.shortcuts === "off") root.dataset.shortcuts = "off";
+        else delete root.dataset.shortcuts;
+        try { localStorage.setItem("shortcuts", button.dataset.shortcuts); } catch (e) {}
+        show();
+      });
+    });
+    show();
+  })();
+</script>

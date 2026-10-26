@@ -8,7 +8,7 @@
   Menu: _data/nav.yml (the same list as the GeoCities sidebar), each link going to the page's Minimal version in
   minimal/. Each link can have an emoji or logo before it (sidebar-icon.html): the menu's from `emoji` in nav.yml,
   the social networks' from `logo` in profile.yml. Contact: email and the resume (the PDF, through /resume, in a new tab). Social: profile.yml. Settings:
-  theme (appearance-select.html) and color (color-setting.html).
+  theme (appearance-select.html), color (color-setting.html) and keyboard shortcuts (shortcuts-setting.html).
 {%- endcomment -%}
 {%- assign current_url = page.url | remove: ".html" -%}
 {%- assign profile = site.data.profile -%}
@@ -58,12 +58,19 @@
     <section class="sidebar-section" id="sidebar-settings-section" aria-labelledby="sidebar-settings">
       <h2 class="sidebar-heading" id="sidebar-settings">Settings</h2>
       <div class="setting">
-        <span class="setting-label" aria-hidden="true">Theme</span>
+        <span class="setting-label" aria-hidden="true">Theme <span class="key-hint">(Z)</span></span>
         {% include appearance-select.html current="minimal" %}
       </div>
       <div class="setting">
-        <span class="setting-label" aria-hidden="true">Color</span>
+        <span class="setting-label" aria-hidden="true">Color <span class="key-hint">(X)</span></span>
         {% include color-setting.html default="system" fade=true %}
+      </div>
+      <div class="setting shortcuts-setting">
+        <span class="setting-label" aria-hidden="true">Shortcuts</span>
+        <div class="shortcuts-row">
+          {% include shortcuts-setting.html %}
+          <button type="button" class="help-button" id="shortcuts-help-open" aria-label="Keyboard shortcuts help" aria-haspopup="dialog">?</button>
+        </div>
       </div>
     </section>
   </div>

@@ -1,6 +1,7 @@
 {%- comment -%}
-  Cursor setting for the settings box: a button that opens a window of every cursor in _data/cursors.yml, a dice
-  button that picks one at random, and a left-handed checkbox that mirrors the cursors (see cursor-init.html).
+  Cursor setting for the settings box: a button that opens a window of every cursor in _data/cursors.yml (with a
+  left-handed checkbox at the top that mirrors the cursors; see cursor-init.html), and a dice button that
+  picks one at random.
   Each option shows the normal cursor, and the link version on hover. Cursors with a special effect get a star. The choice is saved in the browser;
   cursor-init.html applies it on each page load. Hidden on touch devices (see .cursor-setting in geocities.css).
   Any link to #cursor-menu also opens the window.
@@ -9,14 +10,13 @@
   and isCursorUnlocked(id) says whether one has been.
 {%- endcomment -%}
 <div class="setting cursor-setting">
-  cursor:
+  cursor: <span class="key-hint">(C)</span>
   <div class="cursor-buttons">
-    <button type="button" class="cursor-open" id="cursor-open">Windows 98</button>
+    <button type="button" class="cursor-open" id="cursor-open" aria-keyshortcuts="C">Windows 98</button>
     <button type="button" class="cursor-random" id="cursor-random" title="Random cursor!" aria-label="Pick a random cursor">
       <img src="{{ 'assets/graphics/misc/dice 29.gif' | relative_url }}" alt="">
     </button>
   </div>
-  <label class="cursor-hand"><input type="checkbox" id="cursor-left"> left-handed</label>
 </div>
 
 <dialog class="cursor-menu" id="cursor-menu" aria-labelledby="cursor-menu-title">
@@ -24,7 +24,10 @@
     <span id="cursor-menu-title">Pick a cursor!!</span>
     <button type="button" class="window-close" id="cursor-close" aria-label="Close">X</button>
   </div>
-  <p class="cursor-hint">hover over one to see it on a link, then click to pick it<br><span aria-hidden="true">&#9733; = a special effect!</span></p>
+  <div class="cursor-hint">
+    <span aria-hidden="true">&#9733; = a special effect!</span>
+    <label class="cursor-hand"><input type="checkbox" id="cursor-left"> left-handed</label>
+  </div>
   {%- assign states = "cursor,link" | split: "," %}
   <div class="cursor-grid">
     <button type="button" class="cursor-option" data-cursor="system">

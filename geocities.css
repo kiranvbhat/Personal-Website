@@ -583,6 +583,14 @@ h2 {
     }
 }
 
+/* Keyboard shortcut hints next to settings, like "(Z)" (see shortcut-keys.html). Hidden when shortcuts are turned
+   off, and on touch screens, which have no keyboard, along with the shortcuts setting itself. */
+.key-hint { font-weight: normal; }
+html[data-shortcuts="off"] .key-hint { display: none; }
+@media (hover: none), (pointer: coarse) {
+    .key-hint, .shortcuts-setting { display: none; }
+}
+
 /* No cursor on touch screens, so no point offering the setting. */
 @media (hover: none), (pointer: coarse) {
     .cursor-setting { display: none; }
@@ -618,12 +626,11 @@ h2 {
 .cursor-random img { display: block; width: 24px; height: 24px; }
 
 /* The left-handed checkbox; in left-handed mode the cursor menu's previews are mirrored too. */
+/* The left-handed checkbox, in the cursor menu (see .cursor-hint). */
 .cursor-hand {
     display: flex;
     align-items: center;
     gap: 4px;
-    margin-top: 4px;
-    font-size: 12px;
     cursor: pointer;
 }
 
@@ -663,13 +670,60 @@ h2 {
     cursor: pointer;
 }
 
+/* The row above the cursors: what the star means on the left, the left-handed checkbox on the right. */
 .cursor-hint {
-    margin: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 12px;
     color: var(--heading);
-    text-align: center;
 }
 
 .cursor-option[hidden] { display: none; }  /* secret cursors, until they're unlocked */
+
+/* The keyboard shortcuts window (shortcuts-help.html), like the cursor menu, and its "?" button in settings. */
+.shortcuts-help {
+    width: min(360px, 92vw);
+    padding: 0;
+    border: 3px outset #c0c0c0;
+    background: var(--panel);
+    color: var(--text);
+}
+.shortcuts-help::backdrop { background: rgba(0, 0, 0, 0.6); }
+.shortcuts-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+    align-items: center;
+    margin: 12px;
+}
+.shortcuts-list dt { white-space: nowrap; }
+.shortcuts-list dd { margin: 0; }
+.shortcuts-help kbd {
+    display: inline-block;
+    min-width: 14px;
+    padding: 1px 5px;
+    border: 2px outset #fff;
+    background: #c0c0c0;
+    color: #000;
+    font: bold 12px Verdana, sans-serif;
+    text-align: center;
+}
+/* The On/Off switch with the "?" button to its right, like the cursor button and its dice. */
+.shortcuts-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+.shortcuts-row .toggle { flex: 1; margin-top: 0; }
+.help-button {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 2px outset #fff;
+    background: #c0c0c0;
+    color: #000;
+    font: bold 12px Verdana, sans-serif;
+    cursor: pointer;
+}
+.help-button:active { border-style: inset; }
 
 /* The "you unlocked a cursor" pop-up (a small cursor menu window). */
 .cursor-unlocked { width: min(300px, 92vw); }

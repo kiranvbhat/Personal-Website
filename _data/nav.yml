@@ -14,5 +14,5 @@
 - { name: Coding, url: coding, emoji: 💻, gif: assets/graphics/characters/computer wizard.gif, caption: coding }
 - { name: Performances, url: performances, emoji: 🎭, gif: assets/graphics/characters/magician 1.gif, caption: performances }
 - { name: Music, url: music, emoji: 🎹, gif: assets/graphics/misc/ipod cube 2.gif, caption: music }
-- { name: Other, url: other, emoji: 📷, emoji_image: assets/graphics/characters/TinyWingsBird small.png, gif: assets/graphics/tech/camera 50.gif, caption: other stuff }
+- { name: Other, url: other, emoji: 📷, emoji_image: assets/graphics/characters/TinyWingsBird small.png, gif: assets/graphics/characters/tiny wings bird talking.gif, caption: other stuff, scale: 0.8 }
 - { name: Resume, url: resume, emoji: 📄, gif: assets/graphics/misc/resume distort.gif, caption: resume, scale: 1.5, menu: false }

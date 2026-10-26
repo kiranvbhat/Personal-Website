@@ -16,6 +16,7 @@
     {%- capture geocities_url %}{% include geocities-url.html %}{% endcapture %}
     <link rel="canonical" href="{{ geocities_url | absolute_url }}">
     {% include minimal/color-init.html %}
+    {% include shortcuts-init.html %}
     <link rel="stylesheet" href="{% include asset.html path="minimal.css" %}">
     <!-- GIFs are hidden until they're paused (see minimal/pause-gifs.html) -->
     <script>document.documentElement.classList.add("pause-gifs");</script>
@@ -37,6 +38,8 @@
     </div>
     {% include minimal/pause-gifs.html %}
     {% include minimal/new-tab-links.html %}
+    {% include shortcut-keys.html %}
+    {% include shortcuts-help.html appearance="minimal" %}
     {% include goatcounter.html %}
   </body>
 </html>

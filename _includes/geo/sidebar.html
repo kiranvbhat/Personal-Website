@@ -52,14 +52,21 @@
   <div class="box" id="box-settings">
     <div class="box-title">settings</div>
     <div class="appearance">
-      theme:
+      theme: <span class="key-hint">(Z)</span>
       {% include appearance-select.html current="geocities" %}
     </div>
     <div class="appearance">
-      color:
+      color: <span class="key-hint">(X)</span>
       {% include color-setting.html default="dark" %}
     </div>
     {% include geo/cursor-setting.html %}
+    <div class="appearance shortcuts-setting">
+      shortcuts:
+      <div class="shortcuts-row">
+        {% include shortcuts-setting.html %}
+        <button type="button" class="help-button" id="shortcuts-help-open" aria-label="Keyboard shortcuts help" aria-haspopup="dialog">?</button>
+      </div>
+    </div>
   </div>
 
   <script>

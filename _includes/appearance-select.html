@@ -14,7 +14,7 @@
   {%- if minimal_url == "" %}{% assign minimal_url = "/minimal/" | relative_url %}{% endif -%}
 {%- endif -%}
 {%- assign appearances = "geocities:GeoCities|minimal:Minimal" | split: "|" -%}
-<div class="toggle" role="group" aria-label="Theme">
+<div class="toggle" role="group" aria-label="Theme" aria-keyshortcuts="Z">
   {%- for appearance in appearances %}
   {%- assign id = appearance | split: ":" | first %}
   {%- if id == include.current %}

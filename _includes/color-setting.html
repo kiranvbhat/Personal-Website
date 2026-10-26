@@ -5,9 +5,10 @@
   page load.
   Params: default  the colors before a visitor picks: "dark" (GeoCities) or "system" (Minimal: the device's setting)
           fade     true: cross-fade from the old colors to the new ones, instead of switching at once (Minimal). The
-                   fade's length is set in the appearance's CSS (::view-transition-old/new(root)).
+                   fade's length is set in the appearance's CSS (::view-transition-old/new(root)). Hovered elements
+                   get the hover-held class during the fade, for the CSS to keep their hover effects.
 {%- endcomment -%}
-<div class="toggle" role="group" aria-label="Color" id="color-toggle">
+<div class="toggle" role="group" aria-label="Color" id="color-toggle" aria-keyshortcuts="X">
   <button type="button" data-color="dark">Dark</button>
   <button type="button" data-color="light">Light</button>
 </div>
@@ -39,7 +40,16 @@
         // new page. Browsers without it, and visitors whose device is set to reduce motion, get the instant switch.
         var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (fade && document.startViewTransition && !calm && button.dataset.color !== current()) {
-          document.startViewTransition(apply);
+          // While it fades, the browser doesn't count anything as hovered, so hover effects would switch off and
+          // back on. Whatever's hovered is marked .hover-held, for the CSS to treat as hovered, until the mouse
+          // next moves after the fade (the browser takes a moment to notice the hover again once it ends).
+          var held = document.querySelectorAll(":hover");
+          held.forEach(function (element) { element.classList.add("hover-held"); });
+          document.startViewTransition(apply).finished.finally(function () {
+            addEventListener("mousemove", function () {
+              held.forEach(function (element) { element.classList.remove("hover-held"); });
+            }, { once: true });
+          });
         } else {
           apply();
         }

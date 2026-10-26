@@ -5,7 +5,7 @@
                  is scrolled into view and focused, which minimal.css shows by fading the others, like hovering. Past
                  the first or last entry, up and down scroll the page as usual. Held down, they move on as fast as
                  the page can scroll. Without it (GeoCities), up and down just scroll the page.
-  Ignored while typing (e.g. in the guestbook), in anything that uses the arrow keys itself (like a dropdown or a
+  Ignored when shortcuts are turned off in settings (shortcuts-setting.html), while typing (e.g. in the guestbook), in anything that uses the arrow keys itself (like a dropdown or a
   video), and with Shift, Ctrl, Alt or Cmd held, so the browser's own shortcuts still work.
 {%- endcomment -%}
 <script>
@@ -40,6 +40,7 @@
     }
 
     addEventListener("keydown", function (event) {
+      if (document.documentElement.dataset.shortcuts === "off") return;  // turned off in settings (shortcuts-setting.html)
       if (event.defaultPrevented || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) return;
       var focused = document.activeElement;
       if (focused && focused.closest("input, textarea, select, [contenteditable], iframe, video, audio")) return;

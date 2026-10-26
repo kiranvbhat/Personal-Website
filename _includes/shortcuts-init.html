@@ -1,0 +1,7 @@
+<script>
+  // Keyboard shortcuts on or off (shortcuts-setting.html; shared by both appearances), put on <html> as
+  // data-shortcuts="off" before the page draws, so the key hints in settings (like "(Z)") are hidden from the start.
+  try {
+    if (localStorage.getItem("shortcuts") === "off") document.documentElement.dataset.shortcuts = "off";
+  } catch (e) {}
+</script>

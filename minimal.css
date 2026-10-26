@@ -366,6 +366,88 @@ main { padding-top: 48px; }
     .section-buttons button::after, .sidebar-section.open { transition: none; animation: none; }
 }
 
+/* The shortcuts setting's On/Off switch, with the "?" button to its right, which opens the keyboard shortcuts window. */
+.shortcuts-row { display: flex; align-items: center; gap: 8px; }
+.help-button {
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+}
+.help-button:hover, .help-button:focus-visible { color: var(--text); border-color: var(--muted); }
+
+/* The keyboard shortcuts window (shortcuts-help.html): a card in the middle of the screen, the page dimmed behind. */
+.shortcuts-help {
+    width: min(380px, calc(100vw - 40px));
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--background);
+    color: var(--text);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.35);
+}
+.shortcuts-help::backdrop { background: rgb(0 0 0 / 0.4); }
+.shortcuts-help .window-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-weight: 650;
+    font-size: 1.1rem;
+}
+.shortcuts-help .window-close {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.shortcuts-help .window-close:hover, .shortcuts-help .window-close:focus-visible { color: var(--text); background: var(--surface); }
+.shortcuts-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 16px;
+    align-items: center;
+    margin: 0;
+    font-size: 0.95rem;
+}
+.shortcuts-list dt { white-space: nowrap; }
+.shortcuts-list dd { margin: 0; }
+.shortcuts-help kbd {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    background: var(--surface);
+    font: inherit;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* Keyboard shortcut hints next to settings, like "(Z)" (see shortcut-keys.html). Hidden when shortcuts are turned
+   off, and on touch screens, which have no keyboard, along with the shortcuts setting itself. */
+.key-hint { font-weight: normal; }
+html[data-shortcuts="off"] .key-hint { display: none; }
+@media (hover: none), (pointer: coarse) {
+    .key-hint, .shortcuts-setting { display: none; }
+}
+
 /* ---- Previous and next sections (_includes/minimal/page-nav.html) ---- */
 
 /* Two boxes like the entries: the previous section on the left, the next on the right. */
@@ -487,10 +569,11 @@ main:has(.section-grid) .page-nav { display: none; }
 }
 
 /* Hovering over an entry (or reaching one of its links with the keyboard) fades the page's other entries a little and
-   puts them slightly out of focus, to focus on that one. Only with a mouse: touch screens have no hovering. */
+   puts them slightly out of focus, to focus on that one. Only with a mouse: touch screens have no hovering.
+   .hover-held keeps an entry counted as hovered while dark/light cross-fades (see "fade" in color-setting.html). */
 .entry { transition: opacity 0.2s ease, filter 0.2s ease, border-color 0.2s ease; }
 @media (hover: hover) {
-    main:has(.entry:hover, .entry:focus-within) .entry:not(:hover, :focus-within) { opacity: 0.45; filter: blur(0.75px); }
+    main:has(.entry:hover, .entry:focus-within, .entry.hover-held) .entry:not(:hover, :focus-within, .hover-held) { opacity: 0.45; filter: blur(0.75px); }
 }
 /* The up and down arrow keys focus an entry (see arrow-keys.html), on any device: the same fade, and a darker
    outline instead of the browser's focus ring. */

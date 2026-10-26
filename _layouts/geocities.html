@@ -10,6 +10,7 @@
     <link rel="icon" href="{{ 'assets/graphics/characters/TinyWingsBird.png' | relative_url }}">
     {% include appearance-redirect.html %}
     {% include geo/color-init.html %}
+    {% include shortcuts-init.html %}
     {% include geo/cursor-init.html %}
     <!-- Sawdust Marionette: the font for the site name and section titles (.bubble-text), loaded early -->
     <link rel="preload" href="{{ 'assets/fonts/SawdustMarionette.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
@@ -31,6 +32,8 @@
       {% include geo/footer.html %}
     </div>
     {% include geo/cursor-effects.html %}
+    {% include shortcut-keys.html %}
+    {% include shortcuts-help.html appearance="geocities" %}
     {% include geo/youtube-play.html %}
     {% include geo/bandcamp-colors.html %}
     {% include goatcounter.html %}
