@@ -5,11 +5,15 @@ title: Education
 {% include modern/entries.html items=site.data.education style="education" sort=true %}
 
 <h2 id="coursework">Coursework</h2>
+{%- comment %} Each subject opens and closes when its name is clicked (a <details>, which needs no script). They all
+  start closed; the up and down arrow keys open them one at a time (see arrow-keys.html). {% endcomment %}
 {%- for group in site.data.coursework %}
-<h3>{{ group.subject }}</h3>
-<ul class="courses">
-  {%- for course in group.courses %}
-  <li>{% if course.link %}<a href="{{ course.link }}">{{ course.code }}</a>{% else %}{{ course.code }}{% endif %}: {{ course.name }}</li>
-  {%- endfor %}
-</ul>
+<details class="course-group">
+  <summary><h3>{{ group.subject }}</h3> <span class="course-count">{{ group.courses.size }} courses</span></summary>
+  <ul class="courses">
+    {%- for course in group.courses %}
+    <li>{% if course.link %}<a href="{{ course.link }}">{{ course.code }}</a>{% else %}{{ course.code }}{% endif %}: {{ course.name }}</li>
+    {%- endfor %}
+  </ul>
+</details>
 {%- endfor %}

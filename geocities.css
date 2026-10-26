@@ -305,6 +305,10 @@ html[data-entries] main:has(.entry.featured):has(.entry:not(.featured)) .entries
     border: 3px ridge var(--heading);
 }
 
+/* Entries with `side_thumbs` (like Education's school logos) get a smaller picture (120px instead of 200px), so a box with little text isn't
+   much taller than its text. */
+.side-thumb .entry-thumb { width: 120px; }
+
 .entry-frame {
     margin: 0 auto 10px;
     border: 3px ridge var(--heading);
@@ -1079,7 +1083,7 @@ main:focus, #gb-entries:focus, .gb-thanks:focus { outline: none; }
     .home-intro { flex-direction: column; align-items: center; }
     .coursework { grid-template-columns: 1fr; }
     .entry-thumb { float: none; display: block; width: 100%; max-width: 320px; margin: 0 auto 10px; }
-    .side-thumb .entry-thumb { float: left; width: 35%; max-width: 130px; margin: 0 10px 4px 0; }
+    .side-thumb .entry-thumb { float: left; width: 35%; max-width: 105px; margin: 0 10px 4px 0; }
     .splash-warning { padding: 0 10px; font-size: 28px; }
     .guestbook-form { grid-template-columns: 1fr; }
 }

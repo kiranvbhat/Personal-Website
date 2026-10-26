@@ -1,10 +1,15 @@
 {%- comment -%}
-  Prints an item's dates, e.g. "Mar 2024 - Jun 2026", "Mar 2024 - Present" or just "Mar 2024".
-  Params: start, end (YYYY-MM strings, or "present" for end). Prints nothing if neither is set.
+  Prints an item's dates, e.g. "Mar 2024 - Jun 2026", "Mar 2024 - Present", just "Mar 2024", or "2020 - Present".
+  Params: start, end (YYYY-MM strings, or just YYYY for a year without a month, or "present" for end). Prints nothing
+  if neither is set.
 {%- endcomment -%}
-{%- if include.start -%}{{ include.start | append: "-01" | date: "%b %Y" }}{%- endif -%}
+{%- if include.start -%}
+  {%- assign start_text = include.start | append: "" -%}
+  {%- if start_text.size == 4 %}{{ start_text }}{% else %}{{ start_text | append: "-01" | date: "%b %Y" }}{% endif -%}
+{%- endif -%}
 {%- if include.start and include.end %} - {% endif -%}
 {%- if include.end -%}
-  {%- assign end_text = include.end | downcase -%}
-  {%- if end_text == "present" %}Present{% else %}{{ include.end | append: "-01" | date: "%b %Y" }}{% endif -%}
+  {%- assign end_text = include.end | append: "" -%}
+  {%- assign end_lower = end_text | downcase -%}
+  {%- if end_lower == "present" %}Present{% elsif end_text.size == 4 %}{{ end_text }}{% else %}{{ end_text | append: "-01" | date: "%b %Y" }}{% endif -%}
 {%- endif -%}

@@ -6,7 +6,7 @@ title: Credits
 ---
 {%- assign credits = site.data.credits -%}
 {% include geo/page-title.html %}
-<p class="intro">Websites I looked at for inspiration, and where I found the graphics on this site. Thank you!!</p>
+<p class="intro">{{ credits.description }}</p>
 
 {%- assign sections = "inspiration|inspiration,graphics|graphics" | split: "," -%}
 {%- for section in sections %}

@@ -40,16 +40,16 @@ body {
 
 /* ---- Glass ---- */
 
-/* Panels (entries, the previous/next boxes and the homepage's section cards): see-through, with a faint shine across
+/* Panels (entries, coursework subjects, the previous/next boxes and the homepage's section cards): see-through, with a faint shine across
    the top left and a soft shadow, like a piece of glass. */
-.entry, .page-nav a, .section-card {
+.entry, .page-nav a, .section-card, .course-group {
     background: linear-gradient(135deg, var(--sheen), transparent 45%), var(--glass);
     box-shadow: 0 1px 2px var(--shadow), 0 8px 24px var(--shadow);
 }
 
 /* For visitors whose device is set to reduce transparency: solid panels. */
 @media (prefers-reduced-transparency: reduce) {
-    .entry, .page-nav a, .section-card { background: var(--background); }
+    .entry, .page-nav a, .section-card, .course-group { background: var(--background); }
 }
 
 /* Links are just colored, and underlined when hovered or reached with the keyboard. */
@@ -558,8 +558,48 @@ img.section-card-emoji { width: 1.75rem; height: 1.75rem; margin: 0 auto 6px; ob
 .section-card:hover, .section-card:focus-visible { border-color: var(--muted); text-decoration: none; }
 main:has(.section-grid) .page-nav { display: none; }
 
+/* Education's coursework: one tile per subject (like the entries, with the same hover fade below) that opens to
+   show its courses (a <details>). Its title row has the subject, how many courses, and an arrow that flips when
+   it's open. */
+.course-group {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+.course-group + .course-group { margin-top: 12px; }
+.course-group summary {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 14px 20px;
+    list-style: none;  /* no built-in triangle; the arrow is drawn below */
+    cursor: pointer;
+}
+.course-group summary::-webkit-details-marker { display: none; }  /* Safari's built-in triangle */
+.course-group summary h3 { margin: 0; font-size: 1.05rem; }
+.course-group summary:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
+.course-count { color: var(--muted); font-size: 0.9rem; }
+.course-group summary::after {
+    content: "";
+    align-self: center;
+    width: 7px;
+    height: 7px;
+    margin-left: auto;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.2s ease;
+}
+.course-group[open] summary::after { transform: translateY(2px) rotate(225deg); }
+/* Reached with the keyboard (Tab, or up and down; see arrow-keys.html): no outline; the other tiles fading (below)
+   shows which one it is. */
+.course-group summary:focus { outline: none; }
+@media (prefers-reduced-motion: reduce) {
+    .course-group summary::after { transition: none; }
+}
+
 .courses {
-    padding-left: 1.25rem;
+    margin: 0;
+    padding: 0 20px 16px 2.5rem;
 }
 
 /* ---- Entries (_includes/modern/entries.html) ---- */
@@ -589,16 +629,19 @@ html[data-entries] main:has(.entry.featured):has(.entry:not(.featured)) .entries
 
 /* Hovering over an entry (or reaching one of its links with the keyboard) fades the page's other entries a little and
    puts them slightly out of focus, to focus on that one. Only with a mouse: touch screens have no hovering.
-   .hover-held keeps an entry counted as hovered while dark/light cross-fades (see "fade" in color-setting.html). */
-.entry { transition: opacity 0.2s ease, filter 0.2s ease, border-color 0.2s ease; }
+   .hover-held keeps an entry counted as hovered while dark/light cross-fades (see "fade" in color-setting.html).
+   Coursework subjects (.course-group) fade the same way, together with the entries. Focus only counts when it came
+   from the keyboard (:focus-visible), so clicking a subject or a link doesn't leave the fade on afterwards. While
+   the arrow keys are selecting (.keys-selecting, until the mouse moves; see arrow-keys.html), only the rule below
+   applies, so a tile resting under the mouse doesn't count. */
+.entry, .course-group { transition: opacity 0.2s ease, filter 0.2s ease, border-color 0.2s ease; }
 @media (hover: hover) {
-    main:has(.entry:hover, .entry:focus-within, .entry.hover-held) .entry:not(:hover, :focus-within, .hover-held) { opacity: 0.45; filter: blur(0.75px); }
+    html:not(.keys-selecting) main:has(:is(.entry, .course-group):is(:hover, :has(:focus-visible), .hover-held)) :is(.entry, .course-group):not(:hover, :has(:focus-visible), .hover-held) { opacity: 0.45; filter: blur(0.75px); }
 }
-/* The up and down arrow keys focus an entry (see arrow-keys.html), on any device: the same fade, and a darker
-   outline instead of the browser's focus ring. */
-main:has(.entry:focus) .entry:not(:focus) { opacity: 0.45; filter: blur(0.75px); }
+/* The up and down arrow keys focus an entry, or a subject's title row (see arrow-keys.html), on any device: the same
+   fade, which shows which one is selected, instead of the browser's focus ring. */
+main:has(.entry:focus-visible, .course-group summary:focus-visible) :is(.entry, .course-group):not(:focus-visible, :has(summary:focus-visible)) { opacity: 0.45; filter: blur(0.75px); }
 .entry:focus { outline: none; }
-.entry:focus-visible { border-color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
     .entry { transition: none; }
 }
@@ -647,6 +690,22 @@ main:has(.entry:focus) .entry:not(:focus) { opacity: 0.45; filter: blur(0.75px);
 :root[data-color="dark"] .entry-picture.dark-invert { filter: invert(1) hue-rotate(180deg); }
 @media (prefers-color-scheme: dark) {
     :root:not([data-color]) .entry-picture.dark-invert { filter: invert(1) hue-rotate(180deg); }
+}
+
+/* An album's Bandcamp player (`bandcamp:` under media), above the description: the full width of the entry, up to
+   700px (the widest Bandcamp's player gets) and centered, tall enough to list 6 tracks without a scrollbar, with
+   rounded corners like the pictures.
+   color-scheme: light matches Bandcamp's own page, which keeps the frame see-through in dark mode (when they differ,
+   browsers fill the frame with white behind the player). */
+.entry-bandcamp {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: 340px;
+    color-scheme: light;
+    margin: 0.75rem auto;  /* centered */
+    border: 0;
+    border-radius: 6px;
 }
 
 /* GIFs, until pause-gifs.html has paused them. */

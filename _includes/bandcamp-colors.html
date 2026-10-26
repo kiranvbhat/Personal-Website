@@ -1,0 +1,45 @@
+{%- comment -%}
+  Bandcamp players (.bandcamp-player, from geo/media.html and modern/entries.html) in light or dark colors to match
+  the site. The colors are part of the player's address, so changing them reloads it, which would stop a song that's
+  playing. The page can't see inside the player, so once a visitor clicks into one it keeps its colors until the next
+  page load. Each appearance's layout includes this with its own colors.
+  Params: dark, light  the player's colors in each mode, as they appear in its address: "bgcol=000000/linkcol=ffff00"
+                       (the background, which Bandcamp also uses to pick the text color, and the links' color)
+          system       true: with no color picked in settings, follow the device's light or dark mode (Modern).
+                       Otherwise dark unless light is picked (GeoCities).
+{%- endcomment -%}
+<script>
+  (function () {
+    var players = document.querySelectorAll(".bandcamp-player");
+    if (!players.length) return;
+    var DARK = "/" + {{ include.dark | jsonify }} + "/", LIGHT = "/" + {{ include.light | jsonify }} + "/";
+    var followSystem = {{ include.system | default: false | jsonify }};
+    var system = window.matchMedia && matchMedia("(prefers-color-scheme: light)");
+
+    function isLight() {
+      var picked = document.documentElement.dataset.color;
+      if (picked) return picked === "light";
+      return followSystem && system && system.matches;
+    }
+    function match() {
+      var light = isLight();
+      players.forEach(function (player) {
+        if (player.dataset.used) return;
+        var src = light ? player.src.replace(DARK, LIGHT) : player.src.replace(LIGHT, DARK);
+        if (src !== player.src) player.src = src;
+      });
+    }
+
+    // Clicking into a player moves focus into it, which takes it away from the page.
+    addEventListener("blur", function () {
+      setTimeout(function () {
+        var active = document.activeElement;
+        if (active && active.classList.contains("bandcamp-player")) active.dataset.used = "true";
+      });
+    });
+
+    new MutationObserver(match).observe(document.documentElement, { attributes: true, attributeFilter: ["data-color"] });
+    if (followSystem && system && system.addEventListener) system.addEventListener("change", match);
+    match();
+  })();
+</script>

@@ -1,4 +1,5 @@
-# Coursework grouped by subject. `link` is optional.
+# Coursework grouped by subject. `link` is optional. On the Modern version's Education page, each subject can be
+# opened and closed (they start closed; the up and down arrow keys open them one at a time).
 
 - subject: Computer Science
   courses:

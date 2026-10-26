@@ -3,7 +3,7 @@ layout: modern
 title: Credits
 ---
 {%- assign credits = site.data.credits -%}
-<p>Websites I looked at for inspiration, and where I found the graphics on this site (the GeoCities version). Thank you!</p>
+<p>{{ credits.description }}</p>
 
 {%- assign sections = "inspiration|Inspiration,graphics|Graphics" | split: "," -%}
 {%- for section in sections %}

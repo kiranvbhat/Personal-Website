@@ -9,8 +9,8 @@
     or a file in the site (e.g. assets/portfolio/coding/ghostwriter_paper.pdf).
     sort   true: newest first, by `end` then `start` ("present" counts as newest).
            Entries without dates go last, keeping their order from the file.
-    side_thumbs  true: keep pictures small on the left on phones too, like on desktop (good for logos).
-                 Otherwise pictures go full width above the text on phones.
+    side_thumbs  true: smaller pictures (120px instead of 200px), kept on the left on phones too (good for logos,
+                 like Education's). Otherwise pictures go full width above the text on phones.
 {%- endcomment -%}
 {%- assign visible_items = include.items | where_exp: "i", "i.hidden != true" -%}
 

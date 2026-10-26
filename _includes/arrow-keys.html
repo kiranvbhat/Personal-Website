@@ -1,12 +1,15 @@
 {%- comment -%}
   Keyboard shortcuts for section pages (page-nav.html in geo/ and modern/ includes this):
     left, right  go to the previous and next sections, by following the links at the bottom of the page
-    up, down     only with `entries=true` (Modern): move between the page's entries (projects, jobs, ...). Each one
-                 is scrolled into view and focused, which modern.css shows by fading the others, like hovering. Past
-                 the first or last entry, up and down scroll the page as usual. Held down, they move on as fast as
-                 the page can scroll. Without it (GeoCities), up and down just scroll the page.
-  Ignored when shortcuts are turned off in settings (shortcuts-setting.html), while typing (e.g. in the guestbook), in anything that uses the arrow keys itself (like a dropdown or a
-  video), and with Shift, Ctrl, Alt or Cmd held, so the browser's own shortcuts still work.
+    up, down     only with `entries=true` (Modern): move between the page's entries (projects, jobs, ...) and, on
+                 Education, the coursework subjects after them. Each is scrolled into view and focused, which
+                 modern.css shows (fading the other entries, like hovering, or outlining a subject). A subject opens
+                 when moved to and closes when moved away from (Enter also opens or closes it). Past the first or
+                 last, up and down scroll the page as usual. Held down, they move on as fast as the page can scroll.
+                 Without it (GeoCities), up and down just scroll the page.
+  Ignored when shortcuts are turned off in settings (shortcuts-setting.html), while typing (e.g. in the guestbook),
+  in anything that uses the arrow keys itself (like a dropdown or a video), and with Shift, Ctrl, Alt or Cmd held,
+  so the browser's own shortcuts still work.
 {%- endcomment -%}
 <script>
   (function () {
@@ -28,9 +31,23 @@
     function scrolled() { scrolling = false; clearTimeout(scrollTimer); }
     addEventListener("scrollend", scrolled);
 
-    function show(entry) {
-      entry.tabIndex = -1;  // lets it take focus without adding it to the Tab order
-      entry.focus({ preventScroll: true });
+    // What up and down move between: entries, then coursework subjects (Education's <details>, see modern.css).
+    var STOPS = "main .entry, main .course-group";
+
+    function show(entry, from) {
+      // Until the mouse moves, the selection stands in for hovering: modern.css leaves out the mouse's hover fade,
+      // which would otherwise fade the selected tile too when the mouse rests on a different one.
+      document.documentElement.classList.add("keys-selecting");
+      // Coursework subjects open when moved to, and the one moved away from closes, so only the selected one is open.
+      if (from && from !== entry && from.matches(".course-group")) from.open = false;
+      if (entry.matches(".course-group")) {
+        entry.open = true;
+        // Its title row takes the focus, so Enter can still close (or reopen) it.
+        entry.querySelector("summary").focus({ preventScroll: true });
+      } else {
+        entry.tabIndex = -1;  // lets it take focus without adding it to the Tab order
+        entry.focus({ preventScroll: true });
+      }
       // Centered on screen, unless it's too tall to fit: then its top goes near the top.
       var tall = entry.offsetHeight > innerHeight * 0.8;
       entry.scrollIntoView({ block: tall ? "start" : "center", behavior: calm ? "auto" : "smooth" });
@@ -55,20 +72,25 @@
       var direction = {{ include.entries | default: false | jsonify }} && { ArrowDown: 1, ArrowUp: -1 }[event.key];
       if (!direction) return;
       if (event.repeat && scrolling) { event.preventDefault(); return; }  // held down: wait for the page (see above)
-      // The entries on show (not the ones hidden by the Featured / All switch, see entries-filter.html).
-      var entries = Array.prototype.filter.call(document.querySelectorAll("main .entry"), function (entry) {
+      // The ones on show (not the entries hidden by the Featured / All switch, see entries-filter.html).
+      var entries = Array.prototype.filter.call(document.querySelectorAll(STOPS), function (entry) {
         return entry.getClientRects().length > 0;
       });
-      var entry = nextEntry(entries, focused && focused.closest(".entry"), direction);
+      var current = focused && focused.closest(STOPS);
+      var entry = nextEntry(entries, current, direction);
       if (!entry) return;  // past the first or last entry: let the page scroll
       event.preventDefault();
-      show(entry);
+      show(entry, current);
     });
 
-    // Using the mouse again hands the focus back, so a hovered entry and a focused one don't both stand out.
+    // Using the mouse again hands back to hovering: the selection is let go, so a hovered entry and a selected one
+    // don't both stand out.
     addEventListener("mousemove", function () {
+      var root = document.documentElement;
+      if (!root.classList.contains("keys-selecting")) return;
+      root.classList.remove("keys-selecting");
       var focused = document.activeElement;
-      if (focused && focused.classList.contains("entry")) focused.blur();
+      if (focused && (focused.classList.contains("entry") || focused.closest(".course-group"))) focused.blur();
     });
   })();
 </script>

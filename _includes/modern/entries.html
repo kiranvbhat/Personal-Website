@@ -11,7 +11,8 @@
     background  optional: a color behind the picture (e.g. white for see-through logos with dark artwork). Left out
               with `recolor` or `dark_invert`, which handle dark mode themselves.
     youtube   the video's thumbnail (from YouTube), linking to the video, plus a "Watch on YouTube" link
-    bandcamp  a "Listen on Bandcamp" link to `bandcamp_url`, if it's set
+    bandcamp  the album's Bandcamp player, centered above the description, plus a "Listen on Bandcamp" link to
+              `bandcamp_url`, if it's set (the player's colors follow dark/light mode; see bandcamp-colors.html)
     embed     a link
   Params:
     items  the data list
@@ -89,6 +90,9 @@
     <h{{ level }}>{% if title_link %}<a href="{{ title_link }}">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif %}</h{{ level }}>
     {%- if entry_meta != "" %}
     <p class="entry-meta">{{ entry_meta }}</p>
+    {%- endif %}
+    {%- if m.bandcamp %}
+    <iframe class="bandcamp-player entry-bandcamp" src="https://bandcamp.com/EmbeddedPlayer/album={{ m.bandcamp }}/size=large/bgcol=1b1b1b/linkcol=8ab4f8/artwork=small/transparent=true/" title="{{ entry_title | escape }} on Bandcamp" loading="lazy" seamless></iframe>
     {%- endif %}
     {%- if item.description %}
     {{ item.description | markdownify | strip }}

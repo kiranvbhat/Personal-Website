@@ -8,6 +8,9 @@
 #     note: the background tiles
 # Without a name, the link shows the URL's address (e.g. example.com/page).
 
+# The line at the top of the page, above the links (both versions).
+description: Websites I used for y2k design inspiration and graphics.
+
 inspiration:
   - url: https://www.webdesignmuseum.org/gallery/year-2000/
     note: collection of old website front pages

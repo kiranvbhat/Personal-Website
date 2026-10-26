@@ -16,6 +16,7 @@
   media:
     image: assets/portfolio/education/ccrma shockwave.gif
     still: assets/portfolio/education/ccrma logo small.png
+    height: 38  # a wide logo: keeps it the size it is on desktop, instead of the full width on phones
 
 - role: BS in Computer Science
   organization: Stanford University
@@ -25,7 +26,7 @@
   media:
     image: assets/portfolio/education/stanford logo.gif
     still: assets/portfolio/education/stanford logo.png
-    height: 130
+    height: 72
 
 - organization: Castro Valley High School
   start: 2016-08
@@ -34,4 +35,4 @@
   media:
     image: assets/portfolio/education/cvhs tilt zoom.gif
     still: assets/portfolio/education/cvhs logo small.png
-    height: 130
+    height: 72
